@@ -7,7 +7,7 @@ module Napakalaki
   class Prize
     
     # Inicialización
-    def initialize(treasures, levels)
+    def initialize (treasures, levels)
       @treasures = treasures
       @levels = levels
     end
