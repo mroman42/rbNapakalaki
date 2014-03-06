@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
-require_relative 'BadConsequence.rb'
-require_relative 'Prize.rb'
+require_relative 'badConsequence.rb'
+require_relative 'prize.rb'
 
 module 'Napakalaki'
   class Monster

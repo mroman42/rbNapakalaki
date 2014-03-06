@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
-require_relative 'Monster.rb'
+require_relative 'monster.rb'
 module Napakalaki
   class PruebaNapakalaki
     if __FILE__ == $0
