@@ -40,11 +40,11 @@ module Napakalaki
 
       #El rey de rosa
       @bad = BadConsequence.new_indet_tr("Pierdes 5 niveles y 3 tesoros visibles.", 5, 3, 0)
-      monsters.add(Monster.new("El rey de rosa", 13, bad, Price.new(4,2)))
+      monsters.add(Monster.new("El rey de rosa", 13, bad, Prize.new(4,2)))
 
       #La que redacta en las sombras. 
       bad = BadConsequence.new_indet_tr("Toses los pulmones y pierdes 2 niveles.", 2, 0, 0)
-      monsters.add(Monster.new("La que redacta en las sombras", 3, bad, Price.new(1,1)))
+      monsters.add(Monster.new("La que redacta en las sombras", 3, bad, Prize.new(1,1)))
 
       # Los hondos verdes
       bad = BadConsequence.new_death("Estos monstruos resultan bastante superficiales y te aburren mortalmente. Estás muerto.")
