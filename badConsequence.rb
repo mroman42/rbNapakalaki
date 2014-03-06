@@ -28,6 +28,10 @@ module Napakalaki
     attr_reader :visible
     attr_reader :hidden
     attr_reader :death
+
+    def to_s()
+      puts "#{@text} \n\t" + (death? "DEATH." : "#{@levels} levels, #{@nHidden} hidden treasures" + (hidden.empty? "" : "(#{@hidden}") + ", #{@nVisible} visible treasures" + (visible.empty? "" : "(#{@visible}") + ".") + "\n"
+    end
     
     #Nuevos constructores
     def self.new_det_tr(text, levels, visible, hidden)
