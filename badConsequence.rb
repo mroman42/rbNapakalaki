@@ -10,11 +10,13 @@ module Napakalaki
   class BadConsequence
     
     # Inicializador
-    def initialize (text, levels, nVisible, nHidden, death)
+    def initialize (text, levels, nVisible, nHidden, visible, hidden, death)
       @text = text
       @levels = levels
       @nVisible = nVisible
       @nHidden = nHidden
+      @visible = visible
+      @hidden = hidden
       @death = death
     end
 
@@ -23,8 +25,33 @@ module Napakalaki
     attr_reader :levels
     attr_reader :nVisible
     attr_reader :nHidden
+    attr_reader :visible
+    attr_reader :hidden
     attr_reader :death
     
+    #Nuevos constructores
+    def self.new_det_tr(text, levels, visible, hidden)
+      newObj=allocate
+      newObj.send(:initialize, text, levels, visible.size, hidden.size, visible, hidden, false)
+      newObj
+    end
+
+    def self.new_indet_tr(text, levels, nVisible, nHidden)
+      newObj=allocate
+      newObj.send(:initialize, text, levels, nVisible, nHidden, [], [], false)
+      newObj
+    end
+
+    def self.new_death(text)
+      newObj=allocate
+      newObj.send(:initialize, text, 0, 0, 0, [], [], true)
+      newObj
+    end
+
   end
 
 end
+
+#Deshabilitando el new por defecto
+Test.instance_eval { undef :new }
+
