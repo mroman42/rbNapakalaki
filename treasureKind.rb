@@ -2,7 +2,7 @@
 #encoding: utf-8
 
 module Napakalaki
-
+	
   # Tipos de tesoros.
   ONEHAND   = :onehand
   ARMOR     = :armor
