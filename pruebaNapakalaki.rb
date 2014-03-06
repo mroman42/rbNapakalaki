@@ -74,30 +74,18 @@ module Napakalaki
       bad = BadConsequence.new_det_tr("La quinta directiva primaria te obliga a perder 2 niveles y un tesoro 2 manos visible.", 2, [BOTHHANDS], [])
       monsters.add(Monster.new("Roboggoth", 8, bad, Prize.new(2,1))) 
 
-      # El espía ciego. 
-
-      tvp.clear() 
-      tvp.add(TreasureKind.HELMET) 
-      BadConsequence bad17 = BadConsequence.new_de("Te asusta en la noche. "
-      + "Pierdes un casco visible.", 0, tvp, thp) 
-      Prize price17 = new Prize(1,1) 
-      monsters.add(Monster.new("El espía ciego", 4, bad17, price17)) 
+      # El espía ciego.
+      bad = BadConsequence.new_det_tr("Te asusta en la noche. Pierdes un casco visible.", 0, [HELMET], [])
+      monsters.add(Monster.new("El espía ciego", 4, bad, Prize.new(1,1))) 
 
       # El Lenguas
+      bad = BadConsequence.new_indet_tr("Menudo susto te llevas. Pierdes 2 niveles y 5 tesoros visibles.", 2, 5, 0)
+      monsters.add(Monster.new("El Lenguas", 20, bad, Prize.new(1,1))) 
 
-      BadConsequence bad18 = BadConsequence.new_de("Menudo susto te llevas. Pierdes "
-      + "2 niveles y 5 tesoros visibles.", 2, 5, 0) 
-      Prize price18 = new Prize(1,1) 
-      monsters.add(Monster.new("El Lenguas", 20, bad18, price18)) 
-
-      # Bicéfalo
-
-      tvp.clear() 
+      # Bicéfalo 
       tvp.add(TreasureKind.BOTHHANDS) 
-      BadConsequence bad19 = BadConsequence.new_de("Te faltan manos para tanta cabeza."
-      + " Pierdes 3 niveles y tus tesoros visibles de las manos.", 3, tvp, thp)
-      Prize price19 = new Prize(1,1) 
-      monsters.add(Monster.new("Bicéfalo", 20, bad19, price19)) 
+      BadConsequence bad19 = BadConsequence.new_de("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos.", 3, [ONEHAND, ONEHAND, BOTHHANDS], [])
+      monsters.add(Monster.new("Bicéfalo", 20, bad, Prize.new(1,1))) 
    
     end
   end
