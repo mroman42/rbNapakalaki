@@ -98,27 +98,15 @@ module Napakalaki
           listado.select {|monster| monster.level >= nivel}
       end
 
-      def pierdenSoloNiveles (ArrayList<Monster> listado) {
-        ArrayList<Monster> filtrados = new ArrayList();
-
-        for (Monster actual : listado) {
-        BadConsequence bad = actual.getBadConsequence();
-
-        if ((bad.getLevels() >= 0) && (bad.getDeath() == false) &&
-        (bad.getnVisibleTreasures() == 0) && 
-        (bad.getnHiddenTreasures() == 0))
-        filtrados.add(actual);
-        }
-
-        return filtrados;
+      def pierdenSoloNiveles (listado) {
+        listado.select {|monster| (monster.bad.levels >= 0) && (monster.bad.death() == false) && (monster.bad.nVisible == 0) && (monster.bad.getnHidden == 0))}
       end
 
-      def ganaMasDeUnNivel (ArrayList<Monster> listado) {
+      def ganaMasDeUnNivel (listado) {
         listado.select {|monster| monster.prize.levels > 1}
       end
 
-      def pierdeTesoros (ArrayList<Monster> listado, 
-        ArrayList<TreasureKind> tesoros){
+      def pierdeTesoros (listado, tesoros){
         ArrayList<Monster> filtrados = new ArrayList();
         HashSet<TreasureKind> hs = new HashSet(); 
 
