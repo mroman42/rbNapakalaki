@@ -104,31 +104,12 @@ module Napakalaki
     end
 
     def ganaMasDeUnNivel (listado)
-        listado.select {|monster| monster.prize.levels > 1}
+      listado.select {|monster| monster.prize.levels > 1}
     end
 
     def pierdeTesoros (listado, tesoros)
-      
+      listado.select { |monster| (tesoros - (monster.bad.visible + monster.bad.hidden)).empty? }
     end
-
-    #ArrayList<Monster> filtrados = new ArrayList();
-    #HashSet<TreasureKind> hs = new HashSet(); 
-
-    #for (Monster actual : listado) {
-    #   // Añadimos los tesoros a una tabla Hash (evita duplicados). 
-    #   hs.addAll(actual.getBadConsequence().
-    #            getSpecificVisibleTreasures());
-    # hs.addAll(actual.getBadConsequence().
-    #          getSpecificHiddenTreasures()); 
-
-    #          if (tesoros.containsAll(hs))
-    #           filtrados.add(actual); 
-    #          // Limpiamos la lista. 
-    #           hs.clear(); 
-    #      }
-    #     return filtrados; 
-    #  end
-
     
   end
 
