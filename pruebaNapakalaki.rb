@@ -8,7 +8,7 @@ module Napakalaki
 
     def main ()
       #Declaración de los monstruos. 
-      @monsters = Array.new()
+      monsters = Array.new()
 
       #Monstruos añadidos por orden de aparición en el guión. 
       #3 Byakhees de bonanza.
@@ -40,7 +40,7 @@ module Napakalaki
       monsters.add(Monster.new("Bichgooth", 2, bad, Prize.new(1,1)))
 
       #El rey de rosa
-      @bad = BadConsequence.new_indet_tr("Pierdes 5 niveles y 3 tesoros visibles.", 5, 3, 0)
+      bad = BadConsequence.new_indet_tr("Pierdes 5 niveles y 3 tesoros visibles.", 5, 3, 0)
       monsters.add(Monster.new("El rey de rosa", 13, bad, Prize.new(4,2)))
 
       #La que redacta en las sombras. 
