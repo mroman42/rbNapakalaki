@@ -87,6 +87,56 @@ module Napakalaki
       BadConsequence bad19 = BadConsequence.new_de("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos.", 3, [ONEHAND, ONEHAND, BOTHHANDS], [])
       monsters.add(Monster.new("Bicéfalo", 20, bad, Prize.new(1,1))) 
    
+
+      # Filtros sobre los monstruos.
+      puts "Monstruos de nivel mayor a 10: #{nivelSuperior(monsters, 10).to_s}"
+      puts "Monstruos que sólo quitan niveles: #{pierdenSoloNiveles(monsters).to_s}"
+      puts "Monstruos con ganancia de un nivel o más: #{ganaMasDeUnNivel(monsters).to_s}"    
+      }
+
+      def nivelSuperior (listado, nivel)
+          listado.select {|monster| monster.level >= nivel}
+      end
+
+      def pierdenSoloNiveles (ArrayList<Monster> listado) {
+        ArrayList<Monster> filtrados = new ArrayList();
+
+        for (Monster actual : listado) {
+        BadConsequence bad = actual.getBadConsequence();
+
+        if ((bad.getLevels() >= 0) && (bad.getDeath() == false) &&
+        (bad.getnVisibleTreasures() == 0) && 
+        (bad.getnHiddenTreasures() == 0))
+        filtrados.add(actual);
+        }
+
+        return filtrados;
+      end
+
+      def ganaMasDeUnNivel (ArrayList<Monster> listado) {
+        listado.select {|monster| monster.prize.levels > 1}
+      end
+
+      def pierdeTesoros (ArrayList<Monster> listado, 
+        ArrayList<TreasureKind> tesoros){
+        ArrayList<Monster> filtrados = new ArrayList();
+        HashSet<TreasureKind> hs = new HashSet(); 
+
+        for (Monster actual : listado) {
+        // Añadimos los tesoros a una tabla Hash (evita duplicados). 
+        hs.addAll(actual.getBadConsequence().
+        getSpecificVisibleTreasures());
+        hs.addAll(actual.getBadConsequence().
+        getSpecificHiddenTreasures()); 
+
+        if (tesoros.containsAll(hs))
+        filtrados.add(actual); 
+        // Limpiamos la lista. 
+        hs.clear(); 
+        }
+        return filtrados; 
+      end
+
     end
   end
 end
