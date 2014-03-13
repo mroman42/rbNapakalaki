@@ -20,7 +20,7 @@ module 'Napakalaki'
     attr_reader :prize
 
     def to_s()
-      puts "#{@name} (lv. #{@level}) \nPrize: #{prize.to_s()} \n Bad: \n#{bad.to_s()}\n"
+      "#{@name} (lv. #{@level}) \nPrize: #{prize.to_s()} \n Bad: \n#{bad.to_s()}\n"
     end
   
 	end

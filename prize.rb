@@ -17,7 +17,7 @@ module Napakalaki
     attr_reader :levels
 
     def to_s()
-      puts "#{@treasures} treasures and #{@levels} levels."
+      "#{@treasures} treasures and #{@levels} levels."
     end
 
   end
