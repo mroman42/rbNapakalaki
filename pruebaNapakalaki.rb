@@ -1,15 +1,16 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 require_relative 'monster.rb'
+
 module Napakalaki
+
   class PruebaNapakalaki
-    if __FILE__ == $0
-      #Declaración de los monstruos. 
+
+    def main ()
       #Declaración de los monstruos. 
       @monsters = Array.new()
 
       #Monstruos añadidos por orden de aparición en el guión. 
-
       #3 Byakhees de bonanza.
       bad = BadConsequence.new_det_tr("Pierdes tu armadura visible y otra oculta.", 0, [ARMOR], [ARMOR])
       monsters.add(Monster.new("2 Byakhees de bonanza", 8, bad, Prize.new(2,1)))
@@ -89,42 +90,50 @@ module Napakalaki
    
 
       # Filtros sobre los monstruos.
-      puts "Monstruos de nivel mayor a 10: #{nivelSuperior(monsters, 10).to_s}"
-      puts "Monstruos que sólo quitan niveles: #{pierdenSoloNiveles(monsters).to_s}"
-      puts "Monstruos con ganancia de un nivel o más: #{ganaMasDeUnNivel(monsters).to_s}"    
-      }
-
-      def nivelSuperior (listado, nivel)
-          listado.select {|monster| monster.level >= nivel}
-      end
-
-      def pierdenSoloNiveles (listado) {
-        listado.select {|monster| (monster.bad.levels >= 0) && (monster.bad.death() == false) && (monster.bad.nVisible == 0) && (monster.bad.getnHidden == 0))}
-      end
-
-      def ganaMasDeUnNivel (listado) {
-        listado.select {|monster| monster.prize.levels > 1}
-      end
-
-      def pierdeTesoros (listado, tesoros){
-        ArrayList<Monster> filtrados = new ArrayList();
-        HashSet<TreasureKind> hs = new HashSet(); 
-
-        for (Monster actual : listado) {
-        // Añadimos los tesoros a una tabla Hash (evita duplicados). 
-        hs.addAll(actual.getBadConsequence().
-        getSpecificVisibleTreasures());
-        hs.addAll(actual.getBadConsequence().
-        getSpecificHiddenTreasures()); 
-
-        if (tesoros.containsAll(hs))
-        filtrados.add(actual); 
-        // Limpiamos la lista. 
-        hs.clear(); 
-        }
-        return filtrados; 
-      end
-
+      puts "Monstruos de nivel mayor a 10:\n #{nivelSuperior(monsters, 10).to_s}"
+      puts "Monstruos que sólo quitan niveles:\n #{pierdenSoloNiveles(monsters).to_s}"
+      puts "Monstruos con ganancia de un nivel o más:\n #{ganaMasDeUnNivel(monsters).to_s}"    
     end
+
+    def nivelSuperior (listado, nivel)
+      listado.select {|monster| monster.level >= nivel}
+    end
+
+    def pierdenSoloNiveles (listado)
+      listado.select {|monster| (monster.bad.levels >= 0) && (monster.bad.death() == false) && (monster.bad.nVisible == 0) && (monster.bad.getnHidden == 0)}
+    end
+
+    def ganaMasDeUnNivel (listado)
+        listado.select {|monster| monster.prize.levels > 1}
+    end
+
+    def pierdeTesoros (listado, tesoros)
+      
+    end
+
+    #ArrayList<Monster> filtrados = new ArrayList();
+    #HashSet<TreasureKind> hs = new HashSet(); 
+
+    #for (Monster actual : listado) {
+    #   // Añadimos los tesoros a una tabla Hash (evita duplicados). 
+    #   hs.addAll(actual.getBadConsequence().
+    #            getSpecificVisibleTreasures());
+    # hs.addAll(actual.getBadConsequence().
+    #          getSpecificHiddenTreasures()); 
+
+    #          if (tesoros.containsAll(hs))
+    #           filtrados.add(actual); 
+    #          // Limpiamos la lista. 
+    #           hs.clear(); 
+    #      }
+    #     return filtrados; 
+    #  end
+
+    
   end
+
+  if __FILE__ == $0
+    puts "Ejecutando..."
+  end
+    
 end
