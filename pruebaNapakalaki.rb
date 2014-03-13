@@ -11,39 +11,39 @@ module Napakalaki
       monsters = Array.new()
 
       #Monstruos añadidos por orden de aparición en el guión. 
-      #3 Byakhees de bonanza.
+      # 3 Byakhees de bonanza.
       bad = BadConsequence.new_det_tr("Pierdes tu armadura visible y otra oculta.", 0, [ARMOR], [ARMOR])
-      monsters.add(Monster.new("2 Byakhees de bonanza", 8, bad, Prize.new(2,1)))
+      monsters.add(Monster.new("3 Byakhees de bonanza", 8, bad, Prize.new(2,1)))
 
-      #Chibithulhu
+      # Chibithulhu
       bad = BadConsequence.new_det_tr("Embobados con el lindo primigenio te descartas de tu casco visible.", 0, [HELMET], [])
       monsters.add(Monster.new("Chibithulhu", 2, bad4, Prize.new(1,1))) 
 
-      #El sopor de Dunwich
+      # El sopor de Dunwich
       bad = BadConsequence.new_det_tr("El primordial bostezo contagioso. Pierdes el calzado visible.", 0, [SHOE], [])
       monsters.add(Monster.new("El sopor de Dunwich", 2, bad, Prize.new(1,1)))
 
-      #Ángeles de la noche ibicenca
+      # Ángeles de la noche ibicenca
       bad = BadConsequence.new_det_tr("Te atrapan para llevarte de fiesta y te dejan caer en mitad del vuelo. Descarta 1 mano visible y 1 mano oculta.", 0, [ONEHAND], [ONEHAND])
       monsters.add(Monster.new("Ángeles de la noche ibicenca", 14, bad, Prize.new(4,1)))
 
-      #El gorrón en el umbral???
+      # El gorrón en el umbral
       bad = BadConsequence.new_det_tr("Pierdes todos tus tesoros visibles.", 0, [ARMOR, BOTHHANDs, ONEHAND, ONEHAND, SHOE, SHOE, HELMET, NECKLACE], [])
       monsters.add(Monster.new("El gorrón en el umbral", 10, bad, Prize.new(3,1))) 
 
-      #H.P. Munchcraft
+      # H.P. Munchcraft
       bad = BadConsequence.new_det_tr("Pierdes la armadura visible.", 0, [ARMOR], [])
       monsters.add(Monster.new("H.P. Munchcraft", 6, bad, Prize.new(2,1)))
 
-      #Bichgooth
+      # Bichgooth
       bad = BadConsequence.new_det_tr("Sientes bichos bajo la ropa. Descarta la armadura visible.", 0, [ARMOR], []) 
       monsters.add(Monster.new("Bichgooth", 2, bad, Prize.new(1,1)))
 
-      #El rey de rosa
+      # El rey de rosa
       bad = BadConsequence.new_indet_tr("Pierdes 5 niveles y 3 tesoros visibles.", 5, 3, 0)
       monsters.add(Monster.new("El rey de rosa", 13, bad, Prize.new(4,2)))
 
-      #La que redacta en las sombras. 
+      # La que redacta en las sombras. 
       bad = BadConsequence.new_indet_tr("Toses los pulmones y pierdes 2 niveles.", 2, 0, 0)
       monsters.add(Monster.new("La que redacta en las sombras", 3, bad, Prize.new(1,1)))
 
