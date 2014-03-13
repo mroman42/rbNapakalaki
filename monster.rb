@@ -3,7 +3,9 @@
 require_relative 'badConsequence.rb'
 require_relative 'prize.rb'
 
-module 'Napakalaki'
+module Napakalaki
+  
+  # Monstruo del juego.
   class Monster
     # Inicialización
     def initialize(name, level, bad, prize)
@@ -20,9 +22,9 @@ module 'Napakalaki'
     attr_reader :prize
 
     def to_s()
-      "#{@name} (lv. #{@level}) \nPrize: #{prize.to_s()} \n Bad: \n#{bad.to_s()}\n"
+      "#{@name} (lv. #{@level}) \nPrize: #{prize.to_s()}\n Bad: #{bad.to_s()}\n"
     end
-  
-	end
+  end
+
 end
 
