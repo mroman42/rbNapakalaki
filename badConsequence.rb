@@ -28,10 +28,10 @@ module Napakalaki
     attr_reader :death
 
     def to_s()
-      "#{@text} \n\t" + (death? "DEATH." : 
+      "#{@text} \n\t" + (death ? "DEATH." : 
                         "#{@levels} levels, #{@nHidden} hidden treasures " +
-                        (hidden.empty? "" : "(#{@hidden}") + ", #{@nVisible} visible treasures " + 
-                        (visible.empty? "" : "(#{@visible}") + ".") + "\n"
+                        (hidden.empty ? "" : "(#{@hidden}") + ", #{@nVisible} visible treasures " + 
+                        (visible.empty ? "" : "(#{@visible}") + ".") + "\n"
     end
     
     #Nuevos constructores
@@ -55,8 +55,11 @@ module Napakalaki
 
   end
 
+
+  #Deshabilitando el new por defecto
+  BadConsequence.instance_eval { undef :new }
+
 end
 
-#Deshabilitando el new por defecto
-Test.instance_eval { undef :new }
+
 
