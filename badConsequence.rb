@@ -29,9 +29,8 @@ module Napakalaki
 
     def to_s()
       "#{@text} \n\t" + (death ? "DEATH." : 
-                        "#{@levels} levels, #{@nHidden} hidden treasures " +
-                        (hidden.empty ? "" : "(#{@hidden}") + ", #{@nVisible} visible treasures " + 
-                        (visible.empty ? "" : "(#{@visible}") + ".") + "\n"
+                        "#{@levels} levels, #{@nHidden} hidden treasures, #{@nVisible} visible treasures." 
+                        ) + "\n"
     end
     
     #Nuevos constructores
