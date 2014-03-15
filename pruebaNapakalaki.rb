@@ -108,10 +108,10 @@ module Napakalaki
    
 
       # Filtros sobre los monstruos.
-      puts "Monstruos de nivel mayor a 10:\n----\n #{nivelSuperior(monsters, 10).to_s}\n"
-      puts "Monstruos que sólo quitan niveles:\n----\n #{pierdenSoloNiveles(monsters).to_s}\n"
-      puts "Monstruos con ganancia de un nivel o más:\n----\n #{ganaMasDeUnNivel(monsters).to_s}\n"
-      puts "Monstruos que quitan armaduras:\n----\n #{pierdeTesoros(monsters,[:ARMOR]).to_s}\n"
+      puts "Monstruos de nivel mayor a 10:\n----\n #{nivelSuperior(monsters, 10).to_s}\n\n"
+      puts "Monstruos que sólo quitan niveles:\n----\n #{pierdenSoloNiveles(monsters).to_s}\n\n"
+      puts "Monstruos con ganancia de un nivel o más:\n----\n #{ganaMasDeUnNivel(monsters).to_s}\n\n"
+      puts "Monstruos que quitan armaduras:\n----\n #{pierdeTesoros(monsters,[:ARMOR]).to_s}\n\n"
     end
 
     def self.nivelSuperior (listado, nivel)
