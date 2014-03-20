@@ -2,7 +2,7 @@
 #encoding: utf-8
 require_relative 'treasureKind'
 
-module Napakalaki
+module Game
 
   # Perjuicio al producirse la derrota.
   class BadConsequence

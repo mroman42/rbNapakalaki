@@ -2,7 +2,7 @@
 #encoding: utf-8
 require_relative 'treasureKind.rb'
 
-module Napakalaki
+module Game
   class Treasure
     # Inicialización
     def initialize (name, goldCoins, minBonus, maxBonus, type)

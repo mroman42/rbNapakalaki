@@ -2,7 +2,7 @@
 #encoding: utf-8
 require "singleton"
 
-module Napakalaki
+module Game
   class Dice
     include Singleton
     

@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 
-module Napakalaki
+module Game
 
   # Premio al conseguir una victoria.
   class Prize

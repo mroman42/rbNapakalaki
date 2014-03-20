@@ -2,7 +2,7 @@
 #encoding: utf-8
 require_relative 'monster.rb'
 
-module Napakalaki
+module Game
 
   class PruebaNapakalaki
 

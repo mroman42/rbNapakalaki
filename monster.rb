@@ -3,7 +3,7 @@
 require_relative 'badConsequence.rb'
 require_relative 'prize.rb'
 
-module Napakalaki
+module Game
   
   # Monstruo del juego.
   class Monster
