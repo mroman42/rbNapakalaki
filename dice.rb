@@ -6,8 +6,7 @@ module Game
   class Dice
     include Singleton
     
-    def initialize
-      
+    def nextNumber()
     end
   end
 end

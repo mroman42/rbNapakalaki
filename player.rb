@@ -11,7 +11,14 @@ module Game
       @dead = dead
     end
 
-    
+    def bringToLife()
+      dead = false
+    end
+
+    def incrementLevels(l)
+      level += l
+    end
+
   end
 
 end
