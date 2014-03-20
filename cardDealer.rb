@@ -10,8 +10,9 @@ module Game
 
 
     def self.main ()
-      #Declaración de los monstruos. 
+      #Declaración de los mazos. 
       monsters = Array.new()
+      tesoros = Array.new()
 
       #Monstruos añadidos por orden de aparición en el guión. 
       # 3 Byakhees de bonanza.
@@ -108,33 +109,105 @@ module Game
       bad = BadConsequence.new_det_tr("Te faltan manos para tanta cabeza. Pierdes 3 niveles y tus tesoros visibles de las manos.", 3, [ONEHAND, ONEHAND, BOTHHANDS], [])
       prize = Prize.new(1,1)
       monsters.push Monster.new("Bicéfalo", 20, bad, prize) 
-   
 
-      # Filtros sobre los monstruos.
-      puts "Monstruos de nivel mayor a 10:\n----\n #{nivelSuperior(monsters, 10).to_s}\n\n"
-      puts "Monstruos que sólo quitan niveles:\n----\n #{pierdenSoloNiveles(monsters).to_s}\n\n"
-      puts "Monstruos con ganancia de un nivel o más:\n----\n #{ganaMasDeUnNivel(monsters).to_s}\n\n"
-      puts "Monstruos que quitan armaduras:\n----\n #{pierdeTesoros(monsters,[ARMOR]).to_s}\n\n"
-    end
+      #Tesoros añadidos por orden de aparición en el guión.
+      # ¡Sí, mi amo!
+      tesoros.push Treasure.new("¡Sí, mi amo!", 0, 4, 7, HELMET) 
 
-    def self.nivelSuperior (listado, nivel)
-      listado.select {|monster| monster.level >= nivel}
-    end
+      # Botas de investigación
+      tesoros.push Treasure.new("Botas de investigación", 600, 3, 4, SHOE)
 
-    def self.pierdenSoloNiveles (listado)
-      listado.select {|monster| (monster.bad.levels >= 0) && (monster.bad.death() == false) && (monster.bad.nVisible == 0) && (monster.bad.nHidden == 0)}
-    end
+      # Capucha de Cthulhu
+      tesoros.push Tresure.new("Capucha de Cthulhu", 500, 3, 5, HELMET)
 
-    def self.ganaMasDeUnNivel (listado)
-      listado.select {|monster| monster.prize.levels > 1}
-    end
+      # A prueba de babas verdes
+      tesoros.push Treasure.new("A prueba de babas verdes", 400, 3, 5, ARMOR)
 
-    def self.pierdeTesoros (listado, tesoros)
-      listado.select { |monster| (tesoros - (monster.bad.visible + monster.bad.hidden)).empty? }
-    end
-    
-  end
+      # Botas de lluvia  ́acida
+      tesoros.push Treasure.new("Botas de lluvia  ́acida", 800, 1, 1, BOTHHANDS)
 
+      # Casco minero
+      tesoros.push Treasure.new("Casco minero", 400, 2, 4, HELMET)
+
+      # Ametralladora Thompson
+      tesoros.push Treasure.new("Ametralladora Thompson", 600, 4, 8, BOTHHANDS)
+
+      # Camiseta de la UGR
+      tesoros.push Treasure.new("Camiseta de la UGR", 100, 1, 7, ARMOR)
+
+      # Clavo de rail ferroviario
+      tesoros.push Treasure.new("Clavo de rail ferroviario", 400, 3, 6, ONEHAND)
+
+      # Cuchillo de sushi arcano
+      tesoros.push Treasure.new("Cuchillo de sushi arcano", 300, 2, 3, ONEHAND)
+
+      # Fez Alópodo
+      tesoros.push Treasure.new("Fez Alópodo", 700, 3, 5, HELMET)
+
+      # Hacha prehistórica
+      tesoros.push Treasure.new("Hacha prehistórica", 500, 2, 5, ONEHAND)
+
+      # El aparato del Pr. Tesla
+      tesoros.push Treasure.new("El aparato del Pr. Tesla", 900, 4, 8, ARMOR)
+
+      # Gaita
+      tesoros.push Treasure.new("Gaita", 200, 1, 5, BOTHHANDS)
+
+      # Insecticida
+      tesoros.push Treasure.new("Insecticida", 300, 2, 3, ONEHAND)
+
+      # Escopeta de 3 cañones
+      tesoros.push Treasure.new("Escopeta de 3 cañones", 700, 4, 6, BOTHHANDS)
+
+      # Garabato místico
+      tesoros.push Treasure.new("Garabato místico", 300, 2, 2, ONEHAND)
+
+      # La fuerza de Mr. T
+      tesoros.push Treasure.new("La fuerza de Mr. T", 1000, 0, 0, NECKLACE)
+
+      # La rebeca metálica
+      tesoros.push Treasure.new("La rebeca metálica", 400, 2, 3, ARMOR)
+
+      # Mazo de los antiguos
+      tesoros.push Treasure.new("Mazo de los antiguos", 200, 3, 4, ONEHAND)
+
+      # Necro-playboycón
+      tesoros.push Treasure.new("Necro-playboycón", 300, 3, 5, ONEHAND)
+
+      # Lanzallamas
+      tesoros.push Treasure.new("Lanzallamas", 800, 4, 8, BOTHHANDS)
+
+      # Necro-comicón
+      tesoros.push Treasure.new("Necro-comicón", 100, 1, 1, ONEHAND)
+
+      # Necronomicón
+      tesoros.push Treasure.new("Necronomicón", 800, 5, 7, BOTHHANDS)
+
+      # Linterna a 2 manos
+      tesoros.push Treasure.new("Linterna a 2 manos", 400, 3, 6, BOTHHANDS)
+
+      # Necro-gnomicón
+      tesoros.push Treasure.new("Necro-gnomicón", 200, 2, 4, ONEHAND)
+
+      # Necrotelecom
+      tesoros.push Treasure.new("Necrotelecom", 300, 2, 3, HELMET)
+
+      # Porra preternatural
+      tesoros.push Treasure.new("Porra preternatural", 200, 2, 3, ONEHAND)
+
+      # Tentáculo de pega
+      tesoros.push Treasure.new("Tentáculo de pega", 200, 0, 1, HELMET)
+
+      # Zapatillas deja-amigos
+      tesoros.push Treasure.new("Zapatillas deja-amigos", 500, 0, 1, SHOE)
+
+      # Shogulador
+      tesoros.push Treasure.new("Shogulador", 600, 1, 1, BOTHHANDS)
+
+      # Varita de atizamiento
+      tesoros.push Treasure.new("Varita de atizamiento", 400, 3, 4, ONEHAND)
+
+      
   if __FILE__ == $0
     PruebaNapakalaki.main()
   end
