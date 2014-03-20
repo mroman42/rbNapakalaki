@@ -4,7 +4,10 @@ require_relative 'monster.rb'
 
 module Game
 
-  class PruebaNapakalaki
+  class CardDealer
+    include Singleton
+
+
 
     def self.main ()
       #Declaración de los monstruos. 
