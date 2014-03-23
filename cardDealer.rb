@@ -7,7 +7,37 @@ module Game
   class CardDealer
     include Singleton
 
+    private
 
+    def initTreasureCardDeck()
+    end
+
+    def initMonsterCardDeck()
+    end
+
+    def shuffleTreasures()
+    end
+
+    def shuffleMonsters()
+    end
+
+
+    public
+
+    def nextTreasure()
+    end
+    
+    def nextMonster()
+    end
+    
+    def giveTreasureBack()
+    end
+
+    def giveMonsterBack()
+    end
+
+    def initCards()
+    end
 
     def self.main ()
       #Declaración de los mazos. 
