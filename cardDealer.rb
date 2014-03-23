@@ -7,6 +7,14 @@ module Game
   class CardDealer
     include Singleton
 
+    def initialize()
+      @unusedMonsters = nil
+      @usedMonsters = nil
+      @unusedTreasures = nil
+      @usedTreasures = nil
+    end
+
+
     private
 
     def initTreasureCardDeck()
