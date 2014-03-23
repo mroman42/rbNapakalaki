@@ -4,7 +4,7 @@ require_relative 'monster.rb'
 
 module Game
 
-  class CardDealer
+  class Napakalaki
     include Singleton
 
     def initialize()

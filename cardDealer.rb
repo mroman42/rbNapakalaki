@@ -206,7 +206,9 @@ module Game
 
       # Varita de atizamiento
       tesoros.push Treasure.new("Varita de atizamiento", 400, 3, 4, ONEHAND)
+    end
 
+  end
       
   if __FILE__ == $0
     PruebaNapakalaki.main()
