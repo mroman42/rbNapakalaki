@@ -18,6 +18,7 @@ module Game
 
     def bringToLife()
       dead = false
+      level = 1
     end
 
     def incrementLevels(increment)
@@ -34,6 +35,8 @@ module Game
 
     def die()
       dead = true
+      hiddentreasures.clean()
+      visibletreasure.clean()
     end
 
     def computeGoldCoinsValue(treasure)
@@ -51,8 +54,7 @@ module Game
     attr_reader :visibleTreasures
     attr_reader :hiddenTreasures
     
-    def applyPrize()
-      
+    def applyPrize(prize)
     end
 
     def combat(monster)
@@ -61,10 +63,13 @@ module Game
     def applyBadConsequence(badConsequence)
     end
 
-    def makeTreasureVisible()
+    def makeTreasureVisible(treasure)
     end
     
     def buyLevels(visible, hidden)
+    end
+
+    def getCombatLevel()
     end
 
     def validState()
@@ -73,11 +78,14 @@ module Game
     def initTreasures()
     end
 
-    def hasVisibleTreasures()
-      
+    def isDead()
+      dead
+    end 
+
+    def hasVisibleTreasures()      
     end
 
-
+    
 
   end
 

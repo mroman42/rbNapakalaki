@@ -15,7 +15,6 @@ module Game
 
     attr_reader :currentPlayer
     attr_reader :currentMonster
-    attr_reader :player
 
     def initPlayers(names)
     end
@@ -67,8 +66,4 @@ module Game
 
   end
 
-  if __FILE__ == $0
-    PruebaNapakalaki.main()
-  end
-    
 end
