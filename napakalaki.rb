@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 require_relative 'monster.rb'
+require_relative 'player.rb'
+require_relative 'combatResult.rb'
 require "singleton"
 
 module Game

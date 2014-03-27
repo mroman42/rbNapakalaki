@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
+require_relative 'dice.rb'
+require_relative 'combatResult.rb'
+require_relative 'treasure.rb'
 
 module Game
   
