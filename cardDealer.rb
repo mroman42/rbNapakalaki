@@ -150,6 +150,9 @@ module Game
       prize = Prize.new(1,1)
       monsters.push Monster.new("Bicéfalo", 20, bad, prize) 
 
+
+
+
       #Tesoros añadidos por orden de aparición en el guión.
       # ¡Sí, mi amo!
       tesoros.push Treasure.new("¡Sí, mi amo!", 0, 4, 7, HELMET) 
@@ -249,9 +252,5 @@ module Game
     end
 
   end
-      
-  if __FILE__ == $0
-    PruebaNapakalaki.main()
-  end
-    
+ 
 end
