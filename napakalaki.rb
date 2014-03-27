@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 require_relative 'monster.rb'
+require "singleton"
 
 module Game
 
@@ -8,13 +9,15 @@ module Game
     include Singleton
 
     def initialize()
-      @player = nil
+      @players = nil
       @currentPlayer = nil
       @currentMonster = nil
     end
 
     attr_reader :currentPlayer
     attr_reader :currentMonster
+    attr_reader :players
+
 
     def initPlayers(names)
     end
