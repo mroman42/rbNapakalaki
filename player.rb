@@ -3,6 +3,7 @@
 require_relative 'dice.rb'
 require_relative 'combatResult.rb'
 require_relative 'treasure.rb'
+require_relative 'badConsequence.rb'
 
 module Game
   
