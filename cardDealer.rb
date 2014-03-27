@@ -144,7 +144,7 @@ module Game
       unusedMonsters.push(Monster.new("Ángeles de la noche ibicenca", 14, bad, prize))
 
       # El gorrón en el umbral
-      bad = BadConsequence.new_det_tr("Pierdes todos tus tesoros visibles.", 0, [ARMOR, BOTHHANDS, ONEHAND, ONEHAND, SHOE, SHOE, HELMET, NECKLACE], [])
+      bad = BadConsequence.new_indet_tr("Pierdes todos tus tesoros visibles.", 0, 99, 0)
       prize = Prize.new(3,1)
       unusedMonsters.push(Monster.new("El gorrón en el umbral", 10, bad, prize))
 
