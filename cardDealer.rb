@@ -161,7 +161,7 @@ module Game
       tesoros.push Treasure.new("Botas de investigación", 600, 3, 4, SHOE)
 
       # Capucha de Cthulhu
-      tesoros.push Tresure.new("Capucha de Cthulhu", 500, 3, 5, HELMET)
+      tesoros.push Treasure.new("Capucha de Cthulhu", 500, 3, 5, HELMET)
 
       # A prueba de babas verdes
       tesoros.push Treasure.new("A prueba de babas verdes", 400, 3, 5, ARMOR)
