@@ -9,14 +9,14 @@ module Game
     include Singleton
 
     def initialize()
-      @player = nil
+      @players = nil
       @currentPlayer = nil
       @currentMonster = nil
     end
 
     attr_reader :currentPlayer
     attr_reader :currentMonster
-    attr_reader :player
+    attr_reader :players
 
     def initPlayers(names)
     end
