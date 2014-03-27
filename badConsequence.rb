@@ -52,6 +52,16 @@ module Game
       newObj
     end
 
+    #Métodos
+
+    def isEmpty() 
+      true
+    end 
+
+    def adjustToFitTreasureLists(v, h)
+      
+    end 
+
   end
 
 
