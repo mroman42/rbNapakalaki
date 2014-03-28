@@ -13,12 +13,26 @@ module Game
       @type = type
     end
 
-    # Getters
-    attr_reader :name
-    attr_reader :goldCoins
-    attr_reader :minBonus
-    attr_reader :maxBonus
-    attr_reader :type
+    # Métodos públicos
+    def getName
+      @name
+    end
+
+    def getGoldCoins
+      @goldCoins
+    end
+
+    def getMinBonus
+      @minBonus
+    end
+
+    def getMaxBonus
+      @maxBonus
+    end
+
+    def getType
+      @type
+    end
 
   end
 end
