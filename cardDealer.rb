@@ -9,6 +9,7 @@ module Game
   class CardDealer
     include Singleton
 
+    # Constructor
     def initialize()
       @unusedMonsters = nil
       @usedMonsters = nil
@@ -17,6 +18,7 @@ module Game
     end
 
 
+    # Métodos privados
     private
 
     def initTreasureCardDeck()
@@ -219,32 +221,30 @@ module Game
       unusedMonsters.push(Monster.new("Bicéfalo", 20, bad, prize))
 
     end
-
+        
     def shuffleTreasures()
     end
 
     def shuffleMonsters()
     end
 
+
+    # Métodos públicos
     public
 
-    def nextTreasure()
+    def nextTreasure
     end
     
-    def nextMonster()
+    def nextMonster
     end
     
-    def giveTreasureBack()
+    def giveTreasureBack(treasure)
     end
 
-    def giveMonsterBack()
+    def giveMonsterBack(monster)
     end
 
-    def initCards()
-    end
-
-    def self.main ()
- 
+    def initCards
     end
 
   end
