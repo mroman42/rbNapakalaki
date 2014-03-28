@@ -5,9 +5,9 @@ require_relative 'prize.rb'
 
 module Game
   
-  # Monstruo del juego.
   class Monster
-    # Inicialización
+
+    # Constructor
     def initialize(name, level, bad, prize)
       @name = name 
       @level = level
@@ -15,12 +15,24 @@ module Game
       @prize = prize
     end
 
-    # Getters
-    attr_reader :name
-    attr_reader :level
-    attr_reader :bad
-    attr_reader :prize
+    # Métodos públicos
+    def getName
+      @name
+    end
+    
+    def getLevel
+      @level
+    end
 
+    def getBadConsequence
+      @bad
+    end
+    
+    def getPrize
+      @prize
+    end
+
+    # Métodos auxiliares
     def to_s()
       "#{@name} (lv. #{@level}) \nPrize: #{prize.to_s()}\n Bad: #{bad.to_s()}\n"
     end
