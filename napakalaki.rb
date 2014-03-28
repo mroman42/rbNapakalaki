@@ -3,31 +3,36 @@
 require_relative 'monster.rb'
 require_relative 'player.rb'
 require_relative 'combatResult.rb'
-require "singleton"
+require 'singleton'
 
 module Game
 
   class Napakalaki
     include Singleton
 
-    def initialize()
+    # Constructor.
+    def initialize
       @players = nil
       @currentPlayer = nil
       @currentMonster = nil
     end
 
-    attr_reader :currentPlayer
-    attr_reader :currentMonster
-    attr_reader :players
 
+    # Métodos privados.
+    private
 
     def initPlayers(names)
+      @players = names
     end
 
-    def nextPlayer()
+    def nextPlayer
     end
 
-    def combat()
+
+    # Métodos públicos
+    public
+
+    def combat
     end
 
     def discardVisibleTreasure(treasure)
@@ -45,25 +50,27 @@ module Game
     def initGame(players)
     end
 
-    def getCurrentPlayer()
+    def getCurrentPlayer
+      @currentPlayer
     end
 
-    def getCurrentMonster()
+    def getCurrentMonster
+      @currentMonster
     end
     
     def canMakeTreasureVisible(treasure)
     end
 
-    def getVisibleTreasures()
+    def getVisibleTreasures
     end
 
-    def getHiddenTreasures()
+    def getHiddenTreasures
     end
 
-    def nextTurn()
+    def nextTurn
     end
 
-    def nextTurnAllowed()
+    def nextTurnAllowed
     end
 
     def endOfGame(result)
