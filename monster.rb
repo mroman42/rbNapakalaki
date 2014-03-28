@@ -7,7 +7,7 @@ module Game
   
   class Monster
 
-    # Constructor
+    # Inicializador
     def initialize(name, level, bad, prize)
       @name = name 
       @level = level
