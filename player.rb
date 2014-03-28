@@ -9,15 +9,21 @@ module Game
   
   class Player
     
+    # Inicializador
     def initialize(name)
+      @dead = true
       @name = name
       @level = 1
-      @dead = false
       @pendingBadConsequence = nil
       @hiddenTreasures = []
       @visibleTreasures = []
+
+      bringToLife
     end
 
+
+
+    # Métodos privados
     private
 
     def bringToLife()
@@ -34,13 +40,19 @@ module Game
     end
 
     def setPendingBadConsequence(badConsequence)
-      ## Setter?? 
+      @pendingBadConsequence = badConsequence
     end
 
     def die()
       dead = true
       hiddentreasures.clean()
       visibletreasure.clean()
+    end
+
+    def discardNecklaceIfVisible
+    end
+
+    def dieIfNoTreasures
     end
 
     def computeGoldCoinsValue(treasure)
@@ -52,11 +64,8 @@ module Game
 
 
 
+    # Métodos públicos
     public
-
-    attr_reader :level
-    attr_reader :visibleTreasures
-    attr_reader :hiddenTreasures
     
     def applyPrize(prize)
     end
@@ -70,26 +79,39 @@ module Game
     def makeTreasureVisible(treasure)
     end
     
+    def canMakeTreasureVisible(treasure)
+    end
+
+    def discardVisibleTreasure(treasure)
+    end
+
+    def discardHiddenTreasure(treasure)
+    end
+
     def buyLevels(visible, hidden)
     end
 
-    def getCombatLevel()
+    def getCombatLevel
     end
 
-    def validState()
+    def validState
     end
 
-    def initTreasures()
+    def initTreasures
     end
 
-    def isDead()
-      dead
+    def isDead
+      @dead
     end 
 
-    def hasVisibleTreasures()      
+    def hasVisibleTreasures
     end
 
-    
+    def getVisibleTreasures
+    end
+
+    def getHiddenTreasures
+    end
 
   end
 
