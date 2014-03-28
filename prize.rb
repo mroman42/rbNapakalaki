@@ -6,16 +6,22 @@ module Game
   # Premio al conseguir una victoria.
   class Prize
     
-    # Inicialización
+    # Constructor
     def initialize (treasures, levels)
       @treasures = treasures
       @levels = levels
     end
     
-    # Getters
-    attr_reader :treasures
-    attr_reader :levels
+    # Métodos públicos
+    def getTreasures
+      @treasures
+    end
+    
+    def getLevels
+      @levels
+    end
 
+    # Métodos auxiliares
     def to_s()
       "#{@treasures} treasures and #{@levels} levels."
     end
