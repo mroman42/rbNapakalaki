@@ -10,7 +10,7 @@ module Game
   class Napakalaki
     include Singleton
 
-    # Constructor.
+    # Inicializador
     def initialize
       @players = nil
       @currentPlayer = nil
@@ -18,7 +18,7 @@ module Game
     end
 
 
-    # Métodos privados.
+    # Métodos privados
     private
 
     def initPlayers(names)

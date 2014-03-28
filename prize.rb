@@ -6,7 +6,7 @@ module Game
   # Premio al conseguir una victoria.
   class Prize
     
-    # Constructor
+    # Inicializador
     def initialize (treasures, levels)
       @treasures = treasures
       @levels = levels

@@ -2,7 +2,7 @@
 #encoding: utf-8
 
 module Game
-	
+
   # Resultados de un combate.
   WINANDWINGAME = :winandwingame
   WIN = :win
