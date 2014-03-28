@@ -11,29 +11,16 @@ module Game
     def initialize (text, levels, nVisible, nHidden, visible, hidden, death)
       @text = text
       @levels = levels
-      @nVisible = nVisible
-      @nHidden = nHidden
-      @visible = visible
-      @hidden = hidden
+      @nVisibleTreasures = nVisible
+      @nHiddenTreasures = nHidden
+      @specificVisibleTreasures = visible
+      @specificHiddenTreasures = hidden
       @death = death
     end
 
-    # Getters
-    attr_reader :text
-    attr_reader :levels
-    attr_reader :nVisible
-    attr_reader :nHidden
-    attr_reader :visible
-    attr_reader :hidden
-    attr_reader :death
 
-    def to_s()
-      "#{@text} \n\t" + (death ? "DEATH." : 
-                        "#{@levels} levels, #{@nHidden} hidden treasures, #{@nVisible} visible treasures." 
-                        ) + "\n"
-    end
-    
-    #Nuevos constructores
+
+    # Constructores
     def self.new_det_tr(text, levels, visible, hidden)
       newObj=allocate
       newObj.send(:initialize, text, levels, visible.size, hidden.size, visible, hidden, false)
@@ -52,20 +39,59 @@ module Game
       newObj
     end
 
-    #Métodos
 
+
+    # Métodos públicos
     def isEmpty() 
       true
     end 
 
-    def adjustToFitTreasureLists(v, h)
-      
+    def kills
+      @death
+    end
+
+    def getLevels
+      @levels
+    end
+
+    def getNVisibleTreasures
+      @nVisibleTreasures
+    end
+
+    def getNHiddenTreasures
+      @nHiddenTreasures
+    end
+
+    def getSpecificVisibleTreasures
+      @specificVisibleTreasures
+    end
+
+    def getSpecificHiddenTreasures
+      @specificHiddenTreasures
+    end
+
+    def substractVisibleTreasure(treasure)
+    end
+
+    def substractHiddenTreasure(treasure)
+    end
+
+    def adjustToFitTreasureLists(visible, hidden)      
     end 
+
+
+    # Métodos auxiliares
+    def to_s()
+      "#{@text} \n\t" + (death ? "DEATH." : 
+                         "#{@levels} levels, #{@nHidden} hidden treasures, #{@nVisible} visible treasures." 
+                         ) + "\n"
+    end
 
   end
 
 
-  #Deshabilitando el new por defecto
+
+  # Deshabilitando el constructor por defecto
   BadConsequence.instance_eval { undef :new }
 
 end
