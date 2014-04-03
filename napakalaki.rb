@@ -14,6 +14,7 @@ module Game
     def initialize
       @players = nil
       @currentPlayer = nil
+      @currentPlayerIndex = nil
       @currentMonster = nil
     end
 
@@ -22,10 +23,12 @@ module Game
     private
 
     def initPlayers(names)
-      @players = names
+      @players = names.collect{|name| Player.new(name)}
     end
 
     def nextPlayer
+      @currentPlayerIndex = (@currentPlayerIndex+1) % @players.size
+      @currentPlayer = @players[@currentPlayerIndex]
     end
 
 
@@ -33,6 +36,7 @@ module Game
     public
 
     def combat
+      @currentPlayer.combat(@currentMonster)
     end
 
     def discardVisibleTreasure(treasure)
