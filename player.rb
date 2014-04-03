@@ -50,13 +50,15 @@ module Game
     end
 
     def discardNecklaceIfVisible
+      visibleTreasures-[NECKLACE]
     end
 
     def dieIfNoTreasures
+      die if (visibleTreasures + hiddenTreasures).empty?
     end
 
     def computeGoldCoinsValue(treasure)
-      return 0
+      treasure.getGoldCoins()
     end
 
     def canIBuyLevels(levels)
@@ -68,9 +70,11 @@ module Game
     public
     
     def applyPrize(prize)
+      incrementLevels(prize.getLevels())
     end
 
     def combat(monster)
+      total_level = getCombatLevel()
     end
 
     def applyBadConsequence(badConsequence)
@@ -83,15 +87,28 @@ module Game
     end
 
     def discardVisibleTreasure(treasure)
+      visibleTreasures - treasure.getType()
     end
 
     def discardHiddenTreasure(treasure)
+      hiddenTreasures - treasure.getType()
     end
 
     def buyLevels(visible, hidden)
     end
 
     def getCombatLevel
+      combat_level = level;
+
+      visibleTreasures.each {|treasure|
+        if(visibleTreasures.include?(NECKLACE))
+          combat_level += treasure.getMaxBonus();
+        else
+          combat_level += treasure.getMinBonus();
+        end
+      }
+
+      combat_level
     end
 
     def validState
@@ -105,12 +122,15 @@ module Game
     end 
 
     def hasVisibleTreasures
+      visibleTreasures.empty?
     end
 
     def getVisibleTreasures
+      @visibleTreasures
     end
 
     def getHiddenTreasures
+      @hiddenTreasures
     end
 
   end
