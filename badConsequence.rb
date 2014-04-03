@@ -76,7 +76,27 @@ module Game
     def substractHiddenTreasure(treasure)
     end
 
-    def adjustToFitTreasureLists(visible, hidden)      
+    def adjustToFitTreasureLists(visible, hidden)        
+        if(death){
+            adjustedBC = BadConsequence.new_death(text, death)
+        }
+        else{
+            if(specificVisibleTreasures.empty? && specificHiddenTreasures.empty?){
+                nVTreasures = (visibles.size, nVisibleTreasures).min
+                nHTreasures = (hidden.size, nHiddenTreasures).min
+
+                adjustedBC = new BadConsequence(text, levels, nVTreasures, nHTreasures)
+            }
+            else{
+                listVisibleTreasures = visible & specificVisibleTreasures
+
+                listHiddenTreasures = hidden & specificHidden Treasures
+
+                adjustedBC = new BadConsequence(text, levels, listVisibleTreasures, listHiddenTreasures);
+            }
+        }
+        
+        return adjustedBC;      
     end 
 
 
