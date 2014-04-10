@@ -22,7 +22,6 @@ module Game
     private
 
     def initTreasureCardDeck()
-      
 
       #Tesoros añadidos por orden de aparición en el guión.
       # ¡Sí, mi amo!
@@ -228,9 +227,11 @@ module Game
     end
         
     def shuffleTreasures()
+      unusedTreasures.shuffle
     end
 
     def shuffleMonsters()
+      unusedMonsters.shuffle
     end
 
 
