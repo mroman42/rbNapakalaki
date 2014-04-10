@@ -37,6 +37,9 @@ module Game
 
     def decrementLevels(decrement)
       level -= decrement
+      if (level < 1) 
+        level = 1
+      end 
     end
 
     def setPendingBadConsequence(badConsequence)
@@ -44,9 +47,11 @@ module Game
     end
 
     def die()
-      dead = true
+      hiddentreasure.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
       hiddentreasures.clean()
+      visibletreasure.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
       visibletreasure.clean()
+      dead = true
     end
 
     def discardNecklaceIfVisible
@@ -54,14 +59,19 @@ module Game
     end
 
     def dieIfNoTreasures
-      die if (visibleTreasures + hiddenTreasures).empty?
+      if (visibleTreasures + hiddenTreasures).empty?
+        dead = true
+      end
     end
 
     def computeGoldCoinsValue(treasure)
-      treasure.getGoldCoins()
+      value = 0
+      treasure.each {|t| value += getGoldCoins(t)}
+      value 
     end
 
     def canIBuyLevels(levels)
+      (levels + level) < 10
     end
 
 
