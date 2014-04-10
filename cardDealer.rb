@@ -253,9 +253,11 @@ module Game
     end
     
     def giveTreasureBack(treasure)
+      usedTreasures.push(treasure)
     end
 
     def giveMonsterBack(monster)
+      usedMonsters.push(treasure)
     end
 
     def initCards
