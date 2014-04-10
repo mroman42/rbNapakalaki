@@ -88,9 +88,9 @@ module Game
       if(death)
         return BadConsequence.new_death(text, death)
 
-      elsif(specificVisibleTreasures.empty? && specificHiddenTreasures.empty?){
-        nVTreasures = (visibles.size, nVisibleTreasures).min
-        nHTreasures = (hidden.size, nHiddenTreasures).min
+      elsif (specificVisibleTreasures.empty? && specificHiddenTreasures.empty?)
+        nVTreasures = [visibles.size, nVisibleTreasures].min
+        nHTreasures = [hidden.size, nHiddenTreasures].min
 
         return BadConsequence.new_indet_tr(text, levels, nVTreasures, nHTreasures)
 
