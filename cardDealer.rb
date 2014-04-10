@@ -22,6 +22,7 @@ module Game
     private
 
     def initTreasureCardDeck()
+      
 
       #Tesoros añadidos por orden de aparición en el guión.
       # ¡Sí, mi amo!
@@ -123,6 +124,10 @@ module Game
     end
 
     def initMonsterCardDeck()
+      # El profesor de PDOO.
+      bad = BadConsequence.new_det_tr("Se pierden 20 niveles, todas las armaduras visibles y todos los tesoros de mano invisibles.", 20, [ARMOR], [ONEHAND, BOTHHANDS]*4)
+      prize = Prize.new(1,2)
+      unusedMonsters.push(Monster.new("El profesor de PDOO", 25, bad, prize))
 
       #Monstruos añadidos por orden de aparición en el guión. 
       # 3 Byakhees de bonanza.
