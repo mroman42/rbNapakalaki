@@ -70,14 +70,21 @@ module Game
     public
     
     def applyPrize(prize)
-      incrementLevels(prize.getLevels())
+      incrementLevels(prize.getLevels)
+      nPrize = prize.getTreasures
+
+      min(nPrize, 4-hiddenTreasures.size).times do
+        hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
+      end
     end
 
     def combat(monster)
       total_level = getCombatLevel()
     end
 
-    def applyBadConsequence(badConsequence)
+    def applyBadConsequence(bad)
+      decrementLevels(bad.getLevels)
+      setPendingBadConsequence(bad.adjustToFiTreasureLists(visibleTreasures, hiddenTreasures))
     end
 
     def makeTreasureVisible(treasure)
