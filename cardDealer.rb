@@ -239,9 +239,17 @@ module Game
     public
 
     def nextTreasure
+      #swap si unusedTreasures está vacío
+      unusedTreasures,usedTreasures = usedTreasures,unusedTreasures if (unusedTreasures.isempty?)
+
+      usedTreasures.push(unusedTreasures.pop)
     end
     
     def nextMonster
+      #swap si unusedMonsters está vacío
+      unusedMonsters,usedMonsters = usedMonsters,unusedMonsters if (unusedMonsters.isempty?)
+
+      usedMonsters.push(unusedMonsters.pop)
     end
     
     def giveTreasureBack(treasure)
