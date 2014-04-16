@@ -3,100 +3,101 @@
 require_relative 'monster.rb'
 require_relative 'player.rb'
 require_relative 'combatResult.rb'
+require_relative 'cardDealer.rb'
 require 'singleton'
 
 module Game
 
-  class Napakalaki
-    include Singleton
+    class Napakalaki
+        include Singleton
 
-    # Inicializador
-    def initialize
-      @players = nil
-      @currentPlayer = nil
-      @currentPlayerIndex = nil
-      @currentMonster = nil
-    end
-
-
-    # Métodos privados
-    private
-
-    def initPlayers(names)
-      @players = names.collect{|name| Player.new(name)}
-    end
-
-    def nextPlayer
-      @currentPlayerIndex = (@currentPlayerIndex+1) % @players.size
-      @currentPlayer = @players[@currentPlayerIndex]
-    end
+        # Inicializador
+        def initialize
+            @players = nil
+            @currentPlayer = nil
+            @currentPlayerIndex = nil
+            @currentMonster = nil
+        end
 
 
-    # Métodos públicos
-    public
+        # Métodos privados
+        private
 
-    def combat
-      @currentPlayer.combat(@currentMonster)
-    end
+        def initPlayers(names)
+            @players = names.collect{|name| Player.new(name)}
+        end
 
-    def discardVisibleTreasure(treasure)
-    end
+        def nextPlayer
+            @currentPlayerIndex = (@currentPlayerIndex+1) % @players.size
+            @currentPlayer = @players[@currentPlayerIndex]
+        end
 
-    def discardHiddenTreasure(treasure)
-    end
-    
-    def makeTreasureVisible(treasure) 
-    end
 
-    def buyLevels(visible, hidden)
-    end
+        # Métodos públicos
+        public
 
-    def initGame(names)
-        CardDealer.instance.initCards
-        initPlayers(names)
-        nextTurn()
-    end
+        def combat
+            @currentPlayer.combat(@currentMonster)
+        end
 
-    def getCurrentPlayer
-      @currentPlayer
-    end
+        def discardVisibleTreasure(treasure)
+        end
 
-    def getCurrentMonster
-      @currentMonster
-    end
-    
-    def canMakeTreasureVisible(treasure)
-    end
-
-    def getVisibleTreasures
-      @visibleTreasures
-    end
-
-    def getHiddenTreasures
-      @hiddenTreasures
-    end
-
-    def nextTurn
-        stateOK = nextTurnAllowed
+        def discardHiddenTreasure(treasure)
+        end
         
-        if stateOK
-            currentMonster = CardDealer.instance.nextMonster
-            currentPlayer = nextPlayer
-            dead = currentPlayer.isDead
+        def makeTreasureVisible(treasure) 
+        end
+
+        def buyLevels(visible, hidden)
+        end
+
+        def initGame(names)
+            CardDealer.instance.initCards
+            initPlayers(names)
+            nextTurn()
+        end
+
+        def getCurrentPlayer
+            @currentPlayer
+        end
+
+        def getCurrentMonster
+            @currentMonster
+        end
+        
+        def canMakeTreasureVisible(treasure)
+        end
+
+        def getVisibleTreasures
+            @visibleTreasures
+        end
+
+        def getHiddenTreasures
+            @hiddenTreasures
+        end
+
+        def nextTurn
+            stateOK = nextTurnAllowed
             
-            if dead
-                currentPlayer.initTreasures
+            if stateOK
+                currentMonster = CardDealer.instance.nextMonster
+                currentPlayer = nextPlayer
+                dead = currentPlayer.isDead
+                
+                if dead
+                    currentPlayer.initTreasures
+                end
             end
         end
-    end
 
-    def nextTurnAllowed
-        currentPlayer.validState
-    end
+        def nextTurnAllowed
+            currentPlayer.validState
+        end
 
-    def endOfGame(result)
-    end
+        def endOfGame(result)
+        end
 
-  end
+    end
 
 end
