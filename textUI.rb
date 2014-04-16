@@ -23,10 +23,14 @@ module UserInterface
 
     if __FILE__ == $0
         ui = TextUI.instance
+        np = Game::Napakalaki.instance
 
+        # Presentación del juego.
         ui.printHeader
+
+        # Lee los jugadores.
         players = ui.readPlayers
-        puts players
+        np.initGame(players)
     end
 
 end

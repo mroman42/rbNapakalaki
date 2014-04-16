@@ -51,7 +51,10 @@ module Game
     def buyLevels(visible, hidden)
     end
 
-    def initGame(players)
+    def initGame(names)
+        CardDealer.instance.initCards
+        initPlayers(names)
+        nextTurn()
     end
 
     def getCurrentPlayer
