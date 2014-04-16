@@ -27,7 +27,8 @@ module Game
             @players = names.collect{|name| Player.new(name)}
             
             # Toma el primer jugador como jugador actual
-            @currentPlayer = @players[0]
+            @currentPlayerIndex = 0
+            @currentPlayer = @players[@currentPlayerIndex]
         end
 
         def nextPlayer
