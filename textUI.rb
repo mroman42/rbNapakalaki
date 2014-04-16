@@ -25,10 +25,10 @@ module UserInterface
         ui = TextUI.instance
         np = Game::Napakalaki.instance
 
-        # Presentación del juego.
+        # Presentación del juego
         ui.printHeader
 
-        # Lee los jugadores.
+        # Lee los jugadores
         players = ui.readPlayers
         np.initGame(players)
     end

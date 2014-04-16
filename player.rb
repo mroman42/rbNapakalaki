@@ -129,6 +129,10 @@ module Game
     end
 
     def validState
+        # Según el guión hay que escribir esto:
+        # @pendingBadConsequence.isEmpty? 
+        # Pero esto supone que pendingBadConsequence sea una lista, ¿lo es?
+        @pendingBadConsequence == nil
     end
 
     def initTreasures
