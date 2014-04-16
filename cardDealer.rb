@@ -13,7 +13,7 @@ module Game
         def initialize()
             @unusedMonsters = nil
             @usedMonsters = nil
-            @unusedTreasures = nil
+            @unusedTreasures = []
             @usedTreasures = nil
         end
 
@@ -24,100 +24,100 @@ module Game
         def initTreasureCardDeck()
             #Tesoros añadidos por orden de aparición en el guión.
             # ¡Sí, mi amo!
-            unusedTreasures.push(Treasure.new("¡Sí, mi amo!", 0, 4, 7, HELMET)) 
+            @unusedTreasures.push(Treasure.new("¡Sí, mi amo!", 0, 4, 7, HELMET)) 
 
             # Botas de investigación
-            unusedTreasures.push(Treasure.new("Botas de investigación", 600, 3, 4, SHOE))
+            @unusedTreasures.push(Treasure.new("Botas de investigación", 600, 3, 4, SHOE))
 
             # Capucha de Cthulhu
-            unusedTreasures.push(Tresure.new("Capucha de Cthulhu", 500, 3, 5, HELMET))
+            @unusedTreasures.push(Treasure.new("Capucha de Cthulhu", 500, 3, 5, HELMET))
 
             # A prueba de babas verdes
-            unusedTreasures.push(Treasure.new("A prueba de babas verdes", 400, 3, 5, ARMOR))
+            @unusedTreasures.push(Treasure.new("A prueba de babas verdes", 400, 3, 5, ARMOR))
 
             # Botas de lluvia  ́acida
-            unusedTreasures.push(Treasure.new("Botas de lluvia  ́acida", 800, 1, 1, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Botas de lluvia  ́acida", 800, 1, 1, BOTHHANDS))
 
             # Casco minero
-            unusedTreasures.push(Treasure.new("Casco minero", 400, 2, 4, HELMET))
+            @unusedTreasures.push(Treasure.new("Casco minero", 400, 2, 4, HELMET))
 
             # Ametralladora Thompson
-            unusedTreasures.push(Treasure.new("Ametralladora Thompson", 600, 4, 8, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Ametralladora Thompson", 600, 4, 8, BOTHHANDS))
 
             # Camiseta de la UGR
-            unusedTreasures.push(Treasure.new("Camiseta de la UGR", 100, 1, 7, ARMOR))
+            @unusedTreasures.push(Treasure.new("Camiseta de la UGR", 100, 1, 7, ARMOR))
 
             # Clavo de rail ferroviario
-            unusedTreasures.push(Treasure.new("Clavo de rail ferroviario", 400, 3, 6, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Clavo de rail ferroviario", 400, 3, 6, ONEHAND))
 
             # Cuchillo de sushi arcano
-            unusedTreasures.push(Treasure.new("Cuchillo de sushi arcano", 300, 2, 3, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Cuchillo de sushi arcano", 300, 2, 3, ONEHAND))
 
             # Fez Alópodo
-            unusedTreasures.push(Treasure.new("Fez Alópodo", 700, 3, 5, HELMET))
+            @unusedTreasures.push(Treasure.new("Fez Alópodo", 700, 3, 5, HELMET))
 
             # Hacha prehistórica
-            unusedTreasures.push(Treasure.new("Hacha prehistórica", 500, 2, 5, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Hacha prehistórica", 500, 2, 5, ONEHAND))
 
             # El aparato del Pr. Tesla
-            unusedTreasures.push(Treasure.new("El aparato del Pr. Tesla", 900, 4, 8, ARMOR))
+            @unusedTreasures.push(Treasure.new("El aparato del Pr. Tesla", 900, 4, 8, ARMOR))
 
             # Gaita
-            unusedTreasures.push(Treasure.new("Gaita", 200, 1, 5, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Gaita", 200, 1, 5, BOTHHANDS))
 
             # Insecticida
-            unusedTreasures.push(Treasure.new("Insecticida", 300, 2, 3, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Insecticida", 300, 2, 3, ONEHAND))
 
             # Escopeta de 3 cañones
-            unusedTreasures.push(Treasure.new("Escopeta de 3 cañones", 700, 4, 6, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Escopeta de 3 cañones", 700, 4, 6, BOTHHANDS))
 
             # Garabato místico
-            unusedTreasures.push(Treasure.new("Garabato místico", 300, 2, 2, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Garabato místico", 300, 2, 2, ONEHAND))
 
             # La fuerza de Mr. T
-            unusedTreasures.push(Treasure.new("La fuerza de Mr. T", 1000, 0, 0, NECKLACE))
+            @unusedTreasures.push(Treasure.new("La fuerza de Mr. T", 1000, 0, 0, NECKLACE))
 
             # La rebeca metálica
-            unusedTreasures.push(Treasure.new("La rebeca metálica", 400, 2, 3, ARMOR))
+            @unusedTreasures.push(Treasure.new("La rebeca metálica", 400, 2, 3, ARMOR))
 
             # Mazo de los antiguos
-            unusedTreasures.push(Treasure.new("Mazo de los antiguos", 200, 3, 4, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Mazo de los antiguos", 200, 3, 4, ONEHAND))
 
             # Necro-playboycón
-            unusedTreasures.push(Treasure.new("Necro-playboycón", 300, 3, 5, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Necro-playboycón", 300, 3, 5, ONEHAND))
 
             # Lanzallamas
-            unusedTreasures.push(Treasure.new("Lanzallamas", 800, 4, 8, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Lanzallamas", 800, 4, 8, BOTHHANDS))
 
             # Necro-comicón
-            unusedTreasures.push(Treasure.new("Necro-comicón", 100, 1, 1, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Necro-comicón", 100, 1, 1, ONEHAND))
 
             # Necronomicón
-            unusedTreasures.push(Treasure.new("Necronomicón", 800, 5, 7, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Necronomicón", 800, 5, 7, BOTHHANDS))
 
             # Linterna a 2 manos
-            unusedTreasures.push(Treasure.new("Linterna a 2 manos", 400, 3, 6, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Linterna a 2 manos", 400, 3, 6, BOTHHANDS))
 
             # Necro-gnomicón
-            unusedTreasures.push(Treasure.new("Necro-gnomicón", 200, 2, 4, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Necro-gnomicón", 200, 2, 4, ONEHAND))
 
             # Necrotelecom
-            unusedTreasures.push(Treasure.new("Necrotelecom", 300, 2, 3, HELMET))
+            @unusedTreasures.push(Treasure.new("Necrotelecom", 300, 2, 3, HELMET))
 
             # Porra preternatural
-            unusedTreasures.push(Treasure.new("Porra preternatural", 200, 2, 3, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Porra preternatural", 200, 2, 3, ONEHAND))
 
             # Tentáculo de pega
-            unusedTreasures.push(Treasure.new("Tentáculo de pega", 200, 0, 1, HELMET))
+            @unusedTreasures.push(Treasure.new("Tentáculo de pega", 200, 0, 1, HELMET))
 
             # Zapatillas deja-amigos
-            unusedTreasures.push(Treasure.new("Zapatillas deja-amigos", 500, 0, 1, SHOE))
+            @unusedTreasures.push(Treasure.new("Zapatillas deja-amigos", 500, 0, 1, SHOE))
 
             # Shogulador
-            unusedTreasures.push(Treasure.new("Shogulador", 600, 1, 1, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Shogulador", 600, 1, 1, BOTHHANDS))
 
             # Varita de atizamiento
-            unusedTreasures.push(Treasure.new("Varita de atizamiento", 400, 3, 4, ONEHAND))
+            @unusedTreasures.push(Treasure.new("Varita de atizamiento", 400, 3, 4, ONEHAND))
         end
 
         def initMonsterCardDeck()
