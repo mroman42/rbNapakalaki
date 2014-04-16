@@ -25,6 +25,9 @@ module Game
 
         def initPlayers(names)
             @players = names.collect{|name| Player.new(name)}
+            
+            # Toma el primer jugador como jugador actual
+            @currentPlayer = @players[0]
         end
 
         def nextPlayer
@@ -79,20 +82,19 @@ module Game
 
         def nextTurn
             stateOK = nextTurnAllowed
-            
             if stateOK
-                currentMonster = CardDealer.instance.nextMonster
-                currentPlayer = nextPlayer
-                dead = currentPlayer.isDead
-                
+                @currentMonster = CardDealer.instance.nextMonster
+                @currentPlayer = nextPlayer
+
+                dead = @currentPlayer.isDead                
                 if dead
-                    currentPlayer.initTreasures
+                    @currentPlayer.initTreasures
                 end
             end
         end
 
         def nextTurnAllowed
-            currentPlayer.validState
+            @currentPlayer.validState
         end
 
         def endOfGame(result)
