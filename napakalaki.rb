@@ -77,9 +77,21 @@ module Game
     end
 
     def nextTurn
+        stateOK = nextTurnAllowed
+        
+        if stateOK
+            currentMonster = CardDealer.instance.nextMonster
+            currentPlayer = nextPlayer
+            dead = currentPlayer.isDead
+            
+            if dead
+                currentPlayer.initTreasures
+            end
+        end
     end
 
     def nextTurnAllowed
+        currentPlayer.validState
     end
 
     def endOfGame(result)
