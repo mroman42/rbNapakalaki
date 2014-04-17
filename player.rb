@@ -54,9 +54,14 @@ module Game
             @dead = true
         end
 
-		# Esta virguería que he hecho funciona? (JC) Posiblemente no xD
+		# Esta virguería que he hecho funciona? (JC) 
         def discardNecklaceIfVisible
-            @visibleTreasures.each {|treasure| if (treasure.getType == [NECKLACE]) CardDealer.getInstance.giveTreasureBack(treasure) 										@visibleTreasures.remove(treasure) end}
+            @visibleTreasures.each do |treasure| 
+                if (treasure.getType == NECKLACE) 
+                    CardDealer.getInstance.giveTreasureBack(treasure) 								
+                    @visibleTreasures.remove(treasure) 
+				end
+			end
         end
 
         def dieIfNoTreasures
@@ -80,6 +85,8 @@ module Game
         # Métodos públicos
         public
         
+		# Aplicamos el buen rollo al jugador, incrementando los niveles y obteniendo los tesoros. 
+		# En caso de que con los tesoros obtenidos se superen los 4 ocultos, solo se obtendrán los restantes hasta llegar a 4. 
         def applyPrize(prize)
             incrementLevels(prize.getLevels)
             nPrize = prize.getTreasures
@@ -103,26 +110,36 @@ module Game
         
         def canMakeTreasureVisible(treasure)
         end
-
+        
+        # !!!!!!!!!
         def discardVisibleTreasure(treasure)
-            @visibleTreasures - treasure.getType()
+            @visibleTreasures - treasure.getType
         end
-
+        # !!!!!!!!!
         def discardHiddenTreasure(treasure)
-            @hiddenTreasures - treasure.getType()
+            @hiddenTreasures - treasure.getType
         end
 
         def buyLevels(visible, hidden)
         end
 
-        def getCombatLevel
-            combat_level = @level;
 
+		# Funciona la forma de obtener si está el tesoro de tipo NECKLACE? 
+        def getCombatLevel
+            combat_level = @level
+            necklace = false
             @visibleTreasures.each do |treasure|
-                if @visibleTreasures.include?(NECKLACE)
-                    combat_level += treasure.getMaxBonus();
+
+				@visibleTreasures.each do |treasure| 
+				    if (treasure.getType == NECKLACE) 
+			            necklace = true
+                    end
+                end
+
+                if necklace
+                    combat_level += treasure.getMaxBonus
                 else
-                    combat_level += treasure.getMinBonus();
+                    combat_level += treasure.getMinBonus
                 end
             end
 
@@ -133,7 +150,21 @@ module Game
             @pendingBadConsequence.isEmpty
         end
 
+        # Inicializa los tesoros de un jugador, dependiendo del número sacado al tirar del dado. 
         def initTreasures
+            bringToLife
+            number = Dice.getInstance.nextNumber
+            if (number == 1)
+                @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
+            elsif (nuber == 6)
+                3.times do
+                    @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
+                end 
+            else 
+                2.times do
+                    @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)  
+                end
+            end
         end
 
         def isDead
