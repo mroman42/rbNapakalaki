@@ -27,18 +27,18 @@ module Game
         private
 
         def bringToLife()
-            dead = false
-            level = 1
+            @dead = false
+            @level = 1
         end
 
         def incrementLevels(increment)
-            level += increment
+            @level += increment
         end
 
         def decrementLevels(decrement)
-            level -= decrement
-            if (level < 1) 
-                level = 1
+            @level -= decrement
+            if (@level < 1) 
+                @level = 1
             end 
         end
 
@@ -47,20 +47,20 @@ module Game
         end
 
         def die()
-            hiddentreasure.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
-            hiddentreasures.clean()
-            visibletreasure.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
-            visibletreasure.clean()
-            dead = true
+            @hiddenTreasures.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
+            @hiddenTreasures.clean()
+            @visibleTreasure.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
+            @visibleTreasure.clean()
+            @dead = true
         end
 
         def discardNecklaceIfVisible
-            visibleTreasures-[NECKLACE]
+            @visibleTreasures - [NECKLACE]
         end
 
         def dieIfNoTreasures
-            if (visibleTreasures + hiddenTreasures).empty?
-                dead = true
+            if (@visibleTreasures + @hiddenTreasures).empty?
+                @dead = true
             end
         end
 
@@ -71,7 +71,7 @@ module Game
         end
 
         def canIBuyLevels(levels)
-            (levels + level) < 10
+            (levels + @level) < 10
         end
 
 
@@ -83,8 +83,8 @@ module Game
             incrementLevels(prize.getLevels)
             nPrize = prize.getTreasures
 
-            min(nPrize, 4-hiddenTreasures.size).times do
-                hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
+            min(nPrize, 4 - @hiddenTreasures.size).times do
+                @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
             end
         end
 
@@ -94,7 +94,7 @@ module Game
 
         def applyBadConsequence(bad)
             decrementLevels(bad.getLevels)
-            setPendingBadConsequence(bad.adjustToFiTreasureLists(visibleTreasures, hiddenTreasures))
+            setPendingBadConsequence(bad.adjustToFiTreasureLists(@visibleTreasures, @hiddenTreasures))
         end
 
         def makeTreasureVisible(treasure)
@@ -104,26 +104,26 @@ module Game
         end
 
         def discardVisibleTreasure(treasure)
-            visibleTreasures - treasure.getType()
+            @visibleTreasures - treasure.getType()
         end
 
         def discardHiddenTreasure(treasure)
-            hiddenTreasures - treasure.getType()
+            @hiddenTreasures - treasure.getType()
         end
 
         def buyLevels(visible, hidden)
         end
 
         def getCombatLevel
-            combat_level = level;
+            combat_level = @level;
 
-            visibleTreasures.each {|treasure|
-                if(visibleTreasures.include?(NECKLACE))
+            @visibleTreasures.each do |treasure|
+                if @visibleTreasures.include?(NECKLACE)
                     combat_level += treasure.getMaxBonus();
                 else
                     combat_level += treasure.getMinBonus();
                 end
-            }
+            end
 
             combat_level
         end
@@ -140,7 +140,7 @@ module Game
         end 
 
         def hasVisibleTreasures
-            visibleTreasures.empty?
+            @visibleTreasures.empty?
         end
 
         def getVisibleTreasures
