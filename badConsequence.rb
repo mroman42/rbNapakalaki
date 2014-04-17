@@ -42,7 +42,10 @@ module Game
 
 
     # Métodos públicos
-    def isEmpty() 
+    # HAY QUE COMENTAR LOS MÉTODOS (Los importantes al menos, los getters no hará falta)
+    
+    # Las dos últimas condiciones pueden traer problemas: Si NHTreasures es 7, como solo se pueden tener 4, al quitarlos quedarán 3. 
+    def isEmpty
       (death == false && levels == 0 && nVisibleTreasures == 0 && nHiddenTreasures == 0)
     end 
 

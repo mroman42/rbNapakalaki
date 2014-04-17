@@ -132,7 +132,9 @@ module Game
         # Según el guión hay que escribir esto:
         # @pendingBadConsequence.isEmpty? 
         # Pero esto supone que pendingBadConsequence sea una lista, ¿lo es?
-        @pendingBadConsequence == nil
+
+		# No, pero la clase BadConsequence tiene el método isEmpty implementado. Supongo que se le ha colado la '?'
+        @pendingBadConsequence.isEmpty
     end
 
     def initTreasures

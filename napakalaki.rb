@@ -32,6 +32,7 @@ module Game
         end
 
         def nextPlayer
+            # Toma el siguiente jugador, calculando previamente su índice. 
             @currentPlayerIndex = (@currentPlayerIndex+1) % @players.size
             @currentPlayer = @players[@currentPlayerIndex]
         end

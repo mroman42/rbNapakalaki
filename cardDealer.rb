@@ -121,6 +121,7 @@ module Game
         end
 
         def initMonsterCardDeck()
+
             # El profesor de PDOO.
             bad = BadConsequence.new_det_tr("Se pierden 20 niveles, todas las armaduras visibles y todos los tesoros de mano invisibles.", 20, [ARMOR], [ONEHAND, BOTHHANDS]*4)
             prize = Prize.new(1,2)
@@ -248,6 +249,7 @@ module Game
             @unusedMonsters.pop
         end
         
+        # ¿Sería lo suyo barajar después de introducir un mosntruo o tesoro? 
         def giveTreasureBack(treasure)
             @usedTreasures.push treasure
         end
