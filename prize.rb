@@ -8,22 +8,22 @@ module Game
     
     # Inicializador
     def initialize (treasures, levels)
-      @treasures = treasures
-      @levels = levels
+      	@treasures = treasures
+      	@levels = levels
     end
     
     # Métodos públicos
     def getTreasures
-      @treasures
+      	@treasures
     end
     
     def getLevels
-      @levels
+      	@levels
     end
 
     # Métodos auxiliares
     def to_s()
-      "#{@treasures} treasures and #{@levels} levels."
+      	"#{@treasures} treasures and #{@levels} levels."
     end
 
   end
