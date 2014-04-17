@@ -9,32 +9,32 @@ module Game
 
     # Inicializador
     def initialize(name, level, bad, prize)
-      @name = name 
-      @level = level
-      @bad = bad
-      @prize = prize
+      	@name = name 
+      	@level = level
+      	@bad = bad
+      	@prize = prize
     end
 
     # Métodos públicos
     def getName
-      @name
+      	@name
     end
     
     def getLevel
-      @level
+      	@level
     end
 
     def getBadConsequence
-      @bad
+      	@bad
     end
     
     def getPrize
-      @prize
+      	@prize
     end
 
     # Métodos auxiliares
     def to_s()
-      "#{@name} (lv. #{@level}) \nPrize: #{prize.to_s()}\n Bad: #{bad.to_s()}\n"
+      	"#{@name} (lv. #{@level}) \nPrize: #{prize.to_s()}\n Bad: #{bad.to_s()}\n"
     end
   end
 
