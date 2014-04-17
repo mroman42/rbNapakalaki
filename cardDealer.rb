@@ -238,14 +238,20 @@ module Game
         public
 
         def nextTreasure
-            #swap si unusedTreasures está vacío
-            @unusedTreasures,@usedTreasures = @usedTreasures,@unusedTreasures if (@unusedTreasures.empty?)
+            #swap si unusedTreasures está vacío. Barajamos después
+            if (@unusedTreasures.empty?)
+                @unusedTreasures,@usedTreasures = @usedTreasures,@unusedTreasures 
+                shuffleTreasures
+            end
             @unusedTreasures.pop
         end
         
         def nextMonster
-            #swap si unusedMonsters está vacío
-            @unusedMonsters,@usedMonsters = @usedMonsters,@unusedMonsters if (@unusedMonsters.empty?)
+            #swap si unusedMonsters está vacío. Barajamos despues. 
+            if (@unusedMonsters.empty?)
+                @unusedMonsters,@usedMonsters = @usedMonsters,@unusedMonsters 
+                shuffleMonsters
+            end
             @unusedMonsters.pop
         end
         

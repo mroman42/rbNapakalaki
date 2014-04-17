@@ -6,32 +6,36 @@ module Game
   class Treasure
     # Inicialización
     def initialize (name, goldCoins, minBonus, maxBonus, type)
-      @name = name
-      @goldCoins = goldCoins
-      @minBonus = minBonus
-      @maxBonus = maxBonus
-      @type = type
+        @name = name
+        @goldCoins = goldCoins
+        @minBonus = minBonus
+        @maxBonus = maxBonus
+        @type = type
     end
 
     # Métodos públicos
     def getName
-      @name
+        @name
     end
 
     def getGoldCoins
-      @goldCoins
+        @goldCoins
     end
 
     def getMinBonus
-      @minBonus
+        @minBonus
     end
 
     def getMaxBonus
-      @maxBonus
+        @maxBonus
     end
 
     def getType
-      @type
+        @type
+    end
+
+    def to_s()
+        "#{@name} (Coins. #{@goldCoins}) \nMin Bonus: #{@minBonus}\n Max Bonus: #{@maxBonus}\n"
     end
 
   end

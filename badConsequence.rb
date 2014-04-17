@@ -81,7 +81,7 @@ module Game
         def substractHiddenTreasure(treasure)
             if(@specificHiddenTreasures.include? treasure || (@specificHiddenTreasures.isempty? && @nHiddenTreasures != 0))
                 @specificHiddenTreasures - treasure
-                nHiddenTreasures -= 1 
+                @nHiddenTreasures -= 1 
             end
         end
 
