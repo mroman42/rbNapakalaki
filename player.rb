@@ -54,8 +54,9 @@ module Game
             @dead = true
         end
 
+		# Esta virguería que he hecho funciona? (JC) Posiblemente no xD
         def discardNecklaceIfVisible
-            @visibleTreasures - [NECKLACE]
+            @visibleTreasures.each {|treasure| if (treasure.getType == [NECKLACE]) CardDealer.getInstance.giveTreasureBack(treasure) 										@visibleTreasures.remove(treasure) end}
         end
 
         def dieIfNoTreasures
