@@ -14,7 +14,7 @@ module Game
             @dead = true
             @name = name
             @level = 1
-            @pendingBadConsequence = nil
+            @pendingBadConsequence = BadConsequence.new_indet_tr("",0,0,0)
             @hiddenTreasures = []
             @visibleTreasures = []
 

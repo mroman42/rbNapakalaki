@@ -44,7 +44,7 @@ module Game
         # Métodos públicos        
         def isEmpty
             # Las dos últimas condiciones pueden traer problemas: Si NHTreasures es 7, como solo se pueden tener 4, al quitarlos quedarán 3. 
-            (death == false && levels == 0 && nVisibleTreasures == 0 && nHiddenTreasures == 0)
+            @death == false && @levels == 0 && @nVisibleTreasures == 0 && @nHiddenTreasures == 0
         end 
 
         def kills
@@ -72,34 +72,34 @@ module Game
         end
 
         def substractVisibleTreasure(treasure)
-            if(specificVisibleTreasures.include? treasure || (specificVisibleTreasures.isempty? && nVisibleTreasures != 0))
-                specificVisibleTreasures - treasure
-                nVisibleTreasures -= 1
+            if(@specificVisibleTreasures.include? treasure || (@specificVisibleTreasures.isempty? && @nVisibleTreasures != 0))
+                @specificVisibleTreasures - treasure
+                @nVisibleTreasures -= 1
             end
         end
 
         def substractHiddenTreasure(treasure)
-            if(specificHiddenTreasures.include? treasure || (specificHiddenTreasures.isempty? && nHiddenTreasures != 0))
-                specificHiddenTreasures - treasure
+            if(@specificHiddenTreasures.include? treasure || (@specificHiddenTreasures.isempty? && @nHiddenTreasures != 0))
+                @specificHiddenTreasures - treasure
                 nHiddenTreasures -= 1 
             end
         end
 
         def adjustToFitTreasureLists(visible, hidden)        
-            if(death)
-                return BadConsequence.new_death(text, death)
+            if @death
+                return BadConsequence.new_death(@text, @death)
 
-            elsif (specificVisibleTreasures.empty? && specificHiddenTreasures.empty?)
-                nVTreasures = [visibles.size, nVisibleTreasures].min
-                nHTreasures = [hidden.size, nHiddenTreasures].min
+            elsif (@specificVisibleTreasures.empty? && @specificHiddenTreasures.empty?)
+                nVTreasures = [visible.size, @nVisibleTreasures].min
+                nHTreasures = [hidden.size, @nHiddenTreasures].min
 
-                return BadConsequence.new_indet_tr(text, levels, nVTreasures, nHTreasures)
+                return BadConsequence.new_indet_tr(@text, @levels, nVTreasures, nHTreasures)
 
             else
-                listVisibleTreasures = visible & specificVisibleTreasures
-                listHiddenTreasures = hidden & specificHiddenTreasures
+                listVisibleTreasures = visible & @specificVisibleTreasures
+                listHiddenTreasures = hidden & @specificHiddenTreasures
 
-                return BadConsequence.new_det_tr(text, levels, listVisibleTreasures, listHiddenTreasures);
+                return BadConsequence.new_det_tr(@text, @levels, listVisibleTreasures, listHiddenTreasures);
             end
         end 
 
@@ -112,7 +112,6 @@ module Game
         end
 
     end
-
 
 
     # Deshabilitando el constructor por defecto
