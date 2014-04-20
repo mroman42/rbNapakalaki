@@ -52,9 +52,11 @@ module Game
         end
         
         def makeTreasureVisible(treasure) 
+            @currentPlayer.makeTreasureVisible(treasure)
         end
 
         def buyLevels(visible, hidden)
+            @currentPlayer.buyLevels(visible, hidden)
         end
 
         def initGame(names)

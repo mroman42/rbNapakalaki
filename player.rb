@@ -108,8 +108,35 @@ module Game
         def makeTreasureVisible(treasure)
         end
         
+        # Comprueba si un tesoro puede hacerse visible.
+        # 1- Si es el collar, puede hacerse visible.
+        # 2- Si no es de una mano, comprueba si ya hay uno visible.
+        # 3- Si es de una mano, puede hacerse visible si hay menos de dos visibles. 
         def canMakeTreasureVisible(treasure)
+            type = treasure.getType;
+
+            if type == TreasureKind.NECKLACE
+	            return true
+
+            elsif type != TreasureKind.ONEHAND
+                @visibleTreasures.each |treasure| do
+                    if treasure.getType == type
+                        return false
+                    end         
+                end
+                return true
+
+            else 
+                number_of_onehands = 0
+                @visibleTreasures.each |treasure| do
+                    if treasure.getType == TreasureKind.ONEHAND
+                        number_of_onehands += 1
+                    end 
+                end 
+                return number_of_onehands < 2
+            end 
         end
+        
         
         # !!!!!!!!!
         def discardVisibleTreasure(treasure)
@@ -120,7 +147,18 @@ module Game
             @hiddenTreasures - treasure.getType
         end
 
+
+        # Comprueba si puede comprar niveles. Si es así, lo hace y elimina los tesoros. 
+        # Devuelve si se han comprado niveles o no. 
         def buyLevels(visible, hidden)
+            levels = computeGoldCoinsValue(visible+hidden)
+            if canIBuyLevels(levels) 
+                incrementLevels(levels)
+                visible.each {|t| @visibleTreasures.remove(t)}
+                hidden.each {|t| @hiddenTreasures.remove(t)}
+                return true
+            end
+            return false
         end
 
 
