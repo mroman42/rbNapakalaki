@@ -2,6 +2,8 @@
 #encoding: utf-8
 require_relative 'napakalaki.rb'
 
+# ¿Hay que usar un require_relative aquí arriba? No son del mismo paquete. 
+
 module UserInterface
 
     class TextUI

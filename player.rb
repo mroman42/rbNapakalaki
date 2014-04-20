@@ -85,8 +85,8 @@ module Game
         # Métodos públicos
         public
         
-		# Aplicamos el buen rollo al jugador, incrementando los niveles y obteniendo los tesoros. 
-		# En caso de que con los tesoros obtenidos se superen los 4 ocultos, solo se obtendrán los restantes hasta llegar a 4. 
+        # Aplicamos el buen rollo al jugador, incrementando los niveles y obteniendo los tesoros. 
+        # En caso de que con los tesoros obtenidos se superen los 4 ocultos, solo se obtendrán los restantes hasta llegar a 4. 
         def applyPrize(prize)
             incrementLevels(prize.getLevels)
             nPrize = prize.getTreasures
@@ -105,7 +105,14 @@ module Game
             setPendingBadConsequence(bad.adjustToFiTreasureLists(@visibleTreasures, @hiddenTreasures))
         end
 
+        # Hace visible un tesoro si es posible. Devuelve si el tesoro se ha hecho visible. 
         def makeTreasureVisible(treasure)
+            if canMakeTreasureVisible(treasure)
+                @visibleTreasures.push(treasure)
+                @hiddenTreasures.remove(treasure)
+                return true
+            end
+            return false
         end
         
         # Comprueba si un tesoro puede hacerse visible.
