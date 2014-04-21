@@ -21,18 +21,25 @@ module UserInterface
             players = line.split()
             return players
         end
+
+        def main
+            np = Game::Napakalaki.instance
+
+            # Presentación del juego
+            printHeader
+
+            # Lee los jugadores
+            players = readPlayers
+            np.initGame players
+
+            # Pasa al siguiente turno mientras no acabe el juego
+            
+        end
+
     end
 
     if __FILE__ == $0
-        ui = TextUI.instance
-        np = Game::Napakalaki.instance
-
-        # Presentación del juego
-        ui.printHeader
-
-        # Lee los jugadores
-        players = ui.readPlayers
-        np.initGame(players)
+        TextUI.instance.main
     end
 
 end
