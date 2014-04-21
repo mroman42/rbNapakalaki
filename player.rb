@@ -235,6 +235,11 @@ module Game
             @hiddenTreasures
         end
 
+
+        # Métodos Auxiliares
+        def to_s
+            "#{@name}, con nivel #{@level}."
+        end
     end
 
 end

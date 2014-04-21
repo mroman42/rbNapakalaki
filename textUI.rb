@@ -24,7 +24,7 @@ module UserInterface
         end
 
         def printCurrentPlayerStatus
-            puts "Current Player: #{NP.getCurrentPlayer}"
+            puts "Jugador actual: #{NP.getCurrentPlayer}"
         end
 
         def main
@@ -35,7 +35,7 @@ module UserInterface
             players = readPlayers
             NP.initGame players
 
-            # Pasa al siguiente turno mientras no acabe el juego
+            # Escribe status del jugador actual
             printCurrentPlayerStatus
         end
 
