@@ -126,20 +126,10 @@ module Game
                 return true
 
             elsif type != TreasureKind.ONEHAND
-                @visibleTreasures.each do |treasure|
-                    if treasure.getType == type
-                        return false
-                    end
-                end
-                return true
+                return @visibleTreasures.any?{|treasure| treasure.getType == type}
 
             else 
-                number_of_onehands = 0
-                @visibleTreasures.each do |treasure|
-                    if treasure.getType == TreasureKind.ONEHAND
-                        number_of_onehands += 1
-                    end
-                end
+                number_of_onehands = @visibleTreasures.select{|treasure| treasure.getType == TreasureKind.ONEHAND}.size
                 return number_of_onehands < 2
             end 
         end
