@@ -77,6 +77,7 @@ module Game
         end
         
         def canMakeTreasureVisible(treasure)
+            @currentPlayer.canMakeTreasureVisible(treasure)
         end
 
         def getVisibleTreasures
@@ -105,6 +106,7 @@ module Game
         end
 
         def endOfGame(result)
+            result == CombatResult.WINANDWINGAME   
         end
 
     end

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
-require_relative 'treasureKind'
+require_relative 'treasureKind.rb'
 
 module Game
 
@@ -87,6 +87,7 @@ module Game
             end
         end
 
+	# Añadir comentarios para que se entienda mejor. 
         def adjustToFitTreasureLists(visible, hidden)        
             if @death
                 return BadConsequence.new_death(@text, @death)
