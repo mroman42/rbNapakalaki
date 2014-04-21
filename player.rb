@@ -54,14 +54,14 @@ module Game
             @dead = true
         end
 
-        # Esta virguería que he hecho funciona? (JC) 
+        # Si el collar está visible, lo devuelve al mazo de tesoros.
         def discardNecklaceIfVisible
             @visibleTreasures.each do |treasure| 
-                if (treasure.getType == NECKLACE) 
+                if (treasure.getType == TreasureKind.NECKLACE) 
                     CardDealer.getInstance.giveTreasureBack(treasure) 								
-                    @visibleTreasures.remove(treasure) 
-			    end
-			end
+                    @visibleTreasures.remove(treasure)
+                end
+            end
         end
 
         def dieIfNoTreasures
