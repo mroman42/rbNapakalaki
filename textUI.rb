@@ -8,6 +8,7 @@ module UserInterface
 
     class TextUI
         include Singleton
+        NP = Game::Napakalaki.instance
 
         def printHeader
             puts "-"*30
@@ -22,18 +23,20 @@ module UserInterface
             return players
         end
 
-        def main
-            np = Game::Napakalaki.instance
+        def printCurrentPlayerStatus
+            puts "Current Player: #{NP.getCurrentPlayer}"
+        end
 
+        def main
             # Presentación del juego
             printHeader
 
             # Lee los jugadores
             players = readPlayers
-            np.initGame players
+            NP.initGame players
 
             # Pasa al siguiente turno mientras no acabe el juego
-            
+            printCurrentPlayerStatus
         end
 
     end
