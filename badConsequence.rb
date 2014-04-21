@@ -71,6 +71,7 @@ module Game
             @specificHiddenTreasures
         end
 
+	# REVISAR. No veo bien lo que hace. (JC)
         def substractVisibleTreasure(treasure)
             if(@specificVisibleTreasures.include? treasure || (@specificVisibleTreasures.isempty? && @nVisibleTreasures != 0))
                 @specificVisibleTreasures - treasure
@@ -78,6 +79,7 @@ module Game
             end
         end
 
+	# Igual que el de arriba. 
         def substractHiddenTreasure(treasure)
             if(@specificHiddenTreasures.include? treasure || (@specificHiddenTreasures.isempty? && @nHiddenTreasures != 0))
                 @specificHiddenTreasures - treasure

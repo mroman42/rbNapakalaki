@@ -46,9 +46,11 @@ module Game
         end
 
         def discardVisibleTreasure(treasure)
+            @currentPlayer.discardVisibleTreasure(treasure)
         end
 
         def discardHiddenTreasure(treasure)
+            @currentPlayer.discardHiddenTreasure(treasure)
         end
         
         def makeTreasureVisible(treasure) 
@@ -59,6 +61,7 @@ module Game
             @currentPlayer.buyLevels(visible, hidden)
         end
 
+        # Revisar. El nextTurn al final puede hacer que el primer jugador no sea el primero, pues ya se inicia en initPlayers
         def initGame(names)
             CardDealer.instance.initCards
             initPlayers(names)

@@ -54,13 +54,13 @@ module Game
             @dead = true
         end
 
-		# Esta virguería que he hecho funciona? (JC) 
+        # Esta virguería que he hecho funciona? (JC) 
         def discardNecklaceIfVisible
             @visibleTreasures.each do |treasure| 
                 if (treasure.getType == NECKLACE) 
                     CardDealer.getInstance.giveTreasureBack(treasure) 								
                     @visibleTreasures.remove(treasure) 
-				end
+			    end
 			end
         end
 
@@ -145,24 +145,40 @@ module Game
         end
         
         
-        # !!!!!!!!!
+        # Elimina un tesoro visible. 
+        # Primero lo elimina de la lista de tesoros visibles, y si quedan tesoros en el mal rollo, lo sustrae de él
+        # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
         def discardVisibleTreasure(treasure)
-            @visibleTreasures - treasure.getType
+            @visibleTreasures.remove(treasure)
+            if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
+                @pendingBadConsequence.subtractVisibleTreasure(treasure)
+            end 
+            CardDealer.getInstance.giveTreasureBack(treasure)
+            dieIfNoTreasures
         end
-        # !!!!!!!!!
+
+
+        # Elimina un tesoro oculto. 
+        # Primero lo elimina de la lista de tesoros ocultos, y si quedan tesoros en el mal rollo, lo sustrae de él
+        # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
         def discardHiddenTreasure(treasure)
-            @hiddenTreasures - treasure.getType
+            @hiddenTreasures.remove(treasure)
+            if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
+                @pendingBadConsequence.subtractHiddenTreasure(treasure)
+            end 
+            CardDealer.getInstance.giveTreasureBack(treasure)
+            dieIfNoTreasures
         end
 
 
         # Comprueba si puede comprar niveles. Si es así, lo hace y elimina los tesoros. 
         # Devuelve si se han comprado niveles o no. 
         def buyLevels(visible, hidden)
-            levels = computeGoldCoinsValue(visible+hidden)
+            levels = computeGoldCoinsValue(visible + hidden)
             if canIBuyLevels(levels) 
                 incrementLevels(levels)
-                visible.each {|t| @visibleTreasures.remove(t)}
-                hidden.each {|t| @hiddenTreasures.remove(t)}
+                visible.each {|t| discardVisibleTreasure(t)}
+                hidden.each {|t| discardHiddenTreasure(t)}
                 return true
             end
             return false
@@ -176,7 +192,7 @@ module Game
             @visibleTreasures.each do |treasure|
 
 				@visibleTreasures.each do |treasure| 
-				    if (treasure.getType == NECKLACE) 
+				    if (treasure.getType == TreasureKind.NECKLACE) 
 			            necklace = true
                     end
                 end
@@ -191,6 +207,7 @@ module Game
             combat_level
         end
 
+        # Comprueba si el mal rollo pendiente está vacío, para saber si puede continuar. 
         def validState
             @pendingBadConsequence.isEmpty
         end
