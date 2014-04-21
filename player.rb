@@ -123,23 +123,23 @@ module Game
             type = treasure.getType;
 
             if type == TreasureKind.NECKLACE
-	            return true
+                return true
 
             elsif type != TreasureKind.ONEHAND
-                @visibleTreasures.each |treasure| do
+                @visibleTreasures.each do |treasure|
                     if treasure.getType == type
                         return false
-                    end         
+                    end
                 end
                 return true
 
             else 
                 number_of_onehands = 0
-                @visibleTreasures.each |treasure| do
+                @visibleTreasures.each do |treasure|
                     if treasure.getType == TreasureKind.ONEHAND
                         number_of_onehands += 1
-                    end 
-                end 
+                    end
+                end
                 return number_of_onehands < 2
             end 
         end
