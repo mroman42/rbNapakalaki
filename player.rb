@@ -175,15 +175,15 @@ module Game
         end
 
 
-		# Funciona la forma de obtener si está el tesoro de tipo NECKLACE? 
+        # Funciona la forma de obtener si está el tesoro de tipo NECKLACE? 
         def getCombatLevel
             combat_level = @level
             necklace = false
-            @visibleTreasures.each do |treasure|
 
-				@visibleTreasures.each do |treasure| 
-				    if (treasure.getType == TreasureKind.NECKLACE) 
-			            necklace = true
+            @visibleTreasures.each do |treasure|
+                @visibleTreasures.each do |treasure| 
+                    if (treasure.getType == TreasureKind.NECKLACE) 
+                        necklace = true
                     end
                 end
 
