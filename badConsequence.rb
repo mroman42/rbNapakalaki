@@ -109,7 +109,7 @@ module Game
 
         # Métodos auxiliares
         def to_s()
-            "#{@text} \n\t" + (death ? "DEATH." : 
+            "#{@text} \n\t" + (@death ? "DEATH." : 
                                "#{@levels} levels, #{@nHidden} hidden treasures, #{@nVisible} visible treasures." 
                                ) + "\n"
         end
