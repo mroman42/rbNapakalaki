@@ -71,7 +71,9 @@ module Game
             @specificHiddenTreasures
         end
 
-	# REVISAR. No veo bien lo que hace. (JC)
+	# En los siguientes métodos, hay que usar que hay dos posibles BadConsequence que trabajan con tesoros, los que conocen los objetos que quitan y los que sólo conocen la cantidad.
+    # Para saber si un tesoro está contenido, tenemos que ver si está en la lista de tesoros(conoce los tesoros) o está vacía pero la cantidad de tesoros que quita no es nula(no conoce los tesoros)
+
         def substractVisibleTreasure(treasure)
             if(@specificVisibleTreasures.include? treasure || (@specificVisibleTreasures.isempty? && @nVisibleTreasures != 0))
                 @specificVisibleTreasures - treasure
@@ -79,25 +81,28 @@ module Game
             end
         end
 
-	# Igual que el de arriba. 
-        def substractHiddenTreasure(treasure)
+	    def substractHiddenTreasure(treasure)
             if(@specificHiddenTreasures.include? treasure || (@specificHiddenTreasures.isempty? && @nHiddenTreasures != 0))
                 @specificHiddenTreasures - treasure
                 @nHiddenTreasures -= 1 
             end
         end
 
-	# Añadir comentarios para que se entienda mejor. 
+    # En este método, se usan los tres BadConsequence: 
+    # Añadir comentarios para que se entienda mejor. 
         def adjustToFitTreasureLists(visible, hidden)        
+    #    ·si es mortal, es mortal.
             if @death
                 return BadConsequence.new_death(@text, @death)
 
+    #    ·si no conoce los tesoros(o no hay), trabaja con las cantidades(no puedes quitar más tesoros de los que tiene).
             elsif (@specificVisibleTreasures.empty? && @specificHiddenTreasures.empty?)
                 nVTreasures = [visible.size, @nVisibleTreasures].min
                 nHTreasures = [hidden.size, @nHiddenTreasures].min
 
                 return BadConsequence.new_indet_tr(@text, @levels, nVTreasures, nHTreasures)
 
+    #    ·si conoce los tesoros, trabaja con los tesoros(no puedes quitar los tesoros que no tiene)
             else
                 listVisibleTreasures = visible & @specificVisibleTreasures
                 listHiddenTreasures = hidden & @specificHiddenTreasures
