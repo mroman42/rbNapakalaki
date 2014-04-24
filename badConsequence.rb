@@ -43,12 +43,15 @@ module Game
 
         # Métodos públicos        
         def isEmpty
-            # Las dos últimas condiciones pueden traer problemas: Si NHTreasures es 7, como solo se pueden tener 4, al quitarlos quedarán 3. 
             @death == false && @levels == 0 && @nVisibleTreasures == 0 && @nHiddenTreasures == 0
         end 
 
         def kills
             @death
+        end
+
+        def getText
+            @text
         end
 
         def getLevels
@@ -75,20 +78,20 @@ module Game
     # Para saber si un tesoro está contenido, tenemos que ver si está en la lista de tesoros(conoce los tesoros) o está vacía pero la cantidad de tesoros que quita no es nula(no conoce los tesoros)
 
         def substractVisibleTreasure(treasure)
-            if(@specificVisibleTreasures.include? treasure || (@specificVisibleTreasures.isempty? && @nVisibleTreasures != 0))
+            if(@specificVisibleTreasures.include? treasure || (@specificVisibleTreasures.empty? && @nVisibleTreasures != 0))
                 @specificVisibleTreasures - treasure
                 @nVisibleTreasures -= 1
             end
         end
 
 	    def substractHiddenTreasure(treasure)
-            if(@specificHiddenTreasures.include? treasure || (@specificHiddenTreasures.isempty? && @nHiddenTreasures != 0))
+            if(@specificHiddenTreasures.include? treasure || (@specificHiddenTreasures.empty? && @nHiddenTreasures != 0))
                 @specificHiddenTreasures - treasure
                 @nHiddenTreasures -= 1 
             end
         end
 
-    # En este método, se usan los tres BadConsequence: 
+    # En este método, se usan los tres BadConsequence posibles: 
         def adjustToFitTreasureLists(visible, hidden)        
     #    ·si es mortal, es mortal.
             if @death
@@ -112,7 +115,7 @@ module Game
 
 
         # Métodos auxiliares
-        def to_s()
+        def to_s
             "#{@text} \n\t" + (@death ? "DEATH." : 
                                "#{@levels} levels, #{@nHidden} hidden treasures, #{@nVisible} visible treasures." 
                                ) + "\n"
@@ -125,6 +128,5 @@ module Game
     BadConsequence.instance_eval { undef :new }
 
 end
-
 
 

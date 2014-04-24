@@ -208,7 +208,7 @@ module Game
             number = Dice.getInstance.nextNumber
             if (number == 1)
                 @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
-            elsif (nuber == 6)
+            elsif (number == 6)
                 3.times do
                     @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
                 end 
