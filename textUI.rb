@@ -31,6 +31,17 @@ module UserInterface
             puts "Monstruo actual: #{NP.getCurrentMonster}"
         end
 
+        def yesNoQuestion(message)
+            puts "#{message} (Y/n)"
+            c = gets()
+
+            while c != 'y' and c != 'n'
+                c = gets()
+            end
+
+            return c == 'y'
+        end
+
         def main
             # Presentación del juego
             printHeader
@@ -40,12 +51,26 @@ module UserInterface
             NP.initGame players
 
             # Bucle principal del juego
+            turn = 0
             begin
-                # Escribe status del jugador actual
+                # Anuncia el nuevo turno
+                puts "\n TURNO: #{turn} \n"
+
+                # Escribe status de jugador y monstruo actual
                 printCurrentPlayerStatus
                 printCurrentMonsterStatus
-                NP.nextTurn
+
+                # Compra de niveles
+                puts "Compra de niveles:"
+                yesNoQuestion("¿Comprar niveles?")
+
+                # Combate
                 result = NP.combat
+
+                # Pasa al siguiente turno
+                NP.nextTurn
+                
+                turn = turn+1
             end while not NP.endOfGame(result)
         end
 
