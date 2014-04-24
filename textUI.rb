@@ -55,18 +55,19 @@ module UserInterface
             begin
                 # Anuncia el nuevo turno
                 puts "\n TURNO: #{turn} \n"
-
+                
                 # Escribe status de jugador y monstruo actual
                 printCurrentPlayerStatus
                 printCurrentMonsterStatus
-
+                
                 # Compra de niveles
                 puts "Compra de niveles:"
                 yesNoQuestion("¿Comprar niveles?")
+                NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
 
                 # Combate
                 result = NP.combat
-
+                
                 # Pasa al siguiente turno
                 NP.nextTurn
                 

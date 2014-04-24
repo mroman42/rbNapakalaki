@@ -81,11 +81,11 @@ module Game
         end
 
         def getVisibleTreasures
-            @visibleTreasures
+            @currentPlayer.visibleTreasures
         end
 
         def getHiddenTreasures
-            @hiddenTreasures
+            @currentPlayer.hiddenTreasures
         end
 
         def nextTurn
