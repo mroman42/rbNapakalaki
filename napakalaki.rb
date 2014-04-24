@@ -106,7 +106,7 @@ module Game
         end
 
         def endOfGame(result)
-            result == CombatResult.WINANDWINGAME   
+            result == WINANDWINGAME
         end
 
     end

@@ -35,8 +35,13 @@ module UserInterface
             players = readPlayers
             NP.initGame players
 
-            # Escribe status del jugador actual
-            printCurrentPlayerStatus
+            # Bucle principal del juego
+            begin
+                # Escribe status del jugador actual
+                printCurrentPlayerStatus
+                NP.nextTurn
+                result = NP.combat
+            end while NP.endOfGame(result)
         end
 
     end
