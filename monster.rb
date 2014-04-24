@@ -24,16 +24,16 @@ module Game
       	@level
     end
 
-    def getBadConsequence
-      	@bad
-    end
-    
     def getPrize
       	@prize
     end
 
+    def getBadConsequence
+      	@bad
+    end
+    
     # Métodos auxiliares
-    def to_s()
+    def to_s
       	"#{@name} (lv. #{@level}) \nPrize: #{@prize.to_s()}\n Bad: #{@bad.to_s()}\n"
     end
   end
