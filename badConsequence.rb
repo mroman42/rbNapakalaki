@@ -71,7 +71,7 @@ module Game
             @specificHiddenTreasures
         end
 
-	# En los siguientes métodos, hay que usar que hay dos posibles BadConsequence que trabajan con tesoros, los que conocen los objetos que quitan y los que sólo conocen la cantidad.
+	# En los siguientes dos métodos, hay que usar que hay dos posibles BadConsequence que trabajan con tesoros, los que conocen los objetos que quitan y los que sólo conocen la cantidad.
     # Para saber si un tesoro está contenido, tenemos que ver si está en la lista de tesoros(conoce los tesoros) o está vacía pero la cantidad de tesoros que quita no es nula(no conoce los tesoros)
 
         def substractVisibleTreasure(treasure)
@@ -89,7 +89,6 @@ module Game
         end
 
     # En este método, se usan los tres BadConsequence: 
-    # Añadir comentarios para que se entienda mejor. 
         def adjustToFitTreasureLists(visible, hidden)        
     #    ·si es mortal, es mortal.
             if @death
