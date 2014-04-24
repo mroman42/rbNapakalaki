@@ -32,11 +32,11 @@ module UserInterface
         end
 
         def yesNoQuestion(message)
-            puts "#{message} (Y/n)"
-            c = gets()
+            puts "#{message} (y/n)"
+            c = gets.chomp
 
             while c != 'y' and c != 'n'
-                c = gets()
+                c = gets.chomp
             end
 
             return c == 'y'
