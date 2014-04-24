@@ -97,7 +97,35 @@ module Game
         end
 
         def combat(monster)
-            total_level = getCombatLevel()
+            total_level = getCombatLevel
+            monster_level = monster.getLevel
+            # Si ganamos el combate. 
+            if (total_level >= monster_level)
+                result = CombatResult.WIN 
+                prize = monster.getPrize
+                applyPrize(prize)
+                result = CombatResult.WINANDWINGAME if @level >= 10
+            # Si perdemos el combate, podemos escapar o no. 
+            else
+            # Tiramos el dado.
+                escape = Dice.getInstance.nextNumber
+                # No escapamos. 
+                if (escape < 5)
+                    bad = monster.getBadConsequence
+                    amIDead = bad.kills
+                    if (amIDead)
+                        die
+                        result = CombatResult.LOSEANDDIE;
+                    else
+                        applyBadConsequence(bad)
+                        result = CombatResult.LOSE
+                    end
+                # Escapamos.
+                else
+                    result = CombatResult.LOSEANDESCAPE; 
+                end
+            end 
+            result
         end
 
         def applyBadConsequence(bad)
