@@ -255,7 +255,6 @@ module Game
             @unusedMonsters.pop
         end
         
-        # ¿Sería lo suyo barajar después de introducir un mosntruo o tesoro? 
         def giveTreasureBack(treasure)
             @usedTreasures.push treasure
         end
