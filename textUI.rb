@@ -27,6 +27,10 @@ module UserInterface
             puts "Jugador actual: #{NP.getCurrentPlayer}"
         end
 
+        def printCurrentMonsterStatus
+            puts "Monstruo actual: #{NP.getCurrentMonster}"
+        end
+
         def main
             # Presentación del juego
             printHeader
@@ -39,9 +43,10 @@ module UserInterface
             begin
                 # Escribe status del jugador actual
                 printCurrentPlayerStatus
+                printCurrentMonsterStatus
                 NP.nextTurn
                 result = NP.combat
-            end while NP.endOfGame(result)
+            end while not NP.endOfGame(result)
         end
 
     end
