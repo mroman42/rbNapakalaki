@@ -10,7 +10,7 @@ module Game
         include Singleton
 
         # Constructor
-        def initialize()
+        def initialize
             @unusedMonsters = []
             @usedMonsters = []
             @unusedTreasures = []
@@ -21,7 +21,7 @@ module Game
         # Métodos privados
         private
 
-        def initTreasureCardDeck()
+        def initTreasureCardDeck
             #Tesoros añadidos por orden de aparición en el guión.
             # ¡Sí, mi amo!
             @unusedTreasures.push(Treasure.new("¡Sí, mi amo!", 0, 4, 7, HELMET)) 
@@ -120,12 +120,7 @@ module Game
             @unusedTreasures.push(Treasure.new("Varita de atizamiento", 400, 3, 4, ONEHAND))
         end
 
-        def initMonsterCardDeck()
-
-            # El profesor de PDOO.
-            bad = BadConsequence.new_det_tr("Se pierden 20 niveles, todas las armaduras visibles y todos los tesoros de mano invisibles.", 20, [ARMOR], [ONEHAND, BOTHHANDS]*4)
-            prize = Prize.new(1,2)
-            @unusedMonsters.push(Monster.new("El profesor de PDOO", 25, bad, prize))
+        def initMonsterCardDeck
 
             #Monstruos añadidos por orden de aparición en el guión. 
             # 3 Byakhees de bonanza.
@@ -225,11 +220,11 @@ module Game
 
         end
         
-        def shuffleTreasures()
+        def shuffleTreasures
             @unusedTreasures.shuffle
         end
 
-        def shuffleMonsters()
+        def shuffleMonsters
             @unusedMonsters.shuffle
         end
 
