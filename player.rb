@@ -13,7 +13,7 @@ module Game
         def initialize(name)
             @dead = true
             @name = name
-            @level = 1
+            @level = 1   #¿Necesario? Lo hace bringToLife
             @pendingBadConsequence = BadConsequence.new_indet_tr("",0,0,0)
             @hiddenTreasures = []
             @visibleTreasures = []
@@ -36,14 +36,11 @@ module Game
         end
 
         def decrementLevels(decrement)
-            @level -= decrement
-            if (@level < 1) 
-                @level = 1
-            end 
+            @level = [@level-decrement, 1].max
         end
 
-        def setPendingBadConsequence(badConsequence)
-            @pendingBadConsequence = badConsequence
+        def setPendingBadConsequence(bad)
+            @pendingBadConsequence = bad
         end
 
         def die()
