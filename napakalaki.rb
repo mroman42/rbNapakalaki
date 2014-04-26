@@ -13,7 +13,7 @@ module Game
 
         # Inicializador
         def initialize
-            @players = nil
+            @players = []
             @currentPlayer = nil
             @currentPlayerIndex = nil
             @currentMonster = nil
@@ -62,6 +62,7 @@ module Game
         end
 
         # Revisar. El nextTurn al final puede hacer que el primer jugador no sea el primero, pues ya se inicia en initPlayers
+        # Puede no, hace. Avisar al profesor. --Óscar
         def initGame(names)
             CardDealer.instance.initCards
             initPlayers(names)
@@ -94,11 +95,10 @@ module Game
                 @currentMonster = CardDealer.instance.nextMonster
                 @currentPlayer = nextPlayer
 
-                dead = @currentPlayer.isDead                
-                if dead
-                    @currentPlayer.initTreasures
-                end
+                @currentPlayer.initTreasures if @currentPlayer.isDead
             end
+
+            stateOK
         end
 
         def nextTurnAllowed
