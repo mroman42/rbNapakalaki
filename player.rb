@@ -93,9 +93,36 @@ module Game
             end
         end
 
+        # Combate contra un monstruo. Obtenemos los niveles del jugador y del monstruo, y aplicamos las reglas del juego. 
         def combat(monster)
-            total_level = getCombatLevel()
-        end
+            total_level = getCombatLevel
+            monster_level = monster.getLevel
+            # Si ganamos
+            if (total_level > monster_level)
+                result = CombatResult.WIN
+                applyPrize(monster.getPrize)
+                result = CombatResult.WINANDWINGAME if (@level >= 10)
+            else 
+                escape = Dice.getInstance.nextNumber
+                # Perdemos y no escapamos
+                if (escape < 5) 
+                    bad = monster.getBadConsequence
+                    if (bad.kills)
+                        die
+                        result = CombatResult.LOSEANDDIE
+                    else 
+                        applyBadConsequence(bad)
+                        result = CombatResult.LOSE
+                    end    
+                # Perdemos y escapamos
+                else 
+                    result = CombatResult.LOSEANDESCAPE
+                end 
+            end 
+            discardNecklaceIfVisible
+            CardDealer.getInstance.giveMonsterBack(monster)
+            result
+        end    
 
         def applyBadConsequence(bad)
             decrementLevels(bad.getLevels)
