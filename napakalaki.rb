@@ -42,7 +42,10 @@ module Game
         public
 
         def combat
-            @currentPlayer.combat(@currentMonster)
+            result = @currentPlayer.combat(@currentMonster)
+            CardDealer.getInstance.giveMonsterBack(@currentMonster)
+
+            result
         end
 
         def discardVisibleTreasure(treasure)
