@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
+require 'curses'
 require_relative 'napakalaki.rb'
 
-# ¿Hay que usar un require_relative aquí arriba? No son del mismo paquete. 
 
 module UserInterface
 
@@ -24,11 +24,11 @@ module UserInterface
         end
 
         def printCurrentPlayerStatus
-            puts "Jugador actual: #{NP.getCurrentPlayer}"
+            puts "\nJugador actual:\n#{NP.getCurrentPlayer}\n"
         end
 
         def printCurrentMonsterStatus
-            puts "Monstruo actual: #{NP.getCurrentMonster}"
+            puts "\nMonstruo actual:\n#{NP.getCurrentMonster}\n"
         end
 
         def yesNoQuestion(message)
@@ -54,7 +54,7 @@ module UserInterface
             turn = 0
             begin
                 # Anuncia el nuevo turno
-                puts "\n TURNO: #{turn} \n"
+                puts "\n\n TURNO: #{turn} \n"
                 
                 # Escribe status de jugador y monstruo actual
                 printCurrentPlayerStatus
