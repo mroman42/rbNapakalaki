@@ -44,9 +44,9 @@ module Game
         end
 
         def die()
-            @hiddenTreasures.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
+            @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
             @hiddenTreasures.clean()
-            @visibleTreasure.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
+            @visibleTreasure.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
             @visibleTreasure.clean()
             @dead = true
         end
@@ -55,7 +55,7 @@ module Game
         def discardNecklaceIfVisible
             @visibleTreasures.each do |treasure| 
                 if (treasure.getType == TreasureKind.NECKLACE) 
-                    CardDealer.getInstance.giveTreasureBack(treasure) 								
+                    CardDealer.instance.giveTreasureBack(treasure) 								
                     @visibleTreasures.remove(treasure)
                 end
             end
@@ -89,7 +89,7 @@ module Game
             nPrize = prize.getTreasures
 
             min(nPrize, 4 - @hiddenTreasures.size).times do
-                @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
+                @hiddenTreasures.add(CardDealer.instance.nextTreasure)
             end
         end
 
@@ -120,7 +120,7 @@ module Game
                 end 
             end 
             discardNecklaceIfVisible
-            CardDealer.getInstance.giveMonsterBack(monster)
+            CardDealer.instance.giveMonsterBack(monster)
             result
         end    
 
@@ -167,7 +167,7 @@ module Game
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.subtractVisibleTreasure(treasure)
             end 
-            CardDealer.getInstance.giveTreasureBack(treasure)
+            CardDealer.instance.giveTreasureBack(treasure)
             dieIfNoTreasures
         end
 
@@ -180,7 +180,7 @@ module Game
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.subtractHiddenTreasure(treasure)
             end 
-            CardDealer.getInstance.giveTreasureBack(treasure)
+            CardDealer.instance.giveTreasureBack(treasure)
             dieIfNoTreasures
         end
 
@@ -229,16 +229,16 @@ module Game
         # Inicializa los tesoros de un jugador, dependiendo del número sacado al tirar del dado. 
         def initTreasures
             bringToLife
-            number = Dice.getInstance.nextNumber
+            number = Dice.instance.nextNumber
             if (number == 1)
-                @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
+                @hiddenTreasures.add(CardDealer.instance.nextTreasure)
             elsif (number == 6)
                 3.times do
-                    @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
+                    @hiddenTreasures.add(CardDealer.instance.nextTreasure)
                 end 
             else 
                 2.times do
-                    @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)  
+                    @hiddenTreasures.add(CardDealer.instance.nextTreasure)  
                 end
             end
         end
