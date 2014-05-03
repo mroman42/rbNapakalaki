@@ -43,7 +43,7 @@ module Game
 
         def combat
             result = @currentPlayer.combat(@currentMonster)
-            CardDealer.getInstance.giveMonsterBack(@currentMonster)
+            CardDealer.instance.giveMonsterBack(@currentMonster)
 
             result
         end
