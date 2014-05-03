@@ -41,11 +41,11 @@ module Game
         # Métodos públicos
         public
 
+		# Llama al método combat del jugador actual. Pasa como parámetro el monstruo al que combatir. 
         def combat
             result = @currentPlayer.combat(@currentMonster)
             CardDealer.instance.giveMonsterBack(@currentMonster)
-
-            result
+			result
         end
 
         def discardVisibleTreasure(treasure)
@@ -92,6 +92,7 @@ module Game
             @currentPlayer.getHiddenTreasures
         end
 
+		# Pasa de turno si se puede. 
         def nextTurn
             stateOK = nextTurnAllowed
             if stateOK
@@ -104,6 +105,7 @@ module Game
             stateOK
         end
 
+		# Comprueba si estamos listos para pasar de turno. 
         def nextTurnAllowed
             @currentPlayer.validState
         end
