@@ -139,26 +139,26 @@ module Game
                 @visibleTreasures.push(treasure)
                 @hiddenTreasures.remove(treasure)
                 return true
+            else
+                return false
             end
-            return false
         end
         
         # Comprueba si un tesoro puede hacerse visible.
-        # 1- Si es el collar, puede hacerse visible.
-        # 2- Si no es de una mano, comprueba si ya hay uno visible.
-        # 3- Si es de una mano, puede hacerse visible si hay menos de dos visibles. 
         def canMakeTreasureVisible(treasure)
             type = treasure.getType;
 
+        # 1- Si es el collar, puede hacerse visible.
             if type == TreasureKind.NECKLACE
                 return true
 
-            elsif type != TreasureKind.ONEHAND
-                return @visibleTreasures.any?{|treasure| treasure.getType == type}
+        # 2- // Si no es de mano(una o dos), se puede hacer visible si no hay otro del mismo tipo.
+            elsif (type != TreasureKind.ONEHAND && type != TreasurKind.BOTHHANDS)
+                return !@visibleTreasures.include? treasure
 
+        # 3- Si es de mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos. 
             else 
-                number_of_onehands = @visibleTreasures.select{|treasure| treasure.getType == TreasureKind.ONEHAND}.size
-                return number_of_onehands < 2
+                return (!@visibleTreasures.include? TreasurKind.BOTHHANDS && @visibleTreasures.count(TreasureKind.ONEHAND) < 2)
             end 
         end
         
