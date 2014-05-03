@@ -69,7 +69,7 @@ module Game
         def initGame(names)
             CardDealer.instance.initCards
             initPlayers(names)
-            nextTurn()
+            nextTurn
         end
 
         def getCurrentPlayer
@@ -98,11 +98,11 @@ module Game
             if stateOK
                 @currentMonster = CardDealer.instance.nextMonster
                 @currentPlayer = nextPlayer
-
-                @currentPlayer.initTreasures if @currentPlayer.isDead
+				if (@currentPlayer.isDead)
+					@currentPlayer.initTreasures
+				end
             end
-
-            stateOK
+			stateOK
         end
 
 		# Comprueba si estamos listos para pasar de turno. 
