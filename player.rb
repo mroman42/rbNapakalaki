@@ -168,9 +168,11 @@ module Game
         # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
         def discardVisibleTreasure(treasure)
             @visibleTreasures.remove(treasure)
+
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.subtractVisibleTreasure(treasure)
             end 
+
             CardDealer.instance.giveTreasureBack(treasure)
             dieIfNoTreasures
         end
@@ -192,13 +194,17 @@ module Game
         # Comprueba si puede comprar niveles. Si es así, lo hace y elimina los tesoros. 
         # Devuelve si se han comprado niveles o no. 
         def buyLevels(visible, hidden)
-            levels = computeGoldCoinsValue(visible + hidden)
+            levels = computeGoldCoinsValue(visible) + computeGoldCoinsValue(hidden)
+
             if canIBuyLevels(levels) 
                 incrementLevels(levels)
+
                 visible.each {|t| discardVisibleTreasure(t)}
                 hidden.each {|t| discardHiddenTreasure(t)}
+
                 return true
             end
+
             return false
         end
 
