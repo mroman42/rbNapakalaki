@@ -62,8 +62,9 @@ module UserInterface
                 
                 # Compra de niveles
                 puts "Compra de niveles:"
-                yesNoQuestion("¿Comprar niveles?")
-                NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
+                if (yesNoQuestion("¿Comprar niveles?"))
+                    NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
+                end 
 
                 # Combate
                 result = NP.combat
