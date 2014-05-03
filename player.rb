@@ -103,7 +103,7 @@ module Game
                 applyPrize(monster.getPrize)
                 result = CombatResult.WINANDWINGAME if (@level >= 10)
             else 
-                escape = Dice.getInstance.nextNumber
+                escape = Dice.instance.nextNumber
                 # Perdemos y no escapamos
                 if (escape < 5) 
                     bad = monster.getBadConsequence
@@ -126,7 +126,7 @@ module Game
 
         def applyBadConsequence(bad)
             decrementLevels(bad.getLevels)
-            setPendingBadConsequence(bad.adjustToFiTreasureLists(@visibleTreasures, @hiddenTreasures))
+            setPendingBadConsequence(bad.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures))
         end
 
         # Hace visible un tesoro si es posible. Devuelve si el tesoro se ha hecho visible. 
