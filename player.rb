@@ -48,6 +48,7 @@ module Game
             @hiddenTreasures.clean()
             @visibleTreasure.each {|treasure| CardDealer.getInstance.giveTreasureBack(treasure)}
             @visibleTreasure.clean()
+
             @dead = true
         end
 
@@ -88,7 +89,7 @@ module Game
             incrementLevels(prize.getLevels)
             nPrize = prize.getTreasures
 
-            min(nPrize, 4 - @hiddenTreasures.size).times do
+            [nPrize, 4 - @hiddenTreasures.size].min.times do
                 @hiddenTreasures.add(CardDealer.getInstance.nextTreasure)
             end
         end
@@ -97,11 +98,14 @@ module Game
         def combat(monster)
             total_level = getCombatLevel
             monster_level = monster.getLevel
-            # Si ganamos
+            # Ganamos
             if (total_level > monster_level)
-                result = CombatResult.WIN
                 applyPrize(monster.getPrize)
-                result = CombatResult.WINANDWINGAME if (@level >= 10)
+                if (@level >= 10)
+                    result = CombatResult.WINANDWINGAME
+                else
+                    result = CombatResult.WIN
+                end
             else 
                 escape = Dice.getInstance.nextNumber
                 # Perdemos y no escapamos
@@ -119,8 +123,9 @@ module Game
                     result = CombatResult.LOSEANDESCAPE
                 end 
             end 
+
             discardNecklaceIfVisible
-            CardDealer.getInstance.giveMonsterBack(monster)
+
             result
         end    
 
