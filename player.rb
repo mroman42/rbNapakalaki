@@ -234,6 +234,7 @@ module Game
         def initTreasures
             bringToLife
             number = Dice.instance.nextNumber
+
             if (number == 1)
                 @hiddenTreasures.add(CardDealer.instance.nextTreasure)
             elsif (number == 6)
@@ -252,7 +253,7 @@ module Game
         end 
 
         def hasVisibleTreasures
-            @visibleTreasures.empty?
+            !@visibleTreasures.empty?
         end
 
         def getVisibleTreasures
