@@ -154,7 +154,7 @@ module Game
 
         # 2- // Si no es de mano(una o dos), se puede hacer visible si no hay otro del mismo tipo.
             elsif (type != TreasureKind.ONEHAND && type != TreasurKind.BOTHHANDS)
-                return !@visibleTreasures.include? treasure
+                return (!@visibleTreasures.include? treasure)
 
         # 3- Si es de mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos. 
             else 
