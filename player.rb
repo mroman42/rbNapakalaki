@@ -45,7 +45,7 @@ module Game
             @pendingBadConsequence = bad
         end
 
-        def die()
+        def die
             @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
             @hiddenTreasures.clean()
             @visibleTreasure.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
