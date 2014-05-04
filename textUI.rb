@@ -41,18 +41,25 @@ module UserInterface
             puts "\nMonstruo actual:\n#{NP.getCurrentMonster}\n"
         end
 
-        def selectionMenu
-            puts "Elegir acción:\n"
-            puts "[1]: Comprar niveles"
-            puts "[2]: Combatir"
-            puts "[3]: Huir"
+        def menu(msg, *options)
+            puts msg
+            
+            index = 0
+            for o in options
+                index = index + 1
+                puts "[#{index}]: #{o}"
+            end
+        end
 
+        def selectionMenu
+            menu("Elegir acción:\n",
+                 "Comprar niveles",
+                 "Combatir",
+                 "Huir")
+            
             case gets.strip
             when "1"
-                puts "Compra de niveles:"
-                if (yesNoQuestion("¿Comprar niveles?"))
-                    NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
-                end
+                buyLevels
             end
         end
         
@@ -65,6 +72,15 @@ module UserInterface
             end
 
             return c == 'y'
+        end
+
+        def buyLevels
+            # Escribir
+            # Imprime información relevante a la compra de niveles            
+
+            if (yesNoQuestion("¿Comprar niveles?"))
+                NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
+            end
         end
 
         def main
