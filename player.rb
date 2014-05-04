@@ -4,6 +4,8 @@ require_relative 'dice.rb'
 require_relative 'combatResult.rb'
 require_relative 'treasure.rb'
 require_relative 'badConsequence.rb'
+require_relative 'treasureKind.rb'
+
 
 module Game
     
@@ -102,9 +104,9 @@ module Game
             if (total_level > monster_level)
                 applyPrize(monster.getPrize)
                 if (@level >= 10)
-                    result = CombatResult.WINANDWINGAME
+                    result = WINANDWINGAME
                 else
-                    result = CombatResult.WIN
+                    result = WIN
                 end
             else 
                 escape = Dice.instance.nextNumber
@@ -113,14 +115,14 @@ module Game
                     bad = monster.getBadConsequence
                     if (bad.kills)
                         die
-                        result = CombatResult.LOSEANDDIE
+                        result = LOSEANDDIE
                     else 
                         applyBadConsequence(bad)
-                        result = CombatResult.LOSE
+                        result = LOSE
                     end    
                 # Perdemos y escapamos
                 else 
-                    result = CombatResult.LOSEANDESCAPE
+                    result = LOSEANDESCAPE
                 end 
             end 
 
@@ -212,7 +214,7 @@ module Game
         # Calcula el nivel de combate del jugador
         def getCombatLevel
             combat_level = @level
-            necklace = @visibleTreasures.contains? TreasureKind.NECKLACE
+            necklace = @visibleTreasures.include? NECKLACE
 
             @visibleTreasures.each do |treasure|
                 if necklace
