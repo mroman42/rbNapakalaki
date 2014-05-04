@@ -148,19 +148,19 @@ module Game
         
         # Comprueba si un tesoro puede hacerse visible.
         def canMakeTreasureVisible(treasure)
-            type = treasure.getType;
+            type = treasure.getType
 
-        # 1- Si es el collar, puede hacerse visible.
-            if type == TreasureKind.NECKLACE
+            # 1. Si es el collar, puede hacerse visible.
+            if type == NECKLACE
                 return true
 
-        # 2- // Si no es de mano(una o dos), se puede hacer visible si no hay otro del mismo tipo.
-            elsif (type != TreasureKind.ONEHAND && type != TreasurKind.BOTHHANDS)
+            # 2. Si no es de mano(una o dos), se puede hacer visible si no hay otro del mismo tipo.
+            elsif (type != ONEHAND and type != BOTHHANDS)
                 return (!@visibleTreasures.include? treasure)
 
-        # 3- Si es de mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos. 
+            # 3. Si es de mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos. 
             else 
-                return (!@visibleTreasures.include? TreasurKind.BOTHHANDS && @visibleTreasures.count(TreasureKind.ONEHAND) < 2)
+                return (!@visibleTreasures.include? BOTHHANDS and @visibleTreasures.count(ONEHAND) < 2)
             end 
         end
         
