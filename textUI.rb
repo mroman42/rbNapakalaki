@@ -99,10 +99,42 @@ module UserInterface
             # Escribir
             # Imprime información relevante a la compra de niveles            
 
+            menu("Elegir acción:\n",
+                 "ver visibles",
+                 "ver invisibles",
+                 "vender")
+            
+            case gets.strip
+            when "1"
+                printVisibleTreasures
+            when "2"
+                printHiddenTreasures
+            when "3"
+                # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles(nil's incluidos) y el resto ocultos
+                # respuesta = gets.chomp no séquemás(no sé leer de teclado)
+                (visibles, ocultos) = (respuesta.select{|item| item < 6}, respuesta.select{|item| item >= 6}.collect{|item| item % 6})
 
-            if (yesNoQuestion("¿Comprar niveles?"))
-                NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
+                if(!NP.buyLevels(visibles, ocultos))
+                    if (yesNoQuestion("No puedes venderlos, ¿quieres tiralos?"))
+                        NP.discardVisibleTreasures(visibles)
+                        NP.discardVisibleTreasures(ocultos)
+                    end
+                end
+                    
+            else
+                clearScreen
+                selectionMenu
             end
+
+            def printVisibleTreasures
+                puts "\nTesoros visibles:\n#{NP.getCurrentPlayer.getVisibleTreasures.resize(6)}\n"
+            end
+
+            def printHiddenTreasures
+                puts "\nTesoros ocultos:\n#{NP.getCurrentPlayer.getHiddenTreasures.resize(4)}\n"
+            end
+
+            
         end
 
         def main
