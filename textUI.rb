@@ -39,6 +39,10 @@ module UserInterface
             puts "\nJugador actual:\n#{NP.getCurrentPlayer}\n"
         end
 
+        def printCurrentPlayerCombatStatus
+            puts "\nNivel de combate del jugador actual:\n#{NP.getCurrentPlayer.getCombatLevel}\n"
+        end
+
         def printCurrentMonsterStatus
             puts "\nMonstruo actual:\n#{NP.getCurrentMonster}\n"
         end
@@ -55,19 +59,31 @@ module UserInterface
 
         def selectionMenu
             menu("Elegir acción:\n",
+                 #"Ver todo",
+                 "Ver stats de combate",
                  "Comprar niveles",
+                 "Equipar",
                  "Combatir",
-                 "Huir")
+                 )
             
-            case gets.strip
-            when "1"
-                buyLevels
-            else
+            respuesta = "0"
+
+            # Mientras no sea combatir, no puedes salir del menú implementado de una forma muy brusca(si alguien encuentra algo más bonito...) 
+            while respuesta != "4"
                 clearScreen
                 selectionMenu
+
+                case respuesta = gets.strip
+                when "1"
+                    printCurrentPlayerCombatStatus      # En realidad, esto es para evitar hacer tú los cálculos
+                when "2"
+                    buyLevels
+                when "3"
+                    equip
+                end
             end
         end
-        
+
         def yesNoQuestion(message)
             puts "#{message} (y/n)"
             c = gets.chomp
@@ -82,6 +98,7 @@ module UserInterface
         def buyLevels
             # Escribir
             # Imprime información relevante a la compra de niveles            
+
 
             if (yesNoQuestion("¿Comprar niveles?"))
                 NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
