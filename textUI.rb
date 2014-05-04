@@ -18,6 +18,8 @@ module UserInterface
             system "clear"
             printHeader
             puts "Turno: #{@turn}\n"
+            printCurrentPlayerStatus
+            printCurrentMonsterStatus
         end
 
         def printHeader
@@ -60,6 +62,9 @@ module UserInterface
             case gets.strip
             when "1"
                 buyLevels
+            else
+                clearScreen
+                selectionMenu
             end
         end
         
@@ -97,11 +102,7 @@ module UserInterface
                 # Anuncia el nuevo turno
                 clearScreen
                 
-                # Escribe status de jugador y monstruo actual
-                printCurrentPlayerStatus
-                printCurrentMonsterStatus
-                
-                # Compra de niveles
+                # El jugador elige acción
                 selectionMenu
 
                 # Combate
