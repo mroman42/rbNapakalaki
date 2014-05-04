@@ -134,7 +134,38 @@ module UserInterface
                 puts "\nTesoros ocultos:\n#{NP.getCurrentPlayer.getHiddenTreasures.resize(4)}\n"
             end
 
+            def equip
+            # Escribir
+            # Imprime información relevante a la compra de niveles            
+
+            menu("Elegir acción:\n",
+                 "ver visibles",
+                 "ver invisibles",
+                 "equipar")
             
+            case gets.strip
+            when "1"
+                printVisibleTreasures
+            when "2"
+                printHiddenTreasures
+            when "3"
+                # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
+                # ocultos = gets.chomp no séquemás(no sé leer de teclado)
+                ocultos.each{|treasure|
+                    if(!NP.canMakeTreasureVisible(treasure))
+                        if (yesNoQuestion("No puedes equiparte #{treasure} ¿quieres vender algunos objetos?"))
+                            buyLevels
+                        end
+                    else
+                        NP.makeTreasureVisible(treasure)
+                    end
+                }
+
+                
+            else
+                clearScreen
+                selectionMenu
+            end
         end
 
         def main
