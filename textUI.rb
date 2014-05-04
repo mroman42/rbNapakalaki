@@ -17,7 +17,7 @@ module UserInterface
         def clearScreen
             system "clear"
             printHeader
-            puts "\nTurno: #{@turn}\n"
+            puts "Turno: #{@turn}\n"
         end
 
         def printHeader
