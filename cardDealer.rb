@@ -255,7 +255,7 @@ module Game
         end
 
         def giveMonsterBack(monster)
-            @usedMonsters.push treasure
+            @usedMonsters.push monster
         end
 
         def initCards
