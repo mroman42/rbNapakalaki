@@ -10,6 +10,16 @@ module UserInterface
         include Singleton
         NP = Game::Napakalaki.instance
 
+        def initialize
+            @turn = 0
+        end
+
+        def clearScreen
+            system "clear"
+            printHeader
+            puts "\nTurno: #{@turn}\n"
+        end
+
         def printHeader
             puts "-"*30
             puts "\tNapakalaki"
@@ -31,6 +41,21 @@ module UserInterface
             puts "\nMonstruo actual:\n#{NP.getCurrentMonster}\n"
         end
 
+        def selectionMenu
+            puts "Elegir acción:\n"
+            puts "[1]: Comprar niveles"
+            puts "[2]: Combatir"
+            puts "[3]: Huir"
+
+            case gets.strip
+            when "1"
+                puts "Compra de niveles:"
+                if (yesNoQuestion("¿Comprar niveles?"))
+                    NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
+                end
+            end
+        end
+        
         def yesNoQuestion(message)
             puts "#{message} (y/n)"
             c = gets.chomp
@@ -44,6 +69,7 @@ module UserInterface
 
         def main
             # Presentación del juego
+            system "clear"
             printHeader
 
             # Lee los jugadores
@@ -51,28 +77,23 @@ module UserInterface
             NP.initGame players
 
             # Bucle principal del juego
-            turn = 0
             begin
                 # Anuncia el nuevo turno
-                puts "\n\n TURNO: #{turn} \n"
+                clearScreen
                 
                 # Escribe status de jugador y monstruo actual
                 printCurrentPlayerStatus
                 printCurrentMonsterStatus
                 
                 # Compra de niveles
-                puts "Compra de niveles:"
-                if (yesNoQuestion("¿Comprar niveles?"))
-                    NP.buyLevels(NP.getVisibleTreasures, NP.getHiddenTreasures)
-                end 
+                selectionMenu
 
                 # Combate
                 result = NP.combat
                 
                 # Pasa al siguiente turno
                 NP.nextTurn
-                
-                turn = turn+1
+                @turn = @turn+1
             end while not NP.endOfGame(result)
         end
 
@@ -83,5 +104,3 @@ module UserInterface
     end
 
 end
-
-
