@@ -48,6 +48,20 @@ module UserInterface
             puts "\nMonstruo actual: #{NP.getCurrentMonster}\n"
         end
 
+        def printCombatResult(result)
+            puts "Combate contra #{NP.getCurrentMonster.getName}:"
+            
+            # Faltan otros casos del combate
+            case result
+            when WIN
+                puts "Victoria"
+            when LOSE
+                puts "Derrota"
+            else
+                puts "No sabemos qué ha pasado"
+            end
+        end
+
         def menu(msg, *options)
             puts msg
             
@@ -75,6 +89,8 @@ module UserInterface
             when "2"
                 clearScreen
                 equip
+            when "3"
+                clearScreen
             else
                 clearScreen
                 selectionMenu
