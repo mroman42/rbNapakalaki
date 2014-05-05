@@ -67,21 +67,16 @@ module UserInterface
             
             respuesta = "0"
 
-            # Mientras no sea combatir, no puedes salir del menú implementado de una forma muy brusca(si alguien encuentra algo más bonito...) 
-            while respuesta != "4"
-                clearScreen
+            # Controla opciones del menú
+            case respuesta = gets.strip
+            when "1"
+                printCurrentPlayerCombatStatus
+            when "2"
+                buyLevels
+            when "3"
+                equip
+            else
                 selectionMenu
-
-                case respuesta = gets.strip
-                when "1"
-                    printCurrentPlayerCombatStatus      # En realidad, esto es para evitar hacer tú los cálculos
-                when "2"
-                    buyLevels
-                when "3"
-                    equip
-                else
-                    selectionMenu
-                end
             end
         end
 
