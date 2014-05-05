@@ -36,15 +36,16 @@ module UserInterface
         end
 
         def printCurrentPlayerStatus
-            puts "\nJugador actual:\n#{NP.getCurrentPlayer}\n"
+            puts "\nJugador actual: #{NP.getCurrentPlayer}\n"
+            printCurrentPlayerCombatStatus
         end
 
         def printCurrentPlayerCombatStatus
-            puts "\nNivel de combate del jugador actual:\n#{NP.getCurrentPlayer.getCombatLevel}\n"
+            puts "Nivel de combate:#{NP.getCurrentPlayer.getCombatLevel}\n"
         end
 
         def printCurrentMonsterStatus
-            puts "\nMonstruo actual:\n#{NP.getCurrentMonster}\n"
+            puts "\nMonstruo actual: #{NP.getCurrentMonster}\n"
         end
 
         def menu(msg, *options)
@@ -76,6 +77,7 @@ module UserInterface
             when "3"
                 equip
             else
+                clearScreen
                 selectionMenu
             end
         end
@@ -92,8 +94,7 @@ module UserInterface
         end
 
         def buyLevels
-            # Imprime información relevante a la compra de niveles            
-
+            # Imprime información relevante a la compra de niveles
             menu("Elegir acción:\n",
                  "Ver tesoros visibles",
                  "Ver tesoros invisibles",
@@ -106,21 +107,19 @@ module UserInterface
                 printHiddenTreasures
             when "3"
                 # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles(nil's incluidos) y el resto ocultos
-
-				# He copiado esto de arriba. No sé si funciona, pero es mejor que el no séquemás de Óscar. 
+                # He copiado esto de arriba. No sé si funciona, pero es mejor que el no séquemás de Óscar. 
                 line = gets.chomp 
-				respuesta = line.split
+                respuesta = line.split
                 visibles, ocultos = respuesta.select{|item| item < 6}, respuesta.select{|item| item >= 6}.collect{|item| item % 6}
 
                 if(!NP.buyLevels(visibles, ocultos))
-                    if (yesNoQuestion("No puedes venderlos, ¿quieres tiralos?")) # Es realmente necesario? 
+                    if (yesNoQuestion("No puedes venderlos, ¿quieres tiralos?")) # Es realmente necesario?
                         NP.discardVisibleTreasures(visibles)
                         NP.discardVisibleTreasures(ocultos)
                     end
                 else 
-					puts "Compra realizada. Ahora tu nivel de combate es #{NP.getCurrentPlayer.getCombatLevel}\n"
-				end 
-                    
+                    puts "Compra realizada. Ahora tu nivel de combate es #{NP.getCurrentPlayer.getCombatLevel}\n"
+                end 
             else
                 clearScreen
                 selectionMenu
@@ -136,8 +135,7 @@ module UserInterface
         end
 
         def equip
-            # Escribir
-            # Imprime información relevante a la compra de niveles            
+            # Escribe información relevante a la equipación de objetos        
             
             menu("Elegir acción:\n",
                  "Ver tesoros visibles",
@@ -151,10 +149,9 @@ module UserInterface
                 printHiddenTreasures
             when "3"
                 # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
-                
                 line = gets.chomp
                 ocultos = line.split
-                ocultos.each{|treasure|
+                ocultos.each do |treasure|
                     if(!NP.canMakeTreasureVisible(treasure))
                         if (yesNoQuestion("No puedes equiparte #{treasure} ¿quieres vender algunos objetos?")) # Nuevamente: Es necesario? 
                             buyLevels
@@ -162,9 +159,7 @@ module UserInterface
                     else
                         NP.makeTreasureVisible(treasure)
                     end
-                }
-
-                
+                end
             else
                 clearScreen
                 selectionMenu
