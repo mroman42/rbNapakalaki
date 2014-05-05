@@ -126,41 +126,38 @@ module UserInterface
         end
         
         def printVisibleTreasures
-            puts "\nTesoros visibles:\n#{NP.getCurrentPlayer.getVisibleTreasures.resize(6)}\n"
+            puts "Tesoros visibles:\n" #{NP.getCurrentPlayer.getVisibleTreasures.resize(6)}\n"
+            
+            index = 0
+            for treasure in NP.getVisibleTreasures do
+                puts "(#{index}): #{printTreasure}"
+            end
         end
 
         def printHiddenTreasures
             puts "\nTesoros ocultos:\n#{NP.getCurrentPlayer.getHiddenTreasures.resize(4)}\n"
         end
 
+        def printTreasure(treasure)
+            puts "#{treasure.getName}"
+        end
+
         def equip
             # Escribe información relevante a la equipación de objetos
-            menu("Elegir acción:\n",
-                 "Ver tesoros visibles",
-                 "Ver tesoros invisibles",
-                 "Equipar tesoros")
+            puts "Equipación de objetos."
+            printVisibleTreasures
             
-            case gets.strip
-            when "1"
-                printVisibleTreasures
-            when "2"
-                printHiddenTreasures
-            when "3"
-                # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
-                line = gets.chomp
-                ocultos = line.split
-                ocultos.each do |treasure|
-                    if(!NP.canMakeTreasureVisible(treasure))
-                        if (yesNoQuestion("No puedes equiparte #{treasure} ¿quieres vender algunos objetos?")) # Nuevamente: Es necesario? 
-                            buyLevels
-                        end
-                    else
-                        NP.makeTreasureVisible(treasure)
+            # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
+            line = gets.chomp
+            ocultos = line.split
+            ocultos.each do |treasure|
+                if(!NP.canMakeTreasureVisible(treasure))
+                    if (yesNoQuestion("No puedes equiparte #{treasure} ¿quieres vender algunos objetos?")) # Nuevamente: Es necesario? 
+                        buyLevels
                     end
+                else
+                    NP.makeTreasureVisible(treasure)
                 end
-            else
-                clearScreen
-                selectionMenu
             end
         end
 
