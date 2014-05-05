@@ -31,7 +31,7 @@ module UserInterface
         def readPlayers
             puts "Introduzca el nombre de los jugadores:"
             line = gets.chomp
-            players = line.split			# split sin paréntesis separa por espacios, que supongo que es lo que buscamos. 
+            players = line.split
             return players
         end
 
@@ -59,7 +59,6 @@ module UserInterface
 
         def selectionMenu
             menu("Elegir acción:\n",
-                 #"Ver todo",
                  "Ver stats de combate",
                  "Comprar niveles",
                  "Equipar",
@@ -80,6 +79,8 @@ module UserInterface
                     buyLevels
                 when "3"
                     equip
+                else
+                    selectionMenu
                 end
             end
         end
@@ -129,19 +130,20 @@ module UserInterface
                 clearScreen
                 selectionMenu
             end
+        end
+        
+        def printVisibleTreasures
+            puts "\nTesoros visibles:\n#{NP.getCurrentPlayer.getVisibleTreasures.resize(6)}\n"
+        end
 
-            def printVisibleTreasures
-                puts "\nTesoros visibles:\n#{NP.getCurrentPlayer.getVisibleTreasures.resize(6)}\n"
-            end
+        def printHiddenTreasures
+            puts "\nTesoros ocultos:\n#{NP.getCurrentPlayer.getHiddenTreasures.resize(4)}\n"
+        end
 
-            def printHiddenTreasures
-                puts "\nTesoros ocultos:\n#{NP.getCurrentPlayer.getHiddenTreasures.resize(4)}\n"
-            end
-
-            def equip
+        def equip
             # Escribir
             # Imprime información relevante a la compra de niveles            
-
+            
             menu("Elegir acción:\n",
                  "Ver tesoros visibles",
                  "Ver tesoros invisibles",
@@ -155,8 +157,8 @@ module UserInterface
             when "3"
                 # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
                 
-				line = gets.chomp
-				ocultos = line.split
+                line = gets.chomp
+                ocultos = line.split
                 ocultos.each{|treasure|
                     if(!NP.canMakeTreasureVisible(treasure))
                         if (yesNoQuestion("No puedes equiparte #{treasure} ¿quieres vender algunos objetos?")) # Nuevamente: Es necesario? 
@@ -199,7 +201,6 @@ module UserInterface
                 @turn = @turn+1
             end while not NP.endOfGame(result)
         end
-
     end
 
     if __FILE__ == $0
