@@ -53,9 +53,9 @@ module UserInterface
             
             # Faltan otros casos del combate
             case result
-            when WIN
+            when Game::WIN
                 puts "Victoria"
-            when LOSE
+            when Game::LOSE
                 puts "Derrota"
             else
                 puts "No sabemos qué ha pasado"
@@ -196,8 +196,12 @@ module UserInterface
 
                 # Combate
                 result = NP.combat
+                printCombatResult result
                 
+
                 # Pasa al siguiente turno
+                while not yesNoQuestion("¿Pasar al siguiente turno?")
+                end
                 NP.nextTurn
                 @turn = @turn+1
             end while not NP.endOfGame(result)
