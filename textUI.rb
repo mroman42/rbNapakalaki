@@ -142,16 +142,22 @@ module UserInterface
         end
         
         def printVisibleTreasures
-            puts "Tesoros visibles:\n" #{NP.getCurrentPlayer.getVisibleTreasures.resize(6)}\n"
+            puts "Tesoros visibles:\n"
             
             index = 0
             for treasure in NP.getVisibleTreasures do
                 puts "(#{index}): #{printTreasure}"
+                index = index+1
             end
         end
 
         def printHiddenTreasures
-            puts "\nTesoros ocultos:\n#{NP.getCurrentPlayer.getHiddenTreasures.resize(4)}\n"
+            puts "Tesoros ocultos:\n" # (??) {NP.getCurrentPlayer.getHiddenTreasures.resize(4)}\n"
+            index = 0
+            for treasure in NP.getHiddenTreasures do
+                puts "(#{index}): #{printTreasure}"
+                index = index+1
+            end
         end
 
         def printTreasure(treasure)
