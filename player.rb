@@ -156,11 +156,41 @@ module Game
 
             # 2. Si no es de mano(una o dos), se puede hacer visible si no hay otro del mismo tipo.
             elsif (type != ONEHAND and type != BOTHHANDS)
-                return (!@visibleTreasures.include? treasure)
+                # Hay que hacer esto porque visibleTreasures tiene tesoros, no TreasureKind (no es posible ver si lo contiene directamente)
+                has_one = false
+                @visibleTreasures.each |treasure| do
+                    if treasure.getType == type
+                        has_one = true
+                    end
+                end
+                return (!has_one)
 
-            # 3. Si es de mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos. 
+            # 3. Si es de una mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos. 
+            elsif (type == ONEHAND)
+                has_bothhands = false
+                onehands = 0
+                @visibleTreasures.each |treasure| do
+                    if treasure.getType == ONEHAND
+                        onehands = onehands + 1
+                    elsif treasure.getType == BOTHHANDS
+                        has_bothhands = true
+                    end
+                end
+                return (!has_bothhands and onehands < 2)
+            
+            # 4. Si es de dos manos, puede hacerse visible si no hay ningún tesoro de mano equipado. 
             else 
-                return (!@visibleTreasures.include? BOTHHANDS and @visibleTreasures.count(ONEHAND) < 2)
+                has_bothhands = false
+                has_onehands = false
+                # Es posible que esta bucle pueda pararse al encontrar un true, pero no sé cómo. 
+                @visibleTreasures.each |treasure| do
+                    if treasure.getType == ONEHAND
+                        has_onehands = true
+                    elsif treasure.getType == BOTHHANDS
+                        has_bothhands = true
+                    end
+                end
+                return (!has_bothhands and !has_onehands)
             end 
         end
         
