@@ -41,7 +41,7 @@ module UserInterface
         end
 
         def printCurrentPlayerCombatStatus
-            puts "Nivel de combate:#{NP.getCurrentPlayer.getCombatLevel}\n"
+            puts "Nivel de combate: #{NP.getCurrentPlayer.getCombatLevel}\n"
         end
 
         def printCurrentMonsterStatus
@@ -60,7 +60,6 @@ module UserInterface
 
         def selectionMenu
             menu("Elegir acción:\n",
-                 "Ver stats de combate",
                  "Comprar niveles",
                  "Equipar",
                  "Combatir",
@@ -71,10 +70,10 @@ module UserInterface
             # Controla opciones del menú
             case respuesta = gets.strip
             when "1"
-                printCurrentPlayerCombatStatus
-            when "2"
+                clearScreen
                 buyLevels
-            when "3"
+            when "2"
+                clearScreen
                 equip
             else
                 clearScreen
@@ -106,8 +105,8 @@ module UserInterface
             when "2"
                 printHiddenTreasures
             when "3"
-                # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles(nil's incluidos) y el resto ocultos
-                # He copiado esto de arriba. No sé si funciona, pero es mejor que el no séquemás de Óscar. 
+                # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles (nil's incluidos) y el resto ocultos
+                # He copiado esto de arriba.
                 line = gets.chomp 
                 respuesta = line.split
                 visibles, ocultos = respuesta.select{|item| item < 6}, respuesta.select{|item| item >= 6}.collect{|item| item % 6}
@@ -135,8 +134,7 @@ module UserInterface
         end
 
         def equip
-            # Escribe información relevante a la equipación de objetos        
-            
+            # Escribe información relevante a la equipación de objetos
             menu("Elegir acción:\n",
                  "Ver tesoros visibles",
                  "Ver tesoros invisibles",
