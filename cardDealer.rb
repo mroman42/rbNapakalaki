@@ -221,11 +221,11 @@ module Game
         end
         
         def shuffleTreasures
-            @unusedTreasures.shuffle
+            @unusedTreasures.shuffle!
         end
 
         def shuffleMonsters
-            @unusedMonsters.shuffle
+            @unusedMonsters.shuffle!
         end
 
 
