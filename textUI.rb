@@ -131,7 +131,8 @@ module UserInterface
                 # He copiado esto de arriba.
                 line = gets.chomp 
                 respuesta = line.split
-                visibles, ocultos = respuesta.select{|item| item < 6}, respuesta.select{|item| item >= 6}.collect{|item| item % 6}
+                # NO FUNCIONA. Visibles y ocultos tienen que ser tesoros, no índices. 
+                visibles, ocultos = respuesta.select{|item| item < 6}, respuesta.select{|item| item >= 6 && item < 10}.collect{|item| item % 6}
 
                 if(!NP.buyLevels(visibles, ocultos))
                     if (yesNoQuestion("No puedes venderlos, ¿quieres tiralos?")) # Es realmente necesario?
@@ -168,26 +169,35 @@ module UserInterface
 
         # No sería mejor hacer un treasure.to_s ? Para saber las monedas, el bonus, y tal. -JC<
         def printTreasure(treasure)
-            puts "#{treasure.getName}"
+            puts "#{treasure.getName}\n"
         end
 
+        # Idea: Equipar tesoros de uno en uno, en vez de muchos de golpe. -JC
         def equip
             # Escribe información relevante a la equipación de objetos
-            puts "Equipación de objetos."
+            puts "Equipación de objetos.\n Tesoros visibles: \n"
             printVisibleTreasures
+            puts "Tesoros ocultos: \n"
+            printHiddenTreasures
+            puts "Dime que tesoros ocultos te quieres equipar:"
             
             # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
             line = gets.chomp
             ocultos = line.split
+            # HAY QUE USAR TESOROS, NO ÍNDICES
             ocultos.each do |treasure|
                 if(!NP.canMakeTreasureVisible(treasure))
-                    if (yesNoQuestion("No puedes equiparte #{treasure} ¿quieres vender algunos objetos?")) # Nuevamente: Es necesario? 
-                        buyLevels
-                    end
+                    puts "No puedes equiparte #{treasure}\n"
                 else
                     NP.makeTreasureVisible(treasure)
+                    puts "Tesoro #{treasure} equipado\n"
                 end
             end
+        end
+
+        # Método para ajustar el mal rollo. 
+        def adjust
+        
         end
 
         def main
@@ -210,6 +220,9 @@ module UserInterface
                 # Combate
                 result = NP.combat
                 printCombatResult result
+
+                # Aplica mal rollo si pierde.   
+                adjust if (result == Game::LOSE)
                 
 
                 # Pasa al siguiente turno
