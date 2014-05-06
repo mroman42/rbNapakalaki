@@ -54,11 +54,17 @@ module UserInterface
             # Faltan otros casos del combate
             case result
             when Game::WIN
-                puts "Victoria"
+                puts "Has derrotado al monstruo."
+            when Game::WINANDWINGAME
+                puts "Has ganado el combate y el juego. ¡Enhorabuena!"
+            when Game::LOSEANDESCAPE
+                puts "Has logrado escapar del combate a salvo."
             when Game::LOSE
-                puts "Derrota"
+                puts "Has sido derrotado. Ahora se te aplicará el mal rollo del monstruo."
+            when Game::LOSEANDDIE
+                puts "Has sido derrotado y has muerto."
             else
-                puts "No sabemos qué ha pasado"
+                puts "Error en el combate."
             end
         end
 
@@ -75,7 +81,7 @@ module UserInterface
         def selectionMenu
             menu("Elegir acción:\n",
                  "Comprar niveles",
-                 "Equipar",
+                 "Ver estado del jugador",
                  "Combatir",
                  )
             
@@ -88,7 +94,7 @@ module UserInterface
                 buyLevels
             when "2"
                 clearScreen
-                equip
+                printCurrentPlayerStatus
             when "3"
                 clearScreen
             else
@@ -160,6 +166,7 @@ module UserInterface
             end
         end
 
+        # No sería mejor hacer un treasure.to_s ? Para saber las monedas, el bonus, y tal. -JC<
         def printTreasure(treasure)
             puts "#{treasure.getName}"
         end
