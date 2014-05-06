@@ -158,7 +158,7 @@ module Game
             elsif (type != ONEHAND and type != BOTHHANDS)
                 # Hay que hacer esto porque visibleTreasures tiene tesoros, no TreasureKind (no es posible ver si lo contiene directamente)
                 has_one = false
-                @visibleTreasures.each |treasure| do
+                @visibleTreasures.each do |treasure|
                     if treasure.getType == type
                         has_one = true
                     end
@@ -169,7 +169,7 @@ module Game
             elsif (type == ONEHAND)
                 has_bothhands = false
                 onehands = 0
-                @visibleTreasures.each |treasure| do
+                @visibleTreasures.each do |treasure|
                     if treasure.getType == ONEHAND
                         onehands = onehands + 1
                     elsif treasure.getType == BOTHHANDS
@@ -183,7 +183,7 @@ module Game
                 has_bothhands = false
                 has_onehands = false
                 # Es posible que esta bucle pueda pararse al encontrar un true, pero no sé cómo. 
-                @visibleTreasures.each |treasure| do
+                @visibleTreasures.each do |treasure|
                     if treasure.getType == ONEHAND
                         has_onehands = true
                     elsif treasure.getType == BOTHHANDS
