@@ -138,7 +138,7 @@ module Game
         def makeTreasureVisible(treasure)
             if canMakeTreasureVisible(treasure)
                 @visibleTreasures.push(treasure)
-                @hiddenTreasures.remove(treasure)
+                @hiddenTreasures.delete(treasure)
                 return true
             else
                 return false
@@ -174,7 +174,7 @@ module Game
         # Primero lo elimina de la lista de tesoros visibles, y si quedan tesoros en el mal rollo, lo sustrae de él
         # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
         def discardVisibleTreasure(treasure)
-            @visibleTreasures.remove(treasure)
+            @visibleTreasures.delete(treasure)
 
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.subtractVisibleTreasure(treasure)
@@ -189,7 +189,7 @@ module Game
         # Primero lo elimina de la lista de tesoros ocultos, y si quedan tesoros en el mal rollo, lo sustrae de él
         # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
         def discardHiddenTreasure(treasure)
-            @hiddenTreasures.remove(treasure)
+            @hiddenTreasures.delete(treasure)
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.subtractHiddenTreasure(treasure)
             end 
