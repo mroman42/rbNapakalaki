@@ -97,7 +97,7 @@ module Game
             if @death
                 return BadConsequence.new_death(@text, @death)
 
-    #    ·si no conoce los tesoros(o no hay), trabaja con las cantidades(no puedes quitar más tesoros de los que tiene).
+    #    ·si no conoce los tesoros específicos, trabaja con las cantidades(no puedes quitar más tesoros de los que tiene).
             elsif (@specificVisibleTreasures.empty? && @specificHiddenTreasures.empty?)
                 nVTreasures = [visible.size, @nVisibleTreasures].min
                 nHTreasures = [hidden.size, @nHiddenTreasures].min
