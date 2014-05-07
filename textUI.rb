@@ -148,23 +148,20 @@ module UserInterface
             end
         end
         
+        def printTreasures(treasures)
+            treasures.each_with_index do |treasure, index|
+                puts "(#{index}): #{treasure}"
+            end
+        end
+
         def printVisibleTreasures
             puts "Tesoros visibles:\n"
-            
-            index = 0
-            for treasure in NP.getVisibleTreasures do
-                puts "(#{index}): #{treasure}"
-                index = index+1
-            end
+            printTreasures(NP.getVisibleTreasures)
         end
 
         def printHiddenTreasures
             puts "Tesoros ocultos:\n"
-            index = 0
-            for treasure in NP.getHiddenTreasures do
-                puts "(#{index}): #{treasure}"
-                index = index+1
-            end
+            printTreasures(NP.getHiddenTreasures)
         end
 
         # Idea: Equipar tesoros de uno en uno, en vez de muchos de golpe. -JC
