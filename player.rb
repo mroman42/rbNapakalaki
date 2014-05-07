@@ -47,9 +47,9 @@ module Game
 
         def die
             @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
-            @hiddenTreasures.clean()
+            @hiddenTreasures.clear
             @visibleTreasure.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
-            @visibleTreasure.clean()
+            @visibleTreasure.clear
 
             @dead = true
         end
