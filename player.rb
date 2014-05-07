@@ -91,7 +91,7 @@ module Game
             nPrize = prize.getTreasures
 
             [nPrize, 4 - @hiddenTreasures.size].min.times do
-                @hiddenTreasures.add(CardDealer.instance.nextTreasure)
+                @hiddenTreasures.push(CardDealer.instance.nextTreasure)
             end
         end
 
@@ -243,14 +243,14 @@ module Game
             number = Dice.instance.nextNumber
 
             if (number == 1)
-                @hiddenTreasures.add(CardDealer.instance.nextTreasure)
+                @hiddenTreasures.push(CardDealer.instance.nextTreasure)
             elsif (number == 6)
                 3.times do
-                    @hiddenTreasures.add(CardDealer.instance.nextTreasure)
+                    @hiddenTreasures.push(CardDealer.instance.nextTreasure)
                 end 
             else 
                 2.times do
-                    @hiddenTreasures.add(CardDealer.instance.nextTreasure)  
+                    @hiddenTreasures.push(CardDealer.instance.nextTreasure)  
                 end
             end
         end
