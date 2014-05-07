@@ -28,6 +28,7 @@ module Game
             
             # Toma el índice del primer jugador como -1. El nextTurn en initGames hará que el primer jugador sea el correto. 
             @currentPlayerIndex = -1
+            @currentPlayer = @players[0]
         end
 
         def nextPlayer
