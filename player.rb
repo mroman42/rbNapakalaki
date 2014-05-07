@@ -159,7 +159,7 @@ module Game
 
             # 3. Si es de una mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos. 
             elsif (type == ONEHAND)
-                has_two_onehand = @visibleTreasures.select{|trs| trs.getType == ONEHAND}.size < 2
+                has_two_onehand = (@visibleTreasures.select{|trs| trs.getType == ONEHAND}.size >= 2)
                 has_bothhand = @visibleTreasures.any? {|trs| trs.getType == BOTHHANDS}
                 return (!has_bothhand and !has_two_onehand)
             
