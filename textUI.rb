@@ -140,39 +140,24 @@ module UserInterface
         end
 
         def buyLevels
-            # Imprime información relevante a la compra de niveles
-            menu("Elegir acción:\n",
-                 "Ver tesoros visibles",
-                 "Ver tesoros ocultos",
-                 "Vender tesoros")
-            
-            case gets.strip
-            when "1"
-                printVisibleTreasures
-                buyLevels
-            when "2"
-                printHiddenTreasures
-                buyLevels
-            when "3"
-                # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles (nil's incluidos) y el resto ocultos
-                # He copiado esto de arriba.
-                line = gets.chomp 
-                respuesta = line.split
-                # NO FUNCIONA. Visibles y ocultos tienen que ser tesoros, no índices. 
-                visibles, ocultos = respuesta.select{|item| item < 6}, respuesta.select{|item| item >= 6 && item < 10}.collect{|item| item % 6}
+            #Compra de niveles. 
+            # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles (nil's incluidos) 
+            # y del 6 al 9 ocultos. 
+            # He copiado esto de arriba.
+            puts "Dime los índices de los tesoros que quieres vender -- (0-5) visibles, (6-9) ocultos."
+            line = gets.chomp 
+            respuesta = line.split
+            # NO FUNCIONA. Visibles y ocultos tienen que ser tesoros, no índices. 
+            visibles, ocultos = respuesta.select{|item| item < 6}, respuesta.select{|item| item >= 6 && item < 10}.collect{|item| item % 6}
 
-                if(!NP.buyLevels(visibles, ocultos))
-                    if (yesNoQuestion("No puedes venderlos, ¿quieres tiralos?")) # Es realmente necesario?
-                        NP.discardVisibleTreasures(visibles)
-                        NP.discardVisibleTreasures(ocultos)
-                    end
-                else 
-                    puts "Compra realizada. Ahora tu nivel de combate es #{NP.getCurrentPlayer.getCombatLevel}\n"
-                end 
-            else
-                clearScreen
-                selectionMenu
-            end
+            if(!NP.buyLevels(visibles, ocultos))
+                if (yesNoQuestion("No puedes venderlos, ¿quieres tiralos?")) # Es realmente necesario?
+                    NP.discardVisibleTreasures(visibles)
+                    NP.discardVisibleTreasures(ocultos)
+                end
+            else 
+                puts "Compra realizada. Ahora tu nivel de combate es #{NP.getCurrentPlayer.getCombatLevel}\n"
+            end 
         end
         
         def printTreasures(treasures)
@@ -204,11 +189,11 @@ module UserInterface
             ocultos = line.split
             # Usando índices como tales. 
             ocultos.each do |index|
-                if(!(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index.to_i))))
-                    puts "No puedes equiparte #{NP.getHiddenTreasures.at(index.to_i)}\n"
-                else
+                if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index.to_i)))
                     NP.makeTreasureVisible(treasure)
                     puts "Tesoro #{NP.getHiddenTreasures.at(index.to_i)} equipado\n"
+                else
+                    puts "No puedes equiparte #{NP.getHiddenTreasures.at(index.to_i)}\n"
                 end
             end
         end
