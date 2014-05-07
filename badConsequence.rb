@@ -91,7 +91,7 @@ module Game
             end
         end
 
-    # En este método, se usan los tres BadConsequence posibles: 
+    # En este método, se usan los tres BadConsequence posibles, teniendo en cuenta que ya se han restado los niveles. 
         def adjustToFitTreasureLists(visible, hidden)        
     #    ·si es mortal, es mortal.
             if @death
@@ -102,14 +102,14 @@ module Game
                 nVTreasures = [visible.size, @nVisibleTreasures].min
                 nHTreasures = [hidden.size, @nHiddenTreasures].min
 
-                return BadConsequence.new_indet_tr(@text, @levels, nVTreasures, nHTreasures)
+                return BadConsequence.new_indet_tr(@text, 0, nVTreasures, nHTreasures)
 
     #    ·si conoce los tesoros, trabaja con los tesoros(no puedes quitar los tesoros que no tiene)
             else
                 listVisibleTreasures = visible & @specificVisibleTreasures
                 listHiddenTreasures = hidden & @specificHiddenTreasures
 
-                return BadConsequence.new_det_tr(@text, @levels, listVisibleTreasures, listHiddenTreasures);
+                return BadConsequence.new_det_tr(@text, 0, listVisibleTreasures, listHiddenTreasures);
             end
         end 
 
