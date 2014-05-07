@@ -56,7 +56,7 @@ module Game
 
         # Si el collar está visible, lo devuelve al mazo de tesoros.
         def discardNecklaceIfVisible
-            @visibleTreasure.delete_if {|trs| trs.getType == NECKLACE}
+            @visibleTreasures.delete_if {|trs| trs.getType == NECKLACE}
         end
 
         def dieIfNoTreasures
