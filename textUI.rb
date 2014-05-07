@@ -153,7 +153,7 @@ module UserInterface
             
             index = 0
             for treasure in NP.getVisibleTreasures do
-                puts "(#{index}): #{printTreasure}"
+                puts "(#{index}): #{treasure}"
                 index = index+1
             end
         end
