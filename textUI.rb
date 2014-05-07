@@ -92,9 +92,11 @@ module UserInterface
             when "1"
                 clearScreen
                 buyLevels
+				selectionMenu
             when "2"
                 clearScreen
                 printCurrentPlayerStatus
+				selectionMenu
             when "3"
                 clearScreen
             else
@@ -102,6 +104,27 @@ module UserInterface
                 selectionMenu
             end
         end
+
+		def selectionMenu2
+			menu("Elegir acción:\n", 
+				 "Equipar tesoros", 
+			     "Pasar de turno",
+				 )
+			respuesta = 0
+
+			# Controla opciones
+			case respuesta = gets.strip
+			when "1"
+				clearScreen 
+				equip
+				selectionMenu2
+			when "2"
+				clearScreen
+			else 
+				clearScreen
+				selectionMenu2
+			end
+		end
 
         def yesNoQuestion(message)
             puts "#{message} (y/n)"
@@ -118,14 +141,16 @@ module UserInterface
             # Imprime información relevante a la compra de niveles
             menu("Elegir acción:\n",
                  "Ver tesoros visibles",
-                 "Ver tesoros invisibles",
+                 "Ver tesoros ocultos",
                  "Vender tesoros")
             
             case gets.strip
             when "1"
                 printVisibleTreasures
+				buyLevels
             when "2"
                 printHiddenTreasures
+				buyLevels
             when "3"
                 # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles (nil's incluidos) y el resto ocultos
                 # He copiado esto de arriba.
@@ -167,22 +192,21 @@ module UserInterface
         # Idea: Equipar tesoros de uno en uno, en vez de muchos de golpe. -JC
         def equip
             # Escribe información relevante a la equipación de objetos
-            puts "Equipación de objetos.\n Tesoros visibles: \n"
+            puts "Equipación de objetos.\n"
             printVisibleTreasures
-            puts "Tesoros ocultos: \n"
             printHiddenTreasures
             puts "Dime que tesoros ocultos te quieres equipar:"
             
             # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
             line = gets.chomp
             ocultos = line.split
-            # HAY QUE USAR TESOROS, NO ÍNDICES
-            ocultos.each do |treasure|
-                if(!NP.canMakeTreasureVisible(treasure))
-                    puts "No puedes equiparte #{treasure}\n"
+            # Usando índices como tales. 
+            ocultos.each do |index|
+                if(!(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index.to_i))))
+                    puts "No puedes equiparte #{NP.getHiddenTreasures.at(index.to_i)}\n"
                 else
                     NP.makeTreasureVisible(treasure)
-                    puts "Tesoro #{treasure} equipado\n"
+                    puts "Tesoro #{NP.getHiddenTreasures.at(index.to_i)} equipado\n"
                 end
             end
         end
@@ -215,7 +239,8 @@ module UserInterface
 
                 # Aplica mal rollo si pierde.   
                 adjust if (result == Game::LOSE)
-                
+
+				selectionMenu2                
 
                 # Pasa al siguiente turno
                 while not yesNoQuestion("¿Pasar al siguiente turno?")
