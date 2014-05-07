@@ -157,7 +157,7 @@ module Game
             elsif (type == ONEHAND)
                 has_two_onehand = @visibleTreasures.select{|trs| trs.getType == ONEHAND}.size < 2
                 has_bothhand = @visibleTreasures.any? {|trs| trs.getType == BOTHHANDS}
-                return has_bothhand and has_two_onehand
+                return (has_bothhand and has_two_onehand)
             
             # 4. Si es de dos manos, puede hacerse visible si no hay ningún tesoro de mano equipado. 
             else 
