@@ -15,12 +15,12 @@ module Game
         def initialize(name)
             @dead = true
             @name = name
-            @level = 1   #¿Necesario? Lo hace bringToLife
+            @level = 1   #¿Necesario? Lo hace bringToLife (llamado en initTreasures)
             @pendingBadConsequence = BadConsequence.new_indet_tr("",0,0,0)
             @hiddenTreasures = []
             @visibleTreasures = []
 
-            bringToLife
+           initTreasures
         end
 
 
