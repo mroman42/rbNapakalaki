@@ -159,17 +159,12 @@ module UserInterface
         end
 
         def printHiddenTreasures
-            puts "Tesoros ocultos:\n" # (??) {NP.getCurrentPlayer.getHiddenTreasures.resize(4)}\n"
+            puts "Tesoros ocultos:\n"
             index = 0
             for treasure in NP.getHiddenTreasures do
-                puts "(#{index}): #{printTreasure}"
+                puts "(#{index}): #{treasure}"
                 index = index+1
             end
-        end
-
-        # No sería mejor hacer un treasure.to_s ? Para saber las monedas, el bonus, y tal. -JC<
-        def printTreasure(treasure)
-            puts "#{treasure.getName}\n"
         end
 
         # Idea: Equipar tesoros de uno en uno, en vez de muchos de golpe. -JC
