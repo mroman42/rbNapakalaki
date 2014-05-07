@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
-require 'curses'
+require 'io/console'
 require_relative 'napakalaki.rb'
+
 
 
 module UserInterface
@@ -94,11 +95,11 @@ module UserInterface
             when "1"
                 clearScreen
                 buyLevels
-				selectionMenu
+                selectionMenu
             when "2"
                 clearScreen
                 printCurrentPlayerStatus
-				selectionMenu
+                selectionMenu
             when "3"
                 clearScreen
             else
@@ -107,26 +108,26 @@ module UserInterface
             end
         end
 
-		def selectionMenu2
-			menu("Elegir acción:\n", 
-				 "Equipar tesoros", 
-			     "Pasar de turno",
-				 )
-			respuesta = 0
+        def selectionMenu2
+            menu("Elegir acción:\n", 
+                 "Equipar tesoros", 
+                 "Pasar de turno",
+                 )
+            respuesta = 0
 
-			# Controla opciones
-			case respuesta = gets.strip
-			when "1"
-				clearScreen 
-				equip
-				selectionMenu2
-			when "2"
-				clearScreen
-			else 
-				clearScreen
-				selectionMenu2
-			end
-		end
+            # Controla opciones
+            case respuesta = gets.strip
+            when "1"
+                clearScreen 
+                equip
+                selectionMenu2
+            when "2"
+                clearScreen
+            else 
+                clearScreen
+                selectionMenu2
+            end
+        end
 
         def yesNoQuestion(message)
             puts "#{message} (y/n)"
@@ -149,10 +150,10 @@ module UserInterface
             case gets.strip
             when "1"
                 printVisibleTreasures
-				buyLevels
+                buyLevels
             when "2"
                 printHiddenTreasures
-				buyLevels
+                buyLevels
             when "3"
                 # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles (nil's incluidos) y el resto ocultos
                 # He copiado esto de arriba.
@@ -215,7 +216,7 @@ module UserInterface
 
         # Método para ajustar el mal rollo. 
         def adjust
-        
+            
         end
 
         def main
@@ -241,8 +242,7 @@ module UserInterface
 
                 # Aplica mal rollo si pierde.   
                 adjust if (result == Game::LOSE)
-
-				selectionMenu2                
+                selectionMenu2                
 
                 # Pasa al siguiente turno
                 while not yesNoQuestion("¿Pasar al siguiente turno?")
