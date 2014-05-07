@@ -190,7 +190,7 @@ module UserInterface
             # Usando índices como tales. 
             ocultos.each do |index|
                 if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index.to_i)))
-                    NP.makeTreasureVisible(treasure)
+                    NP.makeTreasureVisible(NP.getHiddenTreasures.at(index.to_i))
                     puts "Tesoro #{NP.getHiddenTreasures.at(index.to_i)} equipado\n"
                 else
                     puts "No puedes equiparte #{NP.getHiddenTreasures.at(index.to_i)}\n"
