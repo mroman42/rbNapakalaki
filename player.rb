@@ -46,11 +46,15 @@ module Game
         end
 
         def die
-            @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
-            @hiddenTreasures.clear
-            @visibleTreasure.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
-            @visibleTreasure.clear
-
+            # Es necesario comprobar, porque da error si están vacíos. 
+            if !(@hiddenTreasures.empty?)
+                @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
+                @hiddenTreasures.clear
+            end
+            if !(@visibleTreasures.empty?)
+                @visibleTreasure.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
+                @visibleTreasure.clear
+            end
             @dead = true
         end
 
