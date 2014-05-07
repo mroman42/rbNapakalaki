@@ -26,9 +26,8 @@ module Game
         def initPlayers(names)
             @players = names.collect{|name| Player.new(name)}
             
-            # Toma el primer jugador como jugador actual
-            @currentPlayerIndex = 0
-            @currentPlayer = @players[@currentPlayerIndex]
+            # Toma el índice del primer jugador como -1. El nextTurn en initGames hará que el primer jugador sea el correto. 
+            @currentPlayerIndex = -1
         end
 
         def nextPlayer
@@ -92,7 +91,7 @@ module Game
             @currentPlayer.getHiddenTreasures
         end
 
-		# Pasa de turno si se puede. 
+        # Pasa de turno si se puede. 
         def nextTurn
             stateOK = nextTurnAllowed
             if stateOK
@@ -105,7 +104,7 @@ module Game
 			stateOK
         end
 
-		# Comprueba si estamos listos para pasar de turno. 
+        # Comprueba si estamos listos para pasar de turno. 
         def nextTurnAllowed
             @currentPlayer.validState
         end
