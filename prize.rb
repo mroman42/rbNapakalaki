@@ -23,7 +23,7 @@ module Game
 
     # Métodos auxiliares
     def to_s()
-      	"#{@treasures} treasures and #{@levels} levels."
+      	"#{@treasures} tesoros y #{@levels} niveles."
     end
 
   end
