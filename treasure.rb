@@ -35,7 +35,7 @@ module Game
         end
 
         def to_s()
-            "#{@name} (Coins. #{@goldCoins}) \nMin Bonus: #{@minBonus}\n Max Bonus: #{@maxBonus}\n"
+            "#{@name} (Coins. #{@goldCoins}) [Min Bonus: #{@minBonus}, Max Bonus: #{@maxBonus}]"
         end
 
     end

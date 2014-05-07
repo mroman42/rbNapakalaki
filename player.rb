@@ -274,7 +274,7 @@ module Game
 
         # Métodos Auxiliares
         def to_s
-            "#{@name}, con nivel #{@level}.\n\tTesoros visibles: #{@visibleTreasures}.\n\tTesoros ocultos: #{@hiddenTreasures}."
+            "#{@name}, con nivel #{@level}."
         end
     end
 

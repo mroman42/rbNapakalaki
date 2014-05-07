@@ -37,6 +37,8 @@ module UserInterface
 
         def printCurrentPlayerStatus
             puts "\nJugador actual: #{NP.getCurrentPlayer}\n"
+            printVisibleTreasures
+            printHiddenTreasures
             printCurrentPlayerCombatStatus
         end
 
@@ -175,7 +177,7 @@ module UserInterface
         
         def printTreasures(treasures)
             treasures.each_with_index do |treasure, index|
-                puts "(#{index}): #{treasure}"
+                puts "\t(#{index}): #{treasure}"
             end
         end
 
