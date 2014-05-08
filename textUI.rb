@@ -178,24 +178,25 @@ module UserInterface
 
         # Idea: Equipar tesoros de uno en uno, en vez de muchos de golpe. -JC
         def equip
-            # Escribe información relevante a la equipación de objetos
-            puts "Equipación de objetos.\n"
-            printVisibleTreasures
-            printHiddenTreasures
-            puts "Dime que tesoros ocultos te quieres equipar:"
-            
-            # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
-            line = gets.chomp
-            ocultos = line.split
-            # Usando índices como tales. 
-            ocultos.each do |index|
-                if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index.to_i)))
-                    puts "Tesoro #{NP.getHiddenTreasures.at(index.to_i)} equipado\n"
-                    NP.makeTreasureVisible(NP.getHiddenTreasures.at(index.to_i))
-                else
-                    puts "No puedes equiparte #{NP.getHiddenTreasures.at(index.to_i)}\n"
-                end
-            end
+            begin
+                # Escribe información relevante a la equipación de objetos
+                puts "Equipación de objetos.\n"
+                printVisibleTreasures
+                printHiddenTreasures
+                puts "Dime que tesoro oculto te quieres equipar (-1 para salir):"
+                
+                # Pasamos el índice del tesoro que queremos equipar. 
+                index = STDIN.getch.to_i
+                if (index >= 0) 
+                    if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index)))
+                        puts "Tesoro #{NP.getHiddenTreasures.at(index)} equipado\n"
+                        NP.makeTreasureVisible(NP.getHiddenTreasures.at(index))
+                    else
+                      	puts "No puedes equiparte #{NP.getHiddenTreasures.at(index)}\n"
+                    end
+                    clearScreen
+                end 
+            end while (index != -1) 
         end
 
         # Método para ajustar el mal rollo. 
