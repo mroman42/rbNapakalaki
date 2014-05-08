@@ -239,7 +239,7 @@ module UserInterface
 
         def discardHiddenTreasures
             puts "Descarta tesoros ocultos:\n"
-            printVisibleTreasures
+            printHiddenTreasures
             puts "Dime el índice del tesoro oculto a descartar (x para terminar): "
             begin
                 index = STDIN.getch
