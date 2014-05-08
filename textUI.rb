@@ -187,6 +187,7 @@ module UserInterface
                 if(!NP.buyLevels(svisibles, shidden))
                     puts "No puedes vender los tesoros"
                 else 
+                    clearScreen
                     puts "Compra realizada.\n"
                 end 
             end
