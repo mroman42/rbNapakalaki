@@ -139,31 +139,58 @@ module UserInterface
 
         def buyLevels
             # Compra de niveles. 
-            visibles = []
-            ocultos = []
-            puts "Dime los índices de los tesoros visibles que quieres vender (x para terminar):"
+            svisibles = []
+            shidden = []
+            
+            # Venta de tesoros visibles
             begin
+                puts "Vendiendo tesoros visibles:"
+                print "Tesoros visibles que se venderán:\n"
+                printTreasures(svisibles)
+                printVisibleTreasures
+                puts "\t(x): Salir"
+
                 index = STDIN.getch
                 if (index != 'x')
                     index = index.to_i
-                    visibles.push(NP.getVisibleTreasures.at(index))
+                    svisibles.push(NP.getVisibleTreasures.at(index))
                 end 
-            end while (index != 'x')
-            puts "Dime los índices de los tesoros ocultos que quieres vender (x para terminar):"
-            begin
-                index = STDIN.getch
-                if (index != 'x')
-                    index = index.to_i
-                    ocultos.push(NP.getHiddenTreasures.at(index))
-                end 
+
+                clearScreen
             end while (index != 'x')
             
-            if(!NP.buyLevels(visibles, ocultos))
-                puts "No puedes vender los tesoros"
-            else 
+            # Venta de tesoros ocultos
+            begin
+                puts "Vendiendo tesoros ocultos:"
+                print "Tesoros ocultos que se venderán:\n"
+                printTreasures(shidden)
+                printHiddenTreasures
+                puts "\t(x): Salir"
+
+                index = STDIN.getch
+                if (index != 'x')
+                    index = index.to_i
+                    shidden.push(NP.getHiddenTreasures.at(index))
+                end
+                
                 clearScreen
-                puts "Compra realizada.\n"
-            end 
+            end while (index != 'x')
+
+
+            # Comprobante de venta
+            puts "Se venderán los siguientes tesoros:"
+            puts "Tesoros visibles:"
+            printTreasures svisibles
+            puts "Tesoros ocultos:"
+            printTreasures shidden
+            
+            if (yesNoQuestion "¿Realizar la compra?")
+                if(!NP.buyLevels(svisibles, shidden))
+                    puts "No puedes vender los tesoros"
+                else 
+                    puts "Compra realizada.\n"
+                end 
+            end
         end
         
         def printTreasures(treasures)
