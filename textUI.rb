@@ -140,23 +140,31 @@ module UserInterface
         end
 
         def buyLevels
-            #Compra de niveles. 
-            # La idea que he tenido es: que te digan una serie de número de 0 a 9, de 0 a 5 serían los visibles (nil's incluidos) 
-            # y del 6 al 9 ocultos. 
-            # He copiado esto de arriba.
-            puts "Dime los índices de los tesoros que quieres vender -- (0-5) visibles, (6-9) ocultos."
-            line = gets.chomp 
-            respuesta = line.split
-            # NO FUNCIONA. Visibles y ocultos tienen que ser tesoros, no índices. 
-            visibles, ocultos = respuesta.select{|item| item < 6}, respuesta.select{|item| item >= 6 && item < 10}.collect{|item| item % 6}
-
+            # Compra de niveles. 
+            visibles = nil
+            ocultos = nil
+            puts "Dime los índices de los tesoros visibles que quieres vender (x para terminar):"
+            index = STDIN.getch
+            begin 
+                if (index != 'x')
+                    index = index.to_i
+                    visibles.push(NP.getVisibleTreasures.at(index)
+                end 
+            end while (index != 'x')
+            puts "Dime los índices de los tesoros ocultos que quieres vender (x para terminar):"
+            index = STDIN.getch
+            begin 
+                if (index != 'x')
+                    index = index.to_i
+                    ocultos.push(NP.getHiddenTreasures.at(index)
+                end 
+            end while (index != 'x')
+            
             if(!NP.buyLevels(visibles, ocultos))
-                if (yesNoQuestion("No puedes venderlos, ¿quieres tiralos?")) # Es realmente necesario?
-                    NP.discardVisibleTreasures(visibles)
-                    NP.discardVisibleTreasures(ocultos)
-                end
+                puts "No puedes vender los tesoros"
             else 
-                puts "Compra realizada. Ahora tu nivel de combate es #{NP.getCurrentPlayer.getCombatLevel}\n"
+                clearScreen
+                puts "Compra realizada.\n"
             end 
         end
         
