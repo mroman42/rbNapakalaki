@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 #encoding: utf-8
 require_relative 'treasureKind.rb'
+require_relative 'treasure.rb'
 
 module Game
 
@@ -78,15 +79,15 @@ module Game
     # Para saber si un tesoro está contenido, tenemos que ver si está en la lista de tesoros(conoce los tesoros) o está vacía pero la cantidad de tesoros que quita no es nula(no conoce los tesoros)
 
         def substractVisibleTreasure(treasure)
-            if(@specificVisibleTreasures.include? treasure || (@specificVisibleTreasures.empty? && @nVisibleTreasures != 0))
-                @specificVisibleTreasures - treasure
+            if(@specificVisibleTreasures.include? treasure.getType || (@specificVisibleTreasures.empty? && @nVisibleTreasures != 0))
+                @specificVisibleTreasures - treasure.getType
                 @nVisibleTreasures -= 1
             end
         end
 
 	    def substractHiddenTreasure(treasure)
-            if(@specificHiddenTreasures.include? treasure || (@specificHiddenTreasures.empty? && @nHiddenTreasures != 0))
-                @specificHiddenTreasures - treasure
+            if(@specificHiddenTreasures.include? treasure.getType || (@specificHiddenTreasures.empty? && @nHiddenTreasures != 0))
+                @specificHiddenTreasures - treasure.getType
                 @nHiddenTreasures -= 1 
             end
         end
@@ -95,7 +96,7 @@ module Game
         def adjustToFitTreasureLists(visible, hidden)  
 
     #    Si no conoce los tesoros específicos, trabaja con las cantidades (no se pueden quitar más tesoros de los que se tiene)
-            elsif (@specificVisibleTreasures.empty? && @specificHiddenTreasures.empty?)
+            if (@specificVisibleTreasures.empty? && @specificHiddenTreasures.empty?)
                 nVTreasures = [visible.size, @nVisibleTreasures].min
                 nHTreasures = [hidden.size, @nHiddenTreasures].min
 
@@ -105,12 +106,10 @@ module Game
             else
                 visiblekind = []
                 hiddenkind = []
-                visible.each do |treasure|
-                    visiblekind.push(treasure.getType)
-                end
-                hidden.each do |treasure|
-                    hiddenkind.push(treasure.getType)
-                end
+
+                visible.each {|treasure| visiblekind.push(treasure.getType)}
+                hidden.each {|treasure| hiddenkind.push(treasure.getType)}
+
                 listVisibleTreasureKind = visiblekind & @specificVisibleTreasures
                 listHiddenTreasureKind = hiddenkind & @specificHiddenTreasures
 
