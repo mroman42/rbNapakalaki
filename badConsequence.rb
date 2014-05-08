@@ -109,7 +109,7 @@ module Game
                 listVisibleTreasures = visible & @specificVisibleTreasures
                 listHiddenTreasures = hidden & @specificHiddenTreasures
 
-                return BadConsequence.new_det_tr(@text, 0, listVisibleTreasures, listHiddenTreasures);
+                return BadConsequence.new_det_tr(@text, 0, listVisibleTreasures, listHiddenTreasures)
             end
         end 
 
