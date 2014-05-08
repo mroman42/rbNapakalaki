@@ -86,8 +86,6 @@ module UserInterface
                  "Comprar niveles",
                  "Combatir",
                  )
-            
-            respuesta = "0"
 
             # Controla opciones del menú
             case respuesta = STDIN.getch
