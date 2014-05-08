@@ -201,6 +201,18 @@ module UserInterface
 
         # Método para ajustar el mal rollo. 
         def adjust
+            while !NP.nextTurnAllowed
+                discardVisibleTreasures
+            end
+        end
+
+        def discardVisibleTreasures
+            puts "Descarta tesoros visibles:\n"
+            printVisibleTreasures
+            
+        end
+
+        def discardHiddenTreasures
             
         end
 
