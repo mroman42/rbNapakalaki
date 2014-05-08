@@ -123,7 +123,7 @@ module UserInterface
                 selectionMenu2
             end
         end
-
+        
         def yesNoQuestion(message)
             puts "#{message} (y/n)"
 
@@ -185,13 +185,14 @@ module UserInterface
                 index = STDIN.getch
                 if (index != 'x')
                     index = index.to_i
+                    
+                    clearScreen
                     if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index)))
-                        puts "Tesoro #{NP.getHiddenTreasures.at(index)} equipado\n"
+                        puts "Tesoro #{NP.getHiddenTreasures.at(index).getName} equipado\n"
                         NP.makeTreasureVisible(NP.getHiddenTreasures.at(index))
                     else
                       	puts "No puedes equiparte #{NP.getHiddenTreasures.at(index)}\n"
                     end
-                    clearScreen
                 end 
             end while (index != 'x')
             clearScreen
