@@ -177,7 +177,7 @@ module Game
             @visibleTreasures.delete(treasure)
 
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
-                @pendingBadConsequence.subtractVisibleTreasure(treasure)
+                @pendingBadConsequence.substractVisibleTreasure(treasure)
             end 
 
             CardDealer.instance.giveTreasureBack(treasure)
@@ -191,7 +191,7 @@ module Game
         def discardHiddenTreasure(treasure)
             @hiddenTreasures.delete(treasure)
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
-                @pendingBadConsequence.subtractHiddenTreasure(treasure)
+                @pendingBadConsequence.substractHiddenTreasure(treasure)
             end 
             CardDealer.instance.giveTreasureBack(treasure)
             dieIfNoTreasures
@@ -219,7 +219,7 @@ module Game
         # Calcula el nivel de combate del jugador
         def getCombatLevel
             combat_level = @level
-            necklace = @visibleTreasures.include? NECKLACE
+            necklace = @visibleTreasures.any? {|trs| trs.getType == NECKLACE}
 
             @visibleTreasures.each do |treasure|
                 if necklace
