@@ -52,6 +52,7 @@ module UserInterface
         end
 
         def printCombatResult(result)
+            clearScreen
             puts "Combate contra #{NP.getCurrentMonster.getName}:"
             
             # Faltan otros casos del combate
