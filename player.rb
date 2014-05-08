@@ -46,12 +46,12 @@ module Game
         end
 
         def die
-            # Es necesario comprobar, porque da error si están vacíos. 
-            if !(@hiddenTreasures.empty?)
+            # Es necesario comprobar, porque da error si están vacíos o son nil.  
+            if !(@hiddenTreasures.empty? || @hiddenTreasures == nil)
                 @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
                 @hiddenTreasures.clear
             end
-            if !(@visibleTreasures.empty?)
+            if !(@visibleTreasures.empty? || @visibleTreasures == nil)
                 @visibleTreasure.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
                 @visibleTreasure.clear
             end
@@ -177,7 +177,7 @@ module Game
             @visibleTreasures.delete(treasure)
 
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
-                @pendingBadConsequence.subtractVisibleTreasure(treasure)
+                @pendingBadConsequence.substractVisibleTreasure(treasure)
             end 
 
             CardDealer.instance.giveTreasureBack(treasure)
@@ -191,7 +191,7 @@ module Game
         def discardHiddenTreasure(treasure)
             @hiddenTreasures.delete(treasure)
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
-                @pendingBadConsequence.subtractHiddenTreasure(treasure)
+                @pendingBadConsequence.substractHiddenTreasure(treasure)
             end 
             CardDealer.instance.giveTreasureBack(treasure)
             dieIfNoTreasures
@@ -219,7 +219,7 @@ module Game
         # Calcula el nivel de combate del jugador
         def getCombatLevel
             combat_level = @level
-            necklace = @visibleTreasures.include? NECKLACE
+            necklace = @visibleTreasures.any? {|trs| trs.getType == NECKLACE}
 
             @visibleTreasures.each do |treasure|
                 if necklace
