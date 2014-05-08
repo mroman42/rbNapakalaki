@@ -98,11 +98,11 @@ module Game
             if stateOK
                 @currentMonster = CardDealer.instance.nextMonster
                 @currentPlayer = nextPlayer
-				if (@currentPlayer.isDead)
-					@currentPlayer.initTreasures
-				end
+                if (@currentPlayer.isDead)
+                    @currentPlayer.initTreasures
+                end
             end
-			stateOK
+            stateOK
         end
 
         # Comprueba si estamos listos para pasar de turno. 
