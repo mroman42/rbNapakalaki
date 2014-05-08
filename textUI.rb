@@ -276,8 +276,8 @@ module UserInterface
                 result = NP.combat
                 printCombatResult result
 
-                # Aplica mal rollo si pierde.   
-                adjust if (result == Game::LOSE)
+                # Aplica mal rollo si pierde, o bien ofrece la posibilidad de eliminar tesoros.    
+                adjust 
                 selectionMenu2                
 
                 # Pasa al siguiente turno
