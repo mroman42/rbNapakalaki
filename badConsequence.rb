@@ -92,24 +92,29 @@ module Game
         end
 
     # En este método, se usan los tres BadConsequence posibles, teniendo en cuenta que ya se han restado los niveles. 
-        def adjustToFitTreasureLists(visible, hidden)        
-    #    ·si es mortal, es mortal.
-            if @death
-                return BadConsequence.new_death(@text, @death)
+        def adjustToFitTreasureLists(visible, hidden)  
 
-    #    ·si no conoce los tesoros específicos, trabaja con las cantidades(no puedes quitar más tesoros de los que tiene).
+    #    Si no conoce los tesoros específicos, trabaja con las cantidades (no se pueden quitar más tesoros de los que se tiene)
             elsif (@specificVisibleTreasures.empty? && @specificHiddenTreasures.empty?)
                 nVTreasures = [visible.size, @nVisibleTreasures].min
                 nHTreasures = [hidden.size, @nHiddenTreasures].min
 
                 return BadConsequence.new_indet_tr(@text, 0, nVTreasures, nHTreasures)
 
-    #    ·si conoce los tesoros, trabaja con los tesoros(no puedes quitar los tesoros que no tiene)
+    #    Si conoce los tesoros, trabaja con los TreasureKind (no se pueden quitar los tipos de tesoros que no tiene)
             else
-                listVisibleTreasures = visible & @specificVisibleTreasures
-                listHiddenTreasures = hidden & @specificHiddenTreasures
+                visiblekind = []
+                hiddenkind = []
+                visible.each do |treasure|
+                    visiblekind.push(treasure.getType)
+                end
+                hidden.each do |treasure|
+                    hiddenkind.push(treasure.getType)
+                end
+                listVisibleTreasureKind = visiblekind & @specificVisibleTreasures
+                listHiddenTreasureKind = hiddenkind & @specificHiddenTreasures
 
-                return BadConsequence.new_det_tr(@text, 0, listVisibleTreasures, listHiddenTreasures)
+                return BadConsequence.new_det_tr(@text, 0, listVisibleTreasureKind, listHiddenTreasureKind)
             end
         end 
 
