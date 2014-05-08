@@ -52,8 +52,8 @@ module Game
                 @hiddenTreasures.clear
             end
             if !(@visibleTreasures.empty? || @visibleTreasures == nil)
-                @visibleTreasure.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
-                @visibleTreasure.clear
+                @visibleTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
+                @visibleTreasures.clear
             end
             @dead = true
         end
