@@ -84,23 +84,18 @@ module UserInterface
         def selectionMenu
             menu("Elegir acción:\n",
                  "Comprar niveles",
-                 "Ver estado del jugador",
                  "Combatir",
                  )
             
             respuesta = "0"
 
             # Controla opciones del menú
-            case respuesta = gets.strip
+            case respuesta = STDIN.getch
             when "1"
                 clearScreen
                 buyLevels
                 selectionMenu
             when "2"
-                clearScreen
-                printCurrentPlayerStatus
-                selectionMenu
-            when "3"
                 clearScreen
             else
                 clearScreen
@@ -116,7 +111,7 @@ module UserInterface
             respuesta = 0
 
             # Controla opciones
-            case respuesta = gets.strip
+            case respuesta = STDIN.getch
             when "1"
                 clearScreen 
                 equip
@@ -128,7 +123,7 @@ module UserInterface
                 selectionMenu2
             end
         end
-
+        
         def yesNoQuestion(message)
             puts "#{message} (y/n)"
 
@@ -191,20 +186,24 @@ module UserInterface
                 puts "Equipación de objetos.\n"
                 printVisibleTreasures
                 printHiddenTreasures
-                puts "Dime que tesoro oculto te quieres equipar (-1 para salir):"
+                puts "\t(x): Salir"
+                puts "Dime que tesoro oculto te quieres equipar:"
                 
                 # Pasamos el índice del tesoro que queremos equipar. 
-                index = STDIN.getch.to_i
-                if (index >= 0) 
+                index = STDIN.getch
+                if (index != 'x')
+                    index = index.to_i
+                    
+                    clearScreen
                     if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index)))
-                        puts "Tesoro #{NP.getHiddenTreasures.at(index)} equipado\n"
+                        puts "Tesoro #{NP.getHiddenTreasures.at(index).getName} equipado\n"
                         NP.makeTreasureVisible(NP.getHiddenTreasures.at(index))
                     else
                       	puts "No puedes equiparte #{NP.getHiddenTreasures.at(index)}\n"
                     end
-                    clearScreen
                 end 
-            end while (index != -1) 
+            end while (index != 'x')
+            clearScreen
         end
 
         # Método para ajustar el mal rollo. 
