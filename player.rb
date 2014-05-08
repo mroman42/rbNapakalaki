@@ -71,7 +71,7 @@ module Game
 
         def computeGoldCoinsValue(treasure)
             value = 0
-            treasure.each {|t| value += getGoldCoins(t)}
+            treasure.each {|t| value += t.getGoldCoins}
             value 
         end
 
