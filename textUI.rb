@@ -85,6 +85,7 @@ module UserInterface
             menu("Elegir acción:\n",
                  "Comprar niveles",
                  "Combatir",
+                 "Cerrar juego"
                  )
             
             respuesta = "0"
@@ -97,6 +98,8 @@ module UserInterface
                 selectionMenu
             when "2"
                 clearScreen
+            when "3"
+                exit
             else
                 clearScreen
                 selectionMenu
@@ -184,13 +187,19 @@ module UserInterface
                 index = STDIN.getch
                 if (index != 'x')
                     index = index.to_i
-                    
                     clearScreen
-                    if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index)))
-                        puts "Tesoro #{NP.getHiddenTreasures.at(index).getName} equipado\n"
-                        NP.makeTreasureVisible(NP.getHiddenTreasures.at(index))
+
+                    # Comprueba que el índice sea válido.
+                    puts "#{NP.getVisibleTreasures.size}"
+                    if (index < NP.getHiddenTreasures.size and index >= 0)
+                        if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index)))
+                            puts "Tesoro #{NP.getHiddenTreasures.at(index).getName} equipado\n"
+                            NP.makeTreasureVisible(NP.getHiddenTreasures.at(index))
+                        else
+                            puts "No puedes equiparte #{NP.getHiddenTreasures.at(index)}\n"
+                        end
                     else
-                      	puts "No puedes equiparte #{NP.getHiddenTreasures.at(index)}\n"
+                        puts "Índice inválido.\n"
                     end
                 end 
             end while (index != 'x')
