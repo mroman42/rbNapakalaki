@@ -36,7 +36,7 @@ module Game
             @unusedTreasures.push(Treasure.new("A prueba de babas verdes", 400, 3, 5, ARMOR))
 
             # Botas de lluvia  ́acida
-            @unusedTreasures.push(Treasure.new("Botas de lluvia  ́acida", 800, 1, 1, BOTHHANDS))
+            @unusedTreasures.push(Treasure.new("Botas de lluvia ácida", 800, 1, 1, BOTHHANDS))
 
             # Casco minero
             @unusedTreasures.push(Treasure.new("Casco minero", 400, 2, 4, HELMET))
