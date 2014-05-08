@@ -46,12 +46,12 @@ module Game
         end
 
         def die
-            # Es necesario comprobar, porque da error si están vacíos. 
-            if !(@hiddenTreasures.empty?)
+            # Es necesario comprobar, porque da error si están vacíos o son nil.  
+            if !(@hiddenTreasures.empty? || @hiddenTreasures == nil)
                 @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
                 @hiddenTreasures.clear
             end
-            if !(@visibleTreasures.empty?)
+            if !(@visibleTreasures.empty? || @visibleTreasures == nil)
                 @visibleTreasure.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
                 @visibleTreasure.clear
             end
