@@ -219,7 +219,7 @@ module Game
         # Calcula el nivel de combate del jugador
         def getCombatLevel
             combat_level = @level
-            necklace = @visibleTreasures.include? NECKLACE
+            necklace = @visibleTreasures.any? {|trs| trs.getType == NECKLACE}
 
             @visibleTreasures.each do |treasure|
                 if necklace
