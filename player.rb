@@ -72,7 +72,7 @@ module Game
         def computeGoldCoinsValue(treasure)
             value = 0
             treasure.each {|t| value += t.getGoldCoins}
-            value 
+            value/1000
         end
 
         def canIBuyLevels(levels)
