@@ -84,23 +84,18 @@ module UserInterface
         def selectionMenu
             menu("Elegir acción:\n",
                  "Comprar niveles",
-                 "Ver estado del jugador",
                  "Combatir",
                  )
             
             respuesta = "0"
 
             # Controla opciones del menú
-            case respuesta = gets.strip
+            case respuesta = STDIN.getch
             when "1"
                 clearScreen
                 buyLevels
                 selectionMenu
             when "2"
-                clearScreen
-                printCurrentPlayerStatus
-                selectionMenu
-            when "3"
                 clearScreen
             else
                 clearScreen
@@ -116,7 +111,7 @@ module UserInterface
             respuesta = 0
 
             # Controla opciones
-            case respuesta = gets.strip
+            case respuesta = STDIN.getch
             when "1"
                 clearScreen 
                 equip
@@ -178,28 +173,44 @@ module UserInterface
 
         # Idea: Equipar tesoros de uno en uno, en vez de muchos de golpe. -JC
         def equip
-            # Escribe información relevante a la equipación de objetos
-            puts "Equipación de objetos.\n"
-            printVisibleTreasures
-            printHiddenTreasures
-            puts "Dime que tesoros ocultos te quieres equipar:"
-            
-            # La idea que he tenido es: que te digan una serie de número de 0 a 3 que serían los ocultos (nil's incluidos)
-            line = gets.chomp
-            ocultos = line.split
-            # Usando índices como tales. 
-            ocultos.each do |index|
-                if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index.to_i)))
-                    puts "Tesoro #{NP.getHiddenTreasures.at(index.to_i)} equipado\n"
-                    NP.makeTreasureVisible(NP.getHiddenTreasures.at(index.to_i))
-                else
-                    puts "No puedes equiparte #{NP.getHiddenTreasures.at(index.to_i)}\n"
-                end
-            end
+            begin
+                # Escribe información relevante a la equipación de objetos
+                puts "Equipación de objetos.\n"
+                printVisibleTreasures
+                printHiddenTreasures
+                puts "\t(x): Salir"
+                puts "Dime que tesoro oculto te quieres equipar:"
+                
+                # Pasamos el índice del tesoro que queremos equipar. 
+                index = STDIN.getch
+                if (index != 'x')
+                    index = index.to_i
+                    if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index)))
+                        puts "Tesoro #{NP.getHiddenTreasures.at(index)} equipado\n"
+                        NP.makeTreasureVisible(NP.getHiddenTreasures.at(index))
+                    else
+                      	puts "No puedes equiparte #{NP.getHiddenTreasures.at(index)}\n"
+                    end
+                    clearScreen
+                end 
+            end while (index != 'x')
+            clearScreen
         end
 
         # Método para ajustar el mal rollo. 
         def adjust
+            while !NP.nextTurnAllowed
+                discardVisibleTreasures
+            end
+        end
+
+        def discardVisibleTreasures
+            puts "Descarta tesoros visibles:\n"
+            printVisibleTreasures
+            
+        end
+
+        def discardHiddenTreasures
             
         end
 
