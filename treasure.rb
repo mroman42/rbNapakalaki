@@ -35,7 +35,22 @@ module Game
         end
 
         def to_s()
-            "#{@name} [+#{@minBonus}, ++#{@maxBonus}] (#{@goldCoins}$)"
+            case @type
+            when ARMOR
+                tipo = "Armadura"
+            when BOTHHANDS
+                tipo = "Arma de dos manos"
+            when ONEHAND
+                tipo = "Arma de una mano"
+            when SHOE
+                tipo = "Calzado"
+            when HELMET
+                tipo = "Casco"
+            when NECKLACE
+                tipo = "Collar"
+            end
+            
+            "#{@name} (#{tipo}) [+#{@minBonus}, ++#{@maxBonus}] (#{@goldCoins}$)"
         end
 
     end
