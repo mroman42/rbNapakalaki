@@ -41,11 +41,11 @@ module Game
         # Métodos públicos
         public
 
-		# Llama al método combat del jugador actual. Pasa como parámetro el monstruo al que combatir. 
+        # Llama al método combat del jugador actual. Pasa como parámetro el monstruo al que combatir. 
         def combat
             result = @currentPlayer.combat(@currentMonster)
             CardDealer.instance.giveMonsterBack(@currentMonster)
-			result
+            result
         end
 
         def discardVisibleTreasure(treasure)
