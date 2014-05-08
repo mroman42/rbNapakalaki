@@ -136,22 +136,22 @@ module UserInterface
 
         def buyLevels
             # Compra de niveles. 
-            visibles = nil
-            ocultos = nil
+            visibles = []
+            ocultos = []
             puts "Dime los índices de los tesoros visibles que quieres vender (x para terminar):"
-            index = STDIN.getch
-            begin 
+            begin
+                index = STDIN.getch
                 if (index != 'x')
                     index = index.to_i
-                    visibles.push(NP.getVisibleTreasures.at(index)
+                    visibles.push(NP.getVisibleTreasures.at(index))
                 end 
             end while (index != 'x')
             puts "Dime los índices de los tesoros ocultos que quieres vender (x para terminar):"
-            index = STDIN.getch
-            begin 
+            begin
+                index = STDIN.getch
                 if (index != 'x')
                     index = index.to_i
-                    ocultos.push(NP.getHiddenTreasures.at(index)
+                    ocultos.push(NP.getHiddenTreasures.at(index))
                 end 
             end while (index != 'x')
             
