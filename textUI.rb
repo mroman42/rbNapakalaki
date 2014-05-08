@@ -252,6 +252,7 @@ module UserInterface
         def discardVisibleTreasures
             puts "Descarta tesoros visibles:\n"
             begin
+                printVisibleTreasures
                 puts "Dime el índice del tesoro visible a descartar (x para terminar): "
                 index = STDIN.getch
                 if (index != 'x') 
@@ -268,6 +269,7 @@ module UserInterface
         def discardHiddenTreasures
             puts "Descarta tesoros ocultos:\n"
             begin
+                printHiddenTreasures
                 puts "Dime el índice del tesoro oculto a descartar (x para terminar): "
                 index = STDIN.getch
                 if (index != 'x') 
@@ -304,11 +306,11 @@ module UserInterface
 
                 # Aplica mal rollo si pierde, o bien ofrece la posibilidad de eliminar tesoros.    
                 adjust 
-                selectionMenu2                
+                begin
+                    selectionMenu2                
 
                 # Pasa al siguiente turno
-                while not yesNoQuestion("¿Pasar al siguiente turno?")
-                end
+                end while not yesNoQuestion("¿Pasar al siguiente turno?")
                 NP.nextTurn
                 @turn = @turn+1
             end while not NP.endOfGame(result)
