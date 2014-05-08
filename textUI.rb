@@ -171,7 +171,6 @@ module UserInterface
             printTreasures(NP.getHiddenTreasures)
         end
 
-        # Idea: Equipar tesoros de uno en uno, en vez de muchos de golpe. -JC
         def equip
             begin
                 # Escribe información relevante a la equipación de objetos
