@@ -19,6 +19,7 @@ module UserInterface
             system "clear"
             printHeader
             puts "Turno: #{@turn}\n"
+            puts Game::CardDealer.instance
             printCurrentPlayerStatus
             printCurrentMonsterStatus
         end

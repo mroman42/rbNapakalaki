@@ -265,6 +265,12 @@ module Game
             shuffleMonsters
         end
 
+
+        # Escribe los datos de CardDealer.
+        def to_s
+            "Mazo de monstruos: (#{@usedMonsters.size}/#{@unusedMonsters.size})\nMazo de tesoros: (#{@usedTreasures.size}/#{@unusedTreasures.size})"
+        end
+
     end
-    
+   
 end
