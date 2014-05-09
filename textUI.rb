@@ -143,8 +143,8 @@ module UserInterface
             svisibles = []
             shidden = []
             # Listas con los índices de posibles tesoros a vender.
-            index_visibles = (1..NP.getVisibleTreasures.size).to_a
-            index_hidden = (1..NP.getHiddenTreasures.size).to_a
+            index_visibles = (0..NP.getVisibleTreasures.size-1).to_a
+            index_hidden = (0..NP.getHiddenTreasures.size-1).to_a
             
             # Venta de tesoros visibles
             begin
