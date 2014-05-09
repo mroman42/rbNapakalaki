@@ -138,9 +138,13 @@ module UserInterface
         end
 
         def buyLevels
-            # Compra de niveles. 
+            # Compra de niveles.
+            # Listas de tesoros ocultos y visibles a vender.
             svisibles = []
             shidden = []
+            # Listas con los índices de posibles tesoros a vender.
+            index_visibles = (1..NP.getVisibleTreasures.size).to_a
+            index_hidden = (1..NP.getHiddenTreasures.size).to_a
             
             # Venta de tesoros visibles
             begin
@@ -153,7 +157,10 @@ module UserInterface
                 index = STDIN.getch
                 if (index != 'x')
                     index = index.to_i
-                    svisibles.push(NP.getVisibleTreasures.at(index))
+                    if (index_visibles.member? index)
+                        svisibles.push(NP.getVisibleTreasures.at(index))
+                        index_visibles.delete index
+                    end
                 end 
 
                 clearScreen
@@ -170,7 +177,10 @@ module UserInterface
                 index = STDIN.getch
                 if (index != 'x')
                     index = index.to_i
-                    shidden.push(NP.getHiddenTreasures.at(index))
+                    if (index_hidden.member? index)
+                        shidden.push(NP.getHiddenTreasures.at(index))
+                        index_hidden.delete index
+                    end
                 end
                 
                 clearScreen
