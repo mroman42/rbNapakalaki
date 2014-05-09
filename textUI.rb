@@ -185,13 +185,17 @@ module UserInterface
             printTreasures shidden
             
             if (yesNoQuestion "¿Realizar la compra?")
+                clearScreen
                 if(!NP.buyLevels(svisibles, shidden))
-                    puts "No puedes vender los tesoros"
+                    puts "No puedes vender los tesoros.\n"
                 else 
-                    clearScreen
                     puts "Compra realizada.\n"
                 end 
+            else
+                clearScreen
+                puts "Compra anulada.\n"
             end
+            
         end
         
         def printTreasures(treasures)
@@ -226,7 +230,6 @@ module UserInterface
                     clearScreen
 
                     # Comprueba que el índice sea válido.
-                    puts "#{NP.getVisibleTreasures.size}"
                     if (index < NP.getHiddenTreasures.size and index >= 0)
                         if(NP.canMakeTreasureVisible(NP.getHiddenTreasures.at(index)))
                             puts "Tesoro #{NP.getHiddenTreasures.at(index).getName} equipado\n"
@@ -305,15 +308,19 @@ module UserInterface
                 result = NP.combat
                 printCombatResult result
 
-                # Aplica mal rollo si pierde, o bien ofrece la posibilidad de eliminar tesoros.    
-                adjust 
-                begin
-                    selectionMenu2                
-
-                # Pasa al siguiente turno
-                end while not yesNoQuestion("¿Pasar al siguiente turno?")
-                NP.nextTurn
-                @turn = @turn+1
+                if result != Game::WINANDWINGAME
+                    # Aplica mal rollo si pierde, o bien ofrece la posibilidad de eliminar tesoros.    
+                    adjust 
+                    begin
+                        selectionMenu2
+                        # Pasa al siguiente turno
+                    end while not yesNoQuestion("¿Pasar al siguiente turno?")
+                    NP.nextTurn
+                    @turn = @turn+1
+                else
+                    # Fin del juego.
+                    puts "¡El juego ha terminado! Ganador: #{NP.currentPlayer}"
+                end
             end while not NP.endOfGame(result)
         end
     end
