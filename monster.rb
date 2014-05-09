@@ -34,7 +34,7 @@ module Game
     
     # Métodos auxiliares
     def to_s
-      	"#{@name} (lv. #{@level}) \n\tPrize: #{@prize.to_s()}\n\tBad: #{@bad.to_s()}\n"
+      	"#{@name} (lv. #{@level}) \n\tBuen rollo: #{@prize.to_s()}\n\tMal rollo: #{@bad.to_s()}\n"
     end
   end
 
