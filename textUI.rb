@@ -185,10 +185,12 @@ module UserInterface
             printTreasures shidden
             
             if (yesNoQuestion "¿Realizar la compra?")
-                clearScreen
+                # Tras realizar la compra, limpia la pantalla y muestra el resultado.
                 if(!NP.buyLevels(svisibles, shidden))
+                    clearScreen
                     puts "No puedes vender los tesoros.\n"
-                else 
+                else
+                    clearScreen
                     puts "Compra realizada.\n"
                 end 
             else
