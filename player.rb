@@ -176,7 +176,7 @@ module Game
         def discardVisibleTreasure(treasure)
             @visibleTreasures.delete(treasure)
 
-            if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
+            if (@pendingBadConsequence != nil && !@pendingBadConsequence.empty?)
                 @pendingBadConsequence.substractVisibleTreasure(treasure)
             end 
 
@@ -190,7 +190,7 @@ module Game
         # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
         def discardHiddenTreasure(treasure)
             @hiddenTreasures.delete(treasure)
-            if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
+            if (@pendingBadConsequence != nil && !@pendingBadConsequence.empty?)
                 @pendingBadConsequence.substractHiddenTreasure(treasure)
             end 
             CardDealer.instance.giveTreasureBack(treasure)
@@ -234,7 +234,7 @@ module Game
 
         # Comprueba si el mal rollo pendiente está vacío, para saber si puede continuar. 
         def validState
-            @pendingBadConsequence.isEmpty
+            @pendingBadConsequence.empty?
         end
 
         # Inicializa los tesoros de un jugador, dependiendo del número sacado al tirar del dado. 
