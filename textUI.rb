@@ -331,7 +331,7 @@ module UserInterface
                     @turn = @turn+1
                 else
                     # Fin del juego.
-                    puts "¡El juego ha terminado! Ganador: #{NP.currentPlayer}"
+                    puts "¡El juego ha terminado! Ganador: #{NP.getCurrentPlayer}"
                 end
             end while not NP.endOfGame(result)
         end
