@@ -56,7 +56,6 @@ module UserInterface
             clearScreen
             puts "Combate contra #{NP.getCurrentMonster.getName}:"
             
-            # Faltan otros casos del combate
             case result
             when Game::WIN
                 puts "Has derrotado al monstruo."
