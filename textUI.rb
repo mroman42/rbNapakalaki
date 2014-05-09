@@ -191,8 +191,17 @@ module UserInterface
             puts "Se venderán los siguientes tesoros:"
             puts "Tesoros visibles:"
             printTreasures svisibles
+            sumavisibles = 0
+            svisibles.each {|t| sumavisibles += t.getGoldCoins}
+            puts "\tSuma total: #{sumavisibles}"
             puts "Tesoros ocultos:"
             printTreasures shidden
+            sumahidden = 0
+            shidden.each {|t| sumahidden += t.getGoldCoins}
+            puts "\tSuma total: #{sumahidden}"
+            puts "Aumentarías #{sumavisibles/1000 + sumahidden/1000} niveles"
+
+
             
             if (yesNoQuestion "¿Realizar la compra?")
                 # Tras realizar la compra, limpia la pantalla y muestra el resultado.
