@@ -96,7 +96,7 @@ module Game
             end
         end
 
-    # En este método, se usan los tres BadConsequence posibles, teniendo en cuenta que ya se han restado los niveles. 
+    # En este método, se usan dos BadConsequence posibles, teniendo en cuenta que ya se han restado los niveles. 
         def adjustToFitTreasureLists(visible, hidden)  
 
     #    Si no conoce los tesoros específicos, trabaja con las cantidades (no se pueden quitar más tesoros de los que se tiene)
