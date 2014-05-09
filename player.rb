@@ -176,7 +176,7 @@ module Game
         def discardVisibleTreasure(treasure)
             @visibleTreasures.delete(treasure)
 
-            if (@pendingBadConsequence != nil && !@pendingBadConsequence.empty?)
+            if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.substractVisibleTreasure(treasure)
             end 
 
@@ -190,7 +190,7 @@ module Game
         # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
         def discardHiddenTreasure(treasure)
             @hiddenTreasures.delete(treasure)
-            if (@pendingBadConsequence != nil && !@pendingBadConsequence.empty?)
+            if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.substractHiddenTreasure(treasure)
             end 
             CardDealer.instance.giveTreasureBack(treasure)
