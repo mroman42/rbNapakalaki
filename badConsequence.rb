@@ -79,15 +79,19 @@ module Game
     # Para saber si un tesoro está contenido, tenemos que ver si está en la lista de tesoros(conoce los tesoros) o está vacía pero la cantidad de tesoros que quita no es nula(no conoce los tesoros)
 
         def substractVisibleTreasure(treasure)
-            if(@specificVisibleTreasures.include? treasure.getType || (@specificVisibleTreasures.empty? && @nVisibleTreasures != 0))
+            if(@specificVisibleTreasures.include?(treasure.getType)) 
                 @specificVisibleTreasures = @specificVisibleTreasures - [treasure.getType]
                 @nVisibleTreasures = @nVisibleTreasures - 1
-            end
+            elsif(@specificVisibleTreasures.empty? and @nVisibleTreasures > 0)
+                @nVisibleTreasures = @nVisibleTreasures - 1
+            end 
         end
 
 	    def substractHiddenTreasure(treasure)
-            if(@specificHiddenTreasures.include? treasure.getType || (@specificHiddenTreasures.empty? && @nHiddenTreasures != 0))
+            if(@specificHiddenTreasures.include?(treasure.getType))
                 @specificHiddenTreasures = @specificHiddenTreasures - [treasure.getType]
+                @nHiddenTreasures = @nHiddenTreasures - 1 
+            elsif(@specificHiddenTreasures.empty? and @nHiddenTreasures > 0)
                 @nHiddenTreasures = @nHiddenTreasures - 1 
             end
         end
