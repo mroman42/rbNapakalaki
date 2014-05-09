@@ -266,16 +266,20 @@ module UserInterface
         end
 
         def discardVisibleTreasures
-            puts "Descarta tesoros visibles:\n"
             begin
+                puts "Descarta tesoros visibles:\n"
                 printVisibleTreasures
                 puts "Dime el índice del tesoro visible a descartar (x para terminar): "
                 index = STDIN.getch
                 if (index != 'x') 
                     index = index.to_i
-                    NP.discardVisibleTreasure(NP.getVisibleTreasures.at(index))
-                    clearScreen 
-                    puts "Tesoro eliminado.\n"
+                    if (index >= 0 and index < NP.getVisibleTreasures.size)
+                        NP.discardVisibleTreasure(NP.getVisibleTreasures.at(index))
+                        clearScreen 
+                        puts "Tesoro eliminado.\n"
+                    else
+                        clearScreen
+                    end
                 else
                     clearScreen
                 end
@@ -283,16 +287,20 @@ module UserInterface
         end 
 
         def discardHiddenTreasures
-            puts "Descarta tesoros ocultos:\n"
             begin
+                puts "Descarta tesoros ocultos:\n"
                 printHiddenTreasures
                 puts "Dime el índice del tesoro oculto a descartar (x para terminar): "
                 index = STDIN.getch
                 if (index != 'x') 
                     index = index.to_i
-                    NP.discardHiddenTreasure(NP.getHiddenTreasures.at(index))
-                    clearScreen 
-                    puts "Tesoro eliminado.\n"
+                    if (index >= 0 and index < NP.getHiddenTreasures.size)
+                        NP.discardHiddenTreasure(NP.getHiddenTreasures.at(index))
+                        clearScreen 
+                        puts "Tesoro eliminado.\n"
+                    else
+                        clearScreen
+                    end
                 else
                     clearScreen
                 end
