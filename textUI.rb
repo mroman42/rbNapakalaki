@@ -110,7 +110,6 @@ module UserInterface
                  "Equipar tesoros", 
                  "Pasar de turno",
                  )
-            respuesta = 0
 
             # Controla opciones
             case respuesta = STDIN.getch
