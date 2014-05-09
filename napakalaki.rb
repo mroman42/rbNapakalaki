@@ -64,8 +64,6 @@ module Game
             @currentPlayer.buyLevels(visible, hidden)
         end
 
-        # Revisar. El nextTurn al final puede hacer que el primer jugador no sea el primero, pues ya se inicia en initPlayers
-        # Puede no, hace. Avisar al profesor. --Óscar
         def initGame(names)
             CardDealer.instance.initCards
             initPlayers(names)
