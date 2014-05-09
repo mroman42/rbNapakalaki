@@ -234,7 +234,7 @@ module Game
 
         # Comprueba si el mal rollo pendiente está vacío, para saber si puede continuar. 
         def validState
-            @pendingBadConsequence.empty?
+            @pendingBadConsequence.isEmpty
         end
 
         # Inicializa los tesoros de un jugador, dependiendo del número sacado al tirar del dado. 
