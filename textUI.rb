@@ -15,6 +15,16 @@ module UserInterface
             @turn = 0
         end
 
+        def yesNoQuestion(message)
+            puts "#{message} (y/n)"
+
+            begin 
+                c = STDIN.getch
+            end while c != 'y' and c != 'n'
+
+            return c == 'y'
+        end
+
         def clearScreen
             system "clear"
             printHeader
@@ -24,17 +34,11 @@ module UserInterface
             printCurrentMonsterStatus
         end
 
+# SECCIÓN PRINT'S:
         def printHeader
             puts "-"*30
             puts "\tNapakalaki"
             puts "-"*30
-        end
-
-        def readPlayers
-            puts "Introduzca el nombre de los jugadores:"
-            line = gets.chomp
-            players = line.split
-            return players
         end
 
         def printCurrentPlayerStatus
@@ -46,6 +50,22 @@ module UserInterface
 
         def printCurrentPlayerCombatStatus
             puts "Nivel de combate: #{NP.getCurrentPlayer.getCombatLevel}\n"
+        end
+        
+        def printTreasures(treasures)
+            treasures.each_with_index do |treasure, index|
+                puts "\t(#{index}): #{treasure}"
+            end
+        end
+
+        def printVisibleTreasures
+            puts "Tesoros visibles:\n"
+            printTreasures(NP.getVisibleTreasures)
+        end
+
+        def printHiddenTreasures
+            puts "Tesoros ocultos:\n"
+            printTreasures(NP.getHiddenTreasures)
         end
 
         def printCurrentMonsterStatus
@@ -72,6 +92,8 @@ module UserInterface
             end
         end
 
+
+#SECCIÓN MENÚ'S:
         def menu(msg, *options)
             puts msg
             
@@ -125,16 +147,7 @@ module UserInterface
             end
         end
         
-        def yesNoQuestion(message)
-            puts "#{message} (y/n)"
-
-            begin 
-                c = STDIN.getch
-            end while c != 'y' and c != 'n'
-
-            return c == 'y'
-        end
-
+# SECCIÓN DE MANEJO DE TESOROS
         def buyLevels
             # Compra de niveles.
             # Listas de tesoros ocultos y visibles a vender.
@@ -216,22 +229,6 @@ module UserInterface
             end
             
         end
-        
-        def printTreasures(treasures)
-            treasures.each_with_index do |treasure, index|
-                puts "\t(#{index}): #{treasure}"
-            end
-        end
-
-        def printVisibleTreasures
-            puts "Tesoros visibles:\n"
-            printTreasures(NP.getVisibleTreasures)
-        end
-
-        def printHiddenTreasures
-            puts "Tesoros ocultos:\n"
-            printTreasures(NP.getHiddenTreasures)
-        end
 
         def equip
             begin
@@ -262,14 +259,6 @@ module UserInterface
                 end 
             end while (index != 'x')
             clearScreen
-        end
-
-        # Método para ajustar el mal rollo. 
-        def adjust
-            begin 
-                discardVisibleTreasures
-                discardHiddenTreasures
-            end while !NP.nextTurnAllowed
         end
 
         def discardVisibleTreasures
@@ -312,6 +301,21 @@ module UserInterface
                     clearScreen
                 end
             end while (index != 'x')
+        end
+
+        # Método para ajustar el mal rollo. 
+        def adjust
+            begin 
+                discardVisibleTreasures
+                discardHiddenTreasures
+            end while !NP.nextTurnAllowed
+        end
+
+        def readPlayers
+            puts "Introduzca el nombre de los jugadores:"
+            line = gets.chomp
+            players = line.split
+            return players
         end
 
         def main
