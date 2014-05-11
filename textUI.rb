@@ -213,16 +213,17 @@ module UserInterface
             puts "Aumentarías #{sumavisibles/1000 + sumahidden/1000} niveles"
 
 
-            clearScreen
-                    
             if (yesNoQuestion "¿Realizar la compra?")
                 # Tras realizar la compra, limpia la pantalla y muestra el resultado.
                 if(!NP.buyLevels(svisibles, shidden))
+                    clearScreen
                     puts "No puedes vender los tesoros.\n"
                 else
+                    clearScreen
                     puts "Compra realizada.\n"
                 end 
             else
+                clearScreen
                 puts "Compra anulada.\n"
             end
             
