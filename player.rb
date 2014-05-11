@@ -89,8 +89,8 @@ module Game
         def applyPrize(prize)
             incrementLevels(prize.getLevels)
             nPrize = prize.getTreasures
-
-            [nPrize, 4 - @hiddenTreasures.size].min.times do
+            minim = [nPrize, 4 - @hiddenTreasures.size].min
+            minim.times do
                 @hiddenTreasures.push(CardDealer.instance.nextTreasure)
             end
         end
