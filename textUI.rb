@@ -26,7 +26,8 @@ module UserInterface
 
         def printHeader
             puts "-"*30
-            puts "\tNapakalaki"
+            puts "\t Napakalaki"
+            puts "\tVersión Ruby"
             puts "-"*30
         end
 

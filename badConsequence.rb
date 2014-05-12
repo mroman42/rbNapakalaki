@@ -76,33 +76,33 @@ module Game
         end
 
 	# En los siguientes dos métodos, hay que usar que hay dos posibles BadConsequence que trabajan con tesoros, los que conocen los objetos que quitan y los que sólo conocen la cantidad.
-    # Para saber si un tesoro está contenido, tenemos que ver si está en la lista de tesoros(conoce los tesoros) o está vacía pero la cantidad de tesoros que quita no es nula(no conoce los tesoros)
+        # Para saber si un tesoro está contenido, tenemos que ver si está en la lista de tesoros(conoce los tesoros) o está vacía pero la cantidad de tesoros que quita no es nula(no conoce los tesoros)
 
         def substractVisibleTreasure(treasure)
-            if(@specificVisibleTreasures.include? treasure.getType || (@specificVisibleTreasures.empty? && @nVisibleTreasures != 0))
+            if(@specificVisibleTreasures.include? treasure.getType or (@specificVisibleTreasures.empty? and @nVisibleTreasures != 0))
                 @specificVisibleTreasures = @specificVisibleTreasures - [treasure.getType]
                 @nVisibleTreasures = @nVisibleTreasures - 1
             end
         end
 
-	    def substractHiddenTreasure(treasure)
-            if(@specificHiddenTreasures.include? treasure.getType || (@specificHiddenTreasures.empty? && @nHiddenTreasures != 0))
+        def substractHiddenTreasure(treasure)
+            if(@specificHiddenTreasures.include? treasure.getType or (@specificHiddenTreasures.empty? and @nHiddenTreasures != 0))
                 @specificHiddenTreasures = @specificHiddenTreasures - [treasure.getType]
                 @nHiddenTreasures = @nHiddenTreasures - 1 
             end
         end
 
-    # En este método, se usan los tres BadConsequence posibles, teniendo en cuenta que ya se han restado los niveles. 
+        # En este método, se usan los tres BadConsequence posibles, teniendo en cuenta que ya se han restado los niveles. 
         def adjustToFitTreasureLists(visible, hidden)  
 
-    #    Si no conoce los tesoros específicos, trabaja con las cantidades (no se pueden quitar más tesoros de los que se tiene)
-            if (@specificVisibleTreasures.empty? && @specificHiddenTreasures.empty?)
+            # Si no conoce los tesoros específicos, trabaja con las cantidades (no se pueden quitar más tesoros de los que se tiene)
+            if (@specificVisibleTreasures.empty? and @specificHiddenTreasures.empty?)
                 nVTreasures = [visible.size, @nVisibleTreasures].min
                 nHTreasures = [hidden.size, @nHiddenTreasures].min
 
                 return BadConsequence.new_indet_tr(@text, 0, nVTreasures, nHTreasures)
 
-    #    Si conoce los tesoros, trabaja con los TreasureKind (no se pueden quitar los tipos de tesoros que no tiene)
+            # Si conoce los tesoros, trabaja con los TreasureKind (no se pueden quitar los tipos de tesoros que no tiene)
             else
                 visiblekind = []
                 hiddenkind = []
@@ -121,8 +121,8 @@ module Game
         # Métodos auxiliares
         def to_s
             "#{@text} \n\t" # + (@death ? "DEATH." : 
-                            #   "#{@levels} levels, #{@nHidden} hidden treasures, #{@nVisible} visible treasures." 
-                            #   ) + "\n"
+            #   "#{@levels} levels, #{@nHidden} hidden treasures, #{@nVisible} visible treasures." 
+            #   ) + "\n"
         end
 
     end
@@ -132,5 +132,3 @@ module Game
     BadConsequence.instance_eval { undef :new }
 
 end
-
-
