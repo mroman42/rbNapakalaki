@@ -79,15 +79,19 @@ module Game
         # Para saber si un tesoro está contenido, tenemos que ver si está en la lista de tesoros(conoce los tesoros) o está vacía pero la cantidad de tesoros que quita no es nula(no conoce los tesoros)
 
         def substractVisibleTreasure(treasure)
-            if(@specificVisibleTreasures.include? treasure.getType or (@specificVisibleTreasures.empty? and @nVisibleTreasures != 0))
+            if(@specificVisibleTreasures.include?(treasure.getType)) 
                 @specificVisibleTreasures = @specificVisibleTreasures - [treasure.getType]
                 @nVisibleTreasures = @nVisibleTreasures - 1
-            end
+            elsif(@specificVisibleTreasures.empty? and @nVisibleTreasures > 0)
+                @nVisibleTreasures = @nVisibleTreasures - 1
+            end 
         end
 
         def substractHiddenTreasure(treasure)
-            if(@specificHiddenTreasures.include? treasure.getType or (@specificHiddenTreasures.empty? and @nHiddenTreasures != 0))
+            if(@specificHiddenTreasures.include?(treasure.getType))
                 @specificHiddenTreasures = @specificHiddenTreasures - [treasure.getType]
+                @nHiddenTreasures = @nHiddenTreasures - 1 
+            elsif(@specificHiddenTreasures.empty? and @nHiddenTreasures > 0)
                 @nHiddenTreasures = @nHiddenTreasures - 1 
             end
         end
@@ -104,15 +108,23 @@ module Game
 
             # Si conoce los tesoros, trabaja con los TreasureKind (no se pueden quitar los tipos de tesoros que no tiene)
             else
-                visiblekind = []
-                hiddenkind = []
+                # Tomamos los tipos de tesoros (treasureKind)
+                visibleKind = visible.collect{|t| t.getType}
+                hiddenKind = hidden.collect{|t| t.getType}
 
-                visible.each {|treasure| visiblekind.push(treasure.getType)}
-                hidden.each {|treasure| hiddenkind.push(treasure.getType)}
+                listVisibleTreasureKind = []
+                listHiddenTreasureKind = []
 
-                listVisibleTreasureKind = visiblekind & @specificVisibleTreasures
-                listHiddenTreasureKind = hiddenkind & @specificHiddenTreasures
+                # Iteramos para cada treasureKind: buscamos el mínimo entre los que tiene el mal rollo y los que tiene el jugador, 
+                # y añadimos dicho número de treasureKind de cada tipo a la lista de treasureKind ajustados. 
+                [ONEHAND, BOTHHANDS, ARMOR, HELMET, SHOE, NECKLACE].each do |tKind|
 
+                    listVisibleTreasureKind = listVisibleTreasureKind + 
+                        [tKind]*[visibleKind.select{|t| t == tKind}.size, @specificVisibleTreasures.select{|t| t == tKind}.size].min
+
+                    listHiddenTreasureKind = listHiddenTreasureKind + 
+                        [tKind]*[hiddenKind.select{|t| t == tKind}.size, @specificHiddenTreasures.select{|t| t == tKind}.size].min
+                end
                 return BadConsequence.new_det_tr(@text, 0, listVisibleTreasureKind, listHiddenTreasureKind)
             end
         end 
