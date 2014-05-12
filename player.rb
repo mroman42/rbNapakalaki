@@ -20,7 +20,7 @@ module Game
             @hiddenTreasures = []
             @visibleTreasures = []
 
-           initTreasures
+            initTreasures
         end
 
 
@@ -28,7 +28,8 @@ module Game
         # Métodos privados
         private
 
-        def bringToLife()
+        # Devuelve a un jugador a la vida. Modifica su nivel a 1 y cambia su estado a vivo. 
+        def bringToLife
             @dead = false
             @level = 1
         end
@@ -45,13 +46,13 @@ module Game
             @pendingBadConsequence = bad
         end
 
+        # Elimina los tesoros del jugador y cambia su estado a muerto. 
         def die
-            # Es necesario comprobar si están vacíos o son nil.  
-            if !(@hiddenTreasures.empty? || @hiddenTreasures == nil)
+            if !(@hiddenTreasures.empty?)
                 @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
                 @hiddenTreasures.clear
             end
-            if !(@visibleTreasures.empty? || @visibleTreasures == nil)
+            if !(@visibleTreasures.empty?)
                 @visibleTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
                 @visibleTreasures.clear
             end
@@ -63,12 +64,14 @@ module Game
             @visibleTreasures.delete_if {|trs| trs.getType == NECKLACE}
         end
 
+        # Cambia el estado del jugador a muerto si no tiene tesoros. 
         def dieIfNoTreasures
             if (@visibleTreasures + @hiddenTreasures).empty?
                 @dead = true
             end
         end
 
+        # Halla el número de niveles que se obtendrían al vender el conjunto de tesoros 'treasure'
         def computeGoldCoinsValue(treasure)
             value = 0
             treasure.each {|t| value += t.getGoldCoins}
@@ -129,6 +132,7 @@ module Game
             result
         end    
 
+        # Establece el mal rollo pendiente ajustando el obtenido del monstruo con los tesoros del jugador, llamando al método correspondiente.
         def applyBadConsequence(bad)
             decrementLevels(bad.getLevels)
             setPendingBadConsequence(bad.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures))

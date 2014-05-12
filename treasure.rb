@@ -34,6 +34,7 @@ module Game
             @type
         end
 
+        # Métodos auxiliares
         def to_s()
             case @type
             when ARMOR

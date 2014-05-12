@@ -26,7 +26,8 @@ module Game
         def initPlayers(names)
             @players = names.collect{|name| Player.new(name)}
             
-            # Toma el índice del primer jugador como -1. El nextTurn en initGames hará que el primer jugador sea el correto. 
+            # Toma el índice del primer jugador como -1. El nextTurn en initGames hará que el primer jugador sea el correcto. 
+            # Hemos de inicializar currentPlayer para que nextTurn nos permita pasar de turno al iniciar el juego. 
             @currentPlayerIndex = -1
             @currentPlayer = @players[0]
         end
@@ -64,6 +65,7 @@ module Game
             @currentPlayer.buyLevels(visible, hidden)
         end
 
+        # Inicia el juego. Inicializa el mazo de cartas, los jugadores, y comienza el primer turno. 
         def initGame(names)
             CardDealer.instance.initCards
             initPlayers(names)
@@ -108,6 +110,7 @@ module Game
             @currentPlayer.validState
         end
 
+        # Comprueba si hemos llegado al final del juego. 
         def endOfGame(result)
             result == WINANDWINGAME
         end

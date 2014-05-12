@@ -35,7 +35,7 @@ module Game
             # A prueba de babas verdes
             @unusedTreasures.push(Treasure.new("A prueba de babas verdes", 400, 3, 5, ARMOR))
 
-            # Botas de lluvia  ́acida
+            # Botas de lluvia ácida
             @unusedTreasures.push(Treasure.new("Botas de lluvia ácida", 800, 1, 1, BOTHHANDS))
 
             # Casco minero
@@ -220,6 +220,7 @@ module Game
 
         end
         
+        # Métodos para barajar los tesoros
         def shuffleTreasures
             @unusedTreasures.shuffle!
         end

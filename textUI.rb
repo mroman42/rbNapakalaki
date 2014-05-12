@@ -15,6 +15,7 @@ module UserInterface
             @turn = 0
         end
 
+        # Hace una pregunta de sí/no y devuelve la respuesta en un valor booleano. 
         def yesNoQuestion(message)
             puts "#{message} (y/n)"
 
@@ -25,6 +26,7 @@ module UserInterface
             return c == 'y'
         end
 
+        # Refresca la pantalla. 
         def clearScreen
             system "clear"
             printHeader
@@ -35,6 +37,8 @@ module UserInterface
         end
 
 # SECCIÓN PRINT'S:
+
+        # Imprime la cabecera del juego. 
         def printHeader
             puts "-"*30
             puts "\t Napakalaki"
@@ -42,6 +46,7 @@ module UserInterface
             puts "-"*30
         end
 
+        # Imprime el estado del jugador actual.
         def printCurrentPlayerStatus
             puts "\nJugador actual: #{NP.getCurrentPlayer}\n"
             printVisibleTreasures
@@ -49,30 +54,36 @@ module UserInterface
             printCurrentPlayerCombatStatus
         end
 
+        # Imprime el nivel de combate del jugador actual. 
         def printCurrentPlayerCombatStatus
             puts "Nivel de combate: #{NP.getCurrentPlayer.getCombatLevel}\n"
         end
         
+        # Imprime los tesoros que se le pasan como parámetro. 
         def printTreasures(treasures)
             treasures.each_with_index do |treasure, index|
                 puts "\t(#{index}): #{treasure}"
             end
         end
 
+        # Imprime los tesoros visibles del jugador actual. 
         def printVisibleTreasures
             puts "Tesoros visibles:\n"
             printTreasures(NP.getVisibleTreasures)
         end
 
+        # Imprime los tesoros ocultos del jugador actual. 
         def printHiddenTreasures
             puts "Tesoros ocultos:\n"
             printTreasures(NP.getHiddenTreasures)
         end
 
+        # Imprime el monstruo actual
         def printCurrentMonsterStatus
             puts "\nMonstruo actual: #{NP.getCurrentMonster}\n"
         end
 
+        # Imprime el resultado de un combate. 
         def printCombatResult(result)
             clearScreen
             puts "Combate contra #{NP.getCurrentMonster.getName}:"
@@ -95,6 +106,7 @@ module UserInterface
 
 
 #SECCIÓN MENÚ'S:
+        # Imprime por pantalla un menu con sus opciones. 
         def menu(msg, *options)
             puts msg
             
@@ -105,6 +117,7 @@ module UserInterface
             end
         end
 
+        # Menú antes de combatir. 
         def selectionMenu
             menu("Elegir acción:\n",
                  "Comprar niveles",
@@ -128,6 +141,7 @@ module UserInterface
             end
         end
 
+        # Menú después de combatir.
         def selectionMenu2
             menu("Elegir acción:\n", 
                  "Equipar tesoros", 
@@ -230,6 +244,7 @@ module UserInterface
             
         end
 
+        # Método para equipar tesoros. 
         def equip
             begin
                 # Escribe información relevante a la equipación de objetos
@@ -261,6 +276,7 @@ module UserInterface
             clearScreen
         end
 
+        # Método para eliminar tesoros visibles. 
         def discardVisibleTreasures
             begin
                 puts "Descarta tesoros visibles:\n"
@@ -282,6 +298,7 @@ module UserInterface
             end while (index != 'x')
         end 
 
+        # Método para eliminar tesoros ocultos.
         def discardHiddenTreasures
             begin
                 puts "Descarta tesoros ocultos:\n"
