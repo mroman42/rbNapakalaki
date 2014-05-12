@@ -31,7 +31,6 @@ module Game
         # Devuelve a un jugador a la vida. Modifica su nivel a 1 y cambia su estado a vivo. 
         def bringToLife
             @dead = false
-            @level = 1
         end
 
         def incrementLevels(increment)
@@ -57,6 +56,8 @@ module Game
                 @visibleTreasures.clear
             end
             @dead = true
+            @level = 1
+
         end
 
         # Si el collar está visible, lo devuelve al mazo de tesoros.
@@ -67,7 +68,7 @@ module Game
         # Cambia el estado del jugador a muerto si no tiene tesoros. 
         def dieIfNoTreasures
             if (@visibleTreasures + @hiddenTreasures).empty?
-                @dead = true
+                die
             end
         end
 
