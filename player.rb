@@ -114,7 +114,7 @@ module Game
         # Combate contra un monstruo. Obtenemos los niveles del jugador y del monstruo, y aplicamos las reglas del juego. 
         def combat(monster)
             total_level = getCombatLevel
-            monster_level = monster.getLevel
+            monster_level = getOponentLevel
             # Ganamos
             if (total_level > monster_level)
                 applyPrize(monster.getPrize)
@@ -248,6 +248,12 @@ module Game
 
             combat_level
         end
+
+        # Calcula el nivel de combate del monstruo oponente
+        def getOponentLevel(monster)
+            monster.getBasicValue
+        end
+
 
         # Comprueba si el mal rollo pendiente está vacío, para saber si puede continuar. 
         def validState
