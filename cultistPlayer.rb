@@ -30,7 +30,7 @@ module Game
         end
 
         def shouldConvert
-            False
+            false
         end
     end
 end
