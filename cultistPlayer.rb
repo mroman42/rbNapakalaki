@@ -3,6 +3,7 @@
 require_relative 'player.rb'
 
 module Game
+
     class CultistPlayer < Player
         @@totalCultistPlayers = 0
 
@@ -33,4 +34,5 @@ module Game
             False
         end
     end
+  
 end
