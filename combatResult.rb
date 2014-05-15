@@ -9,5 +9,6 @@ module Game
   LOSE = :lose
   LOSEANDESCAPE = :loseandescape
   LOSEANDDIE = :loseanddie
+  LOSEANDCONVERT = :loseandconvert
 
 end

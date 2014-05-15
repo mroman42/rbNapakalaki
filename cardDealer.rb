@@ -218,6 +218,23 @@ module Game
             prize = Prize.new(1,1)
             @unusedMonsters.push(Monster.new("Bicéfalo", 20, bad, prize))
 
+            # Monstruos con sectarios. 
+
+            # El mal indecible impronunciable. 
+            bad = BadConsequence.new_det_tr("Pierdes 1 mano visible.", 0, [ONEHAND], [])
+            prize = Prize.new(3,1)
+            @unusedMonsters.push(Monster.new("El mal indecible impronunciable", 10, bad, prize, -2)
+
+            # Testigos oculares. 
+            bad = BadConsequence.new_indet_tr("Pierdes tus tesoros visibles. Jajaja.", 0, 99, 0)
+            prize = Prize.new(2,1)
+            @unusedMonsters.push(Monster.new("Testigos oculares", 6, bad, prize, 2)
+
+            # El gran Cthulhu
+            bad = BadConsequence.new_death("Hoy no es tu día de suerte. Mueres.")
+            prize = Prize.new(2,5)
+            @unusedMonsters.push(Monster.new("El gran Cthulhu", 20, bad, prize, 4)
+
         end
         
         # Métodos para barajar los tesoros
