@@ -23,6 +23,14 @@ module Game
             initTreasures
         end
 
+        def copy(other)
+            @dead = other.isDead
+            @name = other.getName
+            @level = other.getLevel
+            @pendingBadConsequence = other.getPendingBadConsequence
+            @hiddenTreasures = other.getHiddenTreasures
+            @visibleTreasures = other.getVisibleTreasures
+        end
 
 
         # Métodos privados
@@ -43,6 +51,10 @@ module Game
 
         def setPendingBadConsequence(bad)
             @pendingBadConsequence = bad
+        end
+
+        def getPendingBadConsequence
+            @pendingBadConsequence
         end
 
         # Elimina los tesoros del jugador y cambia su estado a muerto. 
