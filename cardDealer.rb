@@ -15,6 +15,7 @@ module Game
             @usedMonsters = []
             @unusedTreasures = []
             @usedTreasures = []
+            @unusedCultists = []
         end
 
 
@@ -257,6 +258,17 @@ module Game
             
 
         end
+
+        # Método para añadir sectarios. 
+        def initCultistCardDeck
+            4.times do 
+                @unusedCultists.push(Cultist.new("Sectario", 1)
+            end
+            2.times do
+                @unusedCultists.push(Cultist.new("Sectario", 2)
+            end
+        end
+
         
         # Métodos para barajar los tesoros
         def shuffleTreasures
@@ -265,6 +277,10 @@ module Game
 
         def shuffleMonsters
             @unusedMonsters.shuffle!
+        end
+
+        def shuffleCultists
+            @unusedCultists.shuffle!
         end
 
 
@@ -288,6 +304,11 @@ module Game
             end
             @unusedMonsters.pop
         end
+
+        def nextCultist
+            #Simplemente extraemos otro sectario.
+            @unusedCultists.pop
+        end
         
         def giveTreasureBack(treasure)
             @usedTreasures.push treasure
@@ -302,6 +323,7 @@ module Game
             initMonsterCardDeck
             shuffleTreasures
             shuffleMonsters
+            shuffleCultists
         end
 
 
