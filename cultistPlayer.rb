@@ -10,6 +10,7 @@ module Game
         def initialize(player, cultist)
             copy(player)
             @myCultistCard = cultist
+            @@totalCultistPlayers += 1
         end
 
         def getCombatLevel
