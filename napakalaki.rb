@@ -51,7 +51,7 @@ module Game
                 @currentPlayer = cultist
                 @players[@currentPlayerIndex] = cultist
             end
-                
+            result                 
         end
 
         def discardVisibleTreasure(treasure)
