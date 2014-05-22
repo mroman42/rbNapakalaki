@@ -4,20 +4,21 @@ require_relative 'cultistPlayer.rb'
 
 module Game
 
-    class Cultist
+  class Cultist
 
     # Inicializador
     def initialize(name, gainedLevels)
-        @name = name
-        @gainedLevels = gainedLevels
-    end 
+      @name = name
+      @gainedLevels = gainedLevels
+    end
 
     def getBasicValue
-        @gainedLevels
-    end 
+      @gainedLevels
+    end
 
     def getSpecialValue
-        (@gainedLevels * CultistPlayer.getTotalCultistPlayers)
-    end 
+      (@gainedLevels * CultistPlayer.getTotalCultistPlayers)
+    end
+  end
 
-end 
+end
