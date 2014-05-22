@@ -235,6 +235,27 @@ module Game
             prize = Prize.new(2,5)
             @unusedMonsters.push(Monster.new("El gran Cthulhu", 20, bad, prize, 4)
 
+            # Serpiente Político
+            bad = BadConsequence.new_det_tr("Tu gobierno te recorta 2 niveles.", 2, [], []) 
+            prize = Prize.new(2,1)
+            @unusedMonsters.push(Monster.new("Serpiente Político", 8, bad, prize, -2)
+        
+            # Felpuggoth
+            bad = BadConsequence.new_det_tr("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas.", 2, [HELMET, ARMOR], [BOTHHANDS, ONEHAND]*4)
+            prize = Prize.new(1,1)
+            @unusedMonsters.push(Monster.new("Felpuggoth", 2, bad, prize, 5)
+            
+            # Shoggoth
+            bad = BadConsequence.new_det_tr("Pierdes 2 niveles", 2, [], [])
+            prize = Prize.new(4,2)
+            @unusedMonster.push(Monster.new("Shoggoth", 16, bad, prize, -4)
+
+            # Lolitagooth
+            bad = BadConsequence.new_det_tr("Pintalabios negro. Pierdes 2 niveles.", 2, [], [])
+            prize = Prize.new(1,1)
+            @unusedMonsters.push(Monster.new("Lolitagooth", 2, bad, prize, 3)
+            
+
         end
         
         # Métodos para barajar los tesoros
