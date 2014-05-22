@@ -51,7 +51,7 @@ module Game
             levelVsCultist = "(+#{@levelChangeAgainstCultistPlayer})"
         end
 
-      	"#{@name} (lv. #{@level}#{@levelVsCultist}) \n\tBuen rollo: #{@prize.to_s()}\n\tMal rollo: #{@bad.to_s()}\n"
+      	"#{@name} (lv. #{@level}#{levelVsCultist}) \n\tBuen rollo: #{@prize.to_s()}\n\tMal rollo: #{@bad.to_s()}\n"
     end
   end
 
