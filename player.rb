@@ -53,9 +53,7 @@ module Game
             @pendingBadConsequence = bad
         end
 
-        def getPendingBadConsequence
-            @pendingBadConsequence
-        end
+
 
 
         # Elimina los tesoros del jugador y cambia su estado a muerto.
@@ -90,6 +88,10 @@ module Game
             (levels + @level) < 10
         end
 
+        protected
+        def getPendingBadConsequence
+            @pendingBadConsequence
+        end
 
         # Métodos públicos
         public
