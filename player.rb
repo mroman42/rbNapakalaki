@@ -8,9 +8,9 @@ require_relative 'treasureKind.rb'
 
 
 module Game
-    
+
     class Player
-        
+
         # Inicializador
         def initialize(name)
             @dead = true
@@ -36,7 +36,7 @@ module Game
         # Métodos privados
         private
 
-        # Devuelve a un jugador a la vida. Modifica su nivel a 1 y cambia su estado a vivo. 
+        # Devuelve a un jugador a la vida. Modifica su nivel a 1 y cambia su estado a vivo.
         def bringToLife
             @dead = false
         end
@@ -57,7 +57,7 @@ module Game
             @pendingBadConsequence
         end
 
-        # Elimina los tesoros del jugador y cambia su estado a muerto. 
+        # Elimina los tesoros del jugador y cambia su estado a muerto.
         def die
             if !(@hiddenTreasures.empty?)
                 @hiddenTreasures.each {|treasure| CardDealer.instance.giveTreasureBack(treasure)}
@@ -77,7 +77,7 @@ module Game
             @visibleTreasures.delete_if {|trs| trs.getType == NECKLACE}
         end
 
-        # Cambia el estado del jugador a muerto si no tiene tesoros. 
+        # Cambia el estado del jugador a muerto si no tiene tesoros.
         def dieIfNoTreasures
             if (@visibleTreasures + @hiddenTreasures).empty?
                 die
@@ -101,9 +101,9 @@ module Game
             value/1000
         end
 
-        
-        # Aplicamos el buen rollo al jugador, incrementando los niveles y obteniendo los tesoros. 
-        # En caso de que con los tesoros obtenidos se superen los 4 ocultos, solo se obtendrán los restantes hasta llegar a 4. 
+
+        # Aplicamos el buen rollo al jugador, incrementando los niveles y obteniendo los tesoros.
+        # En caso de que con los tesoros obtenidos se superen los 4 ocultos, solo se obtendrán los restantes hasta llegar a 4.
         def applyPrize(prize)
             incrementLevels(prize.getLevels)
             nPrize = prize.getTreasures
@@ -113,10 +113,10 @@ module Game
             end
         end
 
-        # Combate contra un monstruo. Obtenemos los niveles del jugador y del monstruo, y aplicamos las reglas del juego. 
+        # Combate contra un monstruo. Obtenemos los niveles del jugador y del monstruo, y aplicamos las reglas del juego.
         def combat(monster)
             total_level = getCombatLevel
-            monster_level = getOponentLevel
+            monster_level = getOponentLevel monster
             # Ganamos
             if (total_level > monster_level)
                 applyPrize(monster.getPrize)
@@ -125,10 +125,10 @@ module Game
                 else
                     result = WIN
                 end
-            else 
+            else
                 escape = Dice.instance.nextNumber
                 # Perdemos y no escapamos
-                if (escape < 5) 
+                if (escape < 5)
                     bad = monster.getBadConsequence
                     if (bad.kills)
                         die
@@ -140,16 +140,16 @@ module Game
                         else
                             result = LOSE
                         end
-                    end    
+                    end
                 # Perdemos y escapamos
-                else 
+                else
                     result = LOSEANDESCAPE
-                end 
-            end 
+                end
+            end
 
             discardNecklaceIfVisible
             result
-        end    
+        end
 
         # Establece el mal rollo pendiente ajustando el obtenido del monstruo con los tesoros del jugador, llamando al método correspondiente.
         def applyBadConsequence(bad)
@@ -157,7 +157,7 @@ module Game
             setPendingBadConsequence(bad.adjustToFitTreasureLists(@visibleTreasures, @hiddenTreasures))
         end
 
-        # Hace visible un tesoro si es posible. Devuelve si el tesoro se ha hecho visible. 
+        # Hace visible un tesoro si es posible. Devuelve si el tesoro se ha hecho visible.
         def makeTreasureVisible(treasure)
             if canMakeTreasureVisible(treasure)
                 @visibleTreasures.push(treasure)
@@ -167,7 +167,7 @@ module Game
                 return false
             end
         end
-        
+
         # Comprueba si un tesoro puede hacerse visible.
         def canMakeTreasureVisible(treasure)
             type = treasure.getType
@@ -180,53 +180,53 @@ module Game
             elsif (type != ONEHAND and type != BOTHHANDS)
                 return !(@visibleTreasures.any? {|trs| trs.getType == type})
 
-            # 3. Si es de una mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos. 
+            # 3. Si es de una mano, puede hacerse visible si no hay ya dos de una mano visibles o uno de dos manos.
             elsif (type == ONEHAND)
                 has_two_onehand = (@visibleTreasures.select{|trs| trs.getType == ONEHAND}.size >= 2)
                 has_bothhand = @visibleTreasures.any? {|trs| trs.getType == BOTHHANDS}
                 return (!has_bothhand and !has_two_onehand)
-            
-            # 4. Si es de dos manos, puede hacerse visible si no hay ningún tesoro de mano equipado. 
-            else 
+
+            # 4. Si es de dos manos, puede hacerse visible si no hay ningún tesoro de mano equipado.
+            else
                 return !(@visibleTreasures.any? {|trs| trs.getType == ONEHAND or trs.getType == BOTHHANDS})
-            end 
+            end
         end
-        
-        
-        # Elimina un tesoro visible. 
+
+
+        # Elimina un tesoro visible.
         # Primero lo elimina de la lista de tesoros visibles, y si quedan tesoros en el mal rollo, lo sustrae de él
-        # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
+        # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros.
         def discardVisibleTreasure(treasure)
             @visibleTreasures.delete(treasure)
 
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.substractVisibleTreasure(treasure)
-            end 
+            end
 
             CardDealer.instance.giveTreasureBack(treasure)
             dieIfNoTreasures
         end
 
 
-        # Elimina un tesoro oculto. 
+        # Elimina un tesoro oculto.
         # Primero lo elimina de la lista de tesoros ocultos, y si quedan tesoros en el mal rollo, lo sustrae de él
-        # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros. 
+        # llamando al método correspondiente. Después, devuelve el tesoro al mazo, y comprueba si al jugador le quedan tesoros.
         def discardHiddenTreasure(treasure)
             @hiddenTreasures.delete(treasure)
             if (@pendingBadConsequence != nil && !@pendingBadConsequence.isEmpty)
                 @pendingBadConsequence.substractHiddenTreasure(treasure)
-            end 
+            end
             CardDealer.instance.giveTreasureBack(treasure)
             dieIfNoTreasures
         end
 
 
-        # Comprueba si puede comprar niveles. Si es así, lo hace y elimina los tesoros. 
-        # Devuelve si se han comprado niveles o no. 
+        # Comprueba si puede comprar niveles. Si es así, lo hace y elimina los tesoros.
+        # Devuelve si se han comprado niveles o no.
         def buyLevels(visible, hidden)
             levels = computeGoldCoinsValue(visible) + computeGoldCoinsValue(hidden)
 
-            if canIBuyLevels(levels) 
+            if canIBuyLevels(levels)
                 incrementLevels(levels)
 
                 visible.each {|t| discardVisibleTreasure(t)}
@@ -261,12 +261,12 @@ module Game
         end
 
 
-        # Comprueba si el mal rollo pendiente está vacío, para saber si puede continuar. 
+        # Comprueba si el mal rollo pendiente está vacío, para saber si puede continuar.
         def validState
             @pendingBadConsequence.isEmpty
         end
 
-        # Inicializa los tesoros de un jugador, dependiendo del número sacado al tirar del dado. 
+        # Inicializa los tesoros de un jugador, dependiendo del número sacado al tirar del dado.
         def initTreasures
             bringToLife
             number = Dice.instance.nextNumber
@@ -276,10 +276,10 @@ module Game
             elsif (number == 6)
                 3.times do
                     @hiddenTreasures.push(CardDealer.instance.nextTreasure)
-                end 
-            else 
+                end
+            else
                 2.times do
-                    @hiddenTreasures.push(CardDealer.instance.nextTreasure)  
+                    @hiddenTreasures.push(CardDealer.instance.nextTreasure)
                 end
             end
         end
@@ -290,7 +290,7 @@ module Game
 
         def isDead
             @dead
-        end 
+        end
 
         def hasVisibleTreasures
             !@visibleTreasures.empty?
