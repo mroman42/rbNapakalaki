@@ -39,5 +39,5 @@ module Game
             super + " [Sectario] "
         end
     end
-  
+
 end

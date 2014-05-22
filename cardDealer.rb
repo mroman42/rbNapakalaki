@@ -250,7 +250,7 @@ module Game
             # Shoggoth
             bad = BadConsequence.new_det_tr("Pierdes 2 niveles", 2, [], [])
             prize = Prize.new(4,2)
-            @unusedMonster.push(Monster.new("Shoggoth", 16, bad, prize, -4))
+            @unusedMonsters.push(Monster.new("Shoggoth", 16, bad, prize, -4))
 
             # Lolitagooth
             bad = BadConsequence.new_det_tr("Pintalabios negro. Pierdes 2 niveles.", 2, [], [])
