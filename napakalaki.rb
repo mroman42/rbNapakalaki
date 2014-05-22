@@ -46,7 +46,12 @@ module Game
         def combat
             result = @currentPlayer.combat(@currentMonster)
             CardDealer.instance.giveMonsterBack(@currentMonster)
-            result
+            if (result == LOSEANDCONVERT)
+		        cultist = CultistPlayer.new(@currentPlayer, CardDealer.instance.nextCultist)
+                @currentPlayer = cultist
+                @players[@currentPlayerIndex] = cultist
+            end
+                
         end
 
         def discardVisibleTreasure(treasure)
