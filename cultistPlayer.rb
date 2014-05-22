@@ -33,6 +33,10 @@ module Game
         def shouldConvert
             false
         end
+
+        def to_s
+            super + " [Sectario] "
+        end
     end
   
 end

@@ -32,6 +32,7 @@ module UserInterface
             printHeader
             puts "Turno: #{@turn}\n"
             puts Game::CardDealer.instance
+            puts "Sectarios en juego: #{Game::CultistPlayer.getTotalCultistPlayers}\n"
             printCurrentPlayerStatus
             printCurrentMonsterStatus
         end
@@ -99,6 +100,8 @@ module UserInterface
                 puts "Has sido derrotado. Ahora se te aplicará el mal rollo del monstruo."
             when Game::LOSEANDDIE
                 puts "Has sido derrotado y has muerto."
+            when Game::LOSEANDCONVERT
+                puts "Has sido derrotado. ¡Ahora eres sectario!"
             else
                 puts "Error en el combate."
             end
