@@ -17,7 +17,7 @@ module Game
     end 
 
     def getSpecialValue
-        (@gainedLevels + CultistPlayer.getTotalCultistPlayers)
+        (@gainedLevels * CultistPlayer.getTotalCultistPlayers)
     end 
 
 end 
