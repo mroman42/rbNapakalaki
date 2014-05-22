@@ -98,6 +98,10 @@ module Game
             @name
         end
 
+        def getLevel
+            @level
+        end
+
         # Halla el número de niveles que se obtendrían al vender el conjunto de tesoros 'treasure'
         def computeGoldCoinsValue(treasure)
             value = 0
