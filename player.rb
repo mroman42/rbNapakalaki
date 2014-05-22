@@ -134,6 +134,9 @@ module Game
                     else 
                         applyBadConsequence(bad)
                         result = LOSE
+                        if (shouldConvert)
+                            result = LOSEANDCONVERT
+                        end
                     end    
                 # Perdemos y escapamos
                 else 
@@ -276,6 +279,10 @@ module Game
                     @hiddenTreasures.push(CardDealer.instance.nextTreasure)  
                 end
             end
+        end
+
+        def shouldConvert
+            Dice.instance.nextNumber == 6
         end
 
         def isDead
