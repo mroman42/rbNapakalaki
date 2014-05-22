@@ -84,6 +84,16 @@ module Game
             end
         end
 
+
+        def canIBuyLevels(levels)
+            (levels + @level) < 10
+        end
+
+
+        # Métodos públicos
+        public
+
+
         # Halla el número de niveles que se obtendrían al vender el conjunto de tesoros 'treasure'
         def computeGoldCoinsValue(treasure)
             value = 0
@@ -91,14 +101,6 @@ module Game
             value/1000
         end
 
-        def canIBuyLevels(levels)
-            (levels + @level) < 10
-        end
-
-
-
-        # Métodos públicos
-        public
         
         # Aplicamos el buen rollo al jugador, incrementando los niveles y obteniendo los tesoros. 
         # En caso de que con los tesoros obtenidos se superen los 4 ocultos, solo se obtendrán los restantes hasta llegar a 4. 
