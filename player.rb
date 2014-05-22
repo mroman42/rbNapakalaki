@@ -135,9 +135,10 @@ module Game
                         result = LOSEANDDIE
                     else
                         applyBadConsequence(bad)
-                        result = LOSE
                         if (shouldConvert)
                             result = LOSEANDCONVERT
+                        else
+                            result = LOSE
                         end
                     end    
                 # Perdemos y escapamos
