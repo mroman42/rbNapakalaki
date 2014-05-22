@@ -263,10 +263,10 @@ module Game
         # Método para añadir sectarios. 
         def initCultistCardDeck
             4.times do 
-                @unusedCultists.push(Cultist.new("Sectario", 1)
+                @unusedCultists.push(Cultist.new("Sectario", 1))
             end
             2.times do
-                @unusedCultists.push(Cultist.new("Sectario", 2)
+                @unusedCultists.push(Cultist.new("Sectario", 2))
             end
         end
 
