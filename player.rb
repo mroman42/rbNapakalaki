@@ -131,7 +131,7 @@ module Game
                     if (bad.kills)
                         die
                         result = LOSEANDDIE
-                    else 
+                    else
                         applyBadConsequence(bad)
                         result = LOSE
                         if (shouldConvert)

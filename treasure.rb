@@ -30,6 +30,14 @@ module Game
             @maxBonus
         end
 
+        def getBasicValue
+            getMinBonus
+        end
+
+        def getSpecialValue
+            getMaxBonus
+        end
+
         def getType
             @type
         end
