@@ -15,6 +15,7 @@ module Game
             @usedMonsters = []
             @unusedTreasures = []
             @usedTreasures = []
+            @unusedCultists = []
         end
 
 
@@ -235,7 +236,39 @@ module Game
             prize = Prize.new(2,5)
             @unusedMonsters.push(Monster.new("El gran Cthulhu", 20, bad, prize, 4)
 
+            # Serpiente Político
+            bad = BadConsequence.new_det_tr("Tu gobierno te recorta 2 niveles.", 2, [], []) 
+            prize = Prize.new(2,1)
+            @unusedMonsters.push(Monster.new("Serpiente Político", 8, bad, prize, -2)
+        
+            # Felpuggoth
+            bad = BadConsequence.new_det_tr("Pierdes tu casco y tu armadura visible. Pierdes tus manos ocultas.", 2, [HELMET, ARMOR], [BOTHHANDS, ONEHAND]*4)
+            prize = Prize.new(1,1)
+            @unusedMonsters.push(Monster.new("Felpuggoth", 2, bad, prize, 5)
+            
+            # Shoggoth
+            bad = BadConsequence.new_det_tr("Pierdes 2 niveles", 2, [], [])
+            prize = Prize.new(4,2)
+            @unusedMonster.push(Monster.new("Shoggoth", 16, bad, prize, -4)
+
+            # Lolitagooth
+            bad = BadConsequence.new_det_tr("Pintalabios negro. Pierdes 2 niveles.", 2, [], [])
+            prize = Prize.new(1,1)
+            @unusedMonsters.push(Monster.new("Lolitagooth", 2, bad, prize, 3)
+            
+
         end
+
+        # Método para añadir sectarios. 
+        def initCultistCardDeck
+            4.times do 
+                @unusedCultists.push(Cultist.new("Sectario", 1)
+            end
+            2.times do
+                @unusedCultists.push(Cultist.new("Sectario", 2)
+            end
+        end
+
         
         # Métodos para barajar los tesoros
         def shuffleTreasures
@@ -244,6 +277,10 @@ module Game
 
         def shuffleMonsters
             @unusedMonsters.shuffle!
+        end
+
+        def shuffleCultists
+            @unusedCultists.shuffle!
         end
 
 
@@ -267,6 +304,11 @@ module Game
             end
             @unusedMonsters.pop
         end
+
+        def nextCultist
+            #Simplemente extraemos otro sectario.
+            @unusedCultists.pop
+        end
         
         def giveTreasureBack(treasure)
             @usedTreasures.push treasure
@@ -281,6 +323,7 @@ module Game
             initMonsterCardDeck
             shuffleTreasures
             shuffleMonsters
+            shuffleCultists
         end
 
 
