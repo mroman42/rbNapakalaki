@@ -45,9 +45,9 @@ module Game
     def to_s
         levelVsCultist = ""
 
-        if(levelChangeAgainstCultistPlayer < 0)
+        if(@levelChangeAgainstCultistPlayer < 0)
             levelVsCultist = "(" + @levelChangeAgainstCultistPlayer + ")"
-        elsif(levelChangeAgainstCultistPlayer > 0)
+        elsif(@levelChangeAgainstCultistPlayer > 0)
             levelVsCultist = "(+" + @levelChangeAgainstCultistPlayer + ")"
         end
 
