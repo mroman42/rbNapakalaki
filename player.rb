@@ -84,6 +84,16 @@ module Game
             end
         end
 
+
+        def canIBuyLevels(levels)
+            (levels + @level) < 10
+        end
+
+
+        # Métodos públicos
+        public
+
+
         # Halla el número de niveles que se obtendrían al vender el conjunto de tesoros 'treasure'
         def computeGoldCoinsValue(treasure)
             value = 0
@@ -91,14 +101,6 @@ module Game
             value/1000
         end
 
-        def canIBuyLevels(levels)
-            (levels + @level) < 10
-        end
-
-
-
-        # Métodos públicos
-        public
         
         # Aplicamos el buen rollo al jugador, incrementando los niveles y obteniendo los tesoros. 
         # En caso de que con los tesoros obtenidos se superen los 4 ocultos, solo se obtendrán los restantes hasta llegar a 4. 
@@ -131,9 +133,13 @@ module Game
                     if (bad.kills)
                         die
                         result = LOSEANDDIE
-                    else 
+                    else
                         applyBadConsequence(bad)
-                        result = LOSE
+                        if (shouldConvert)
+                            result = LOSEANDCONVERT
+                        else
+                            result = LOSE
+                        end
                     end    
                 # Perdemos y escapamos
                 else 
@@ -276,6 +282,10 @@ module Game
                     @hiddenTreasures.push(CardDealer.instance.nextTreasure)  
                 end
             end
+        end
+
+        def shouldConvert
+            Dice.instance.nextNumber == 6
         end
 
         def isDead
