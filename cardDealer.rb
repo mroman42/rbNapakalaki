@@ -321,6 +321,7 @@ module Game
         def initCards
             initTreasureCardDeck
             initMonsterCardDeck
+            initCultistCardDeck
             shuffleTreasures
             shuffleMonsters
             shuffleCultists
