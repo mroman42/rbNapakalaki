@@ -2,6 +2,7 @@
 #encoding: utf-8
 require_relative 'monster.rb'
 require_relative 'treasure.rb'
+require_relative 'cultist.rb'
 require "singleton"
 
 module Game
