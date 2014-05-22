@@ -131,7 +131,10 @@ module Game
                     if (bad.kills)
                         die
                         result = LOSEANDDIE
-                    else 
+                    elsif (shouldConvert)
+                        applyBadConsequence(bad)
+                        result = LOSEANDCONVERT
+                    else
                         applyBadConsequence(bad)
                         result = LOSE
                     end    
@@ -276,6 +279,10 @@ module Game
                     @hiddenTreasures.push(CardDealer.instance.nextTreasure)  
                 end
             end
+        end
+
+        def shouldConvert
+            Dice.getInstance.nextNumber == 6
         end
 
         def isDead
