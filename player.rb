@@ -57,6 +57,7 @@ module Game
             @pendingBadConsequence
         end
 
+
         # Elimina los tesoros del jugador y cambia su estado a muerto.
         def die
             if !(@hiddenTreasures.empty?)
@@ -93,6 +94,9 @@ module Game
         # Métodos públicos
         public
 
+        def getName
+            @name
+        end
 
         # Halla el número de niveles que se obtendrían al vender el conjunto de tesoros 'treasure'
         def computeGoldCoinsValue(treasure)
