@@ -228,8 +228,12 @@ module UserInterface
             sumahidden = 0
             shidden.each {|t| sumahidden += t.getGoldCoins}
             puts "\tSuma total: #{sumahidden}"
-            puts "Aumentarías #{sumavisibles/1000 + sumahidden/1000} niveles"
-
+            # Distinguimos si el jugador es sectario o no. 
+            if (NP.getCurrentPlayer.instance_of?(Game::Player))
+                puts "Aumentarías #{sumavisibles/1000 + sumahidden/1000} niveles"
+            else 
+                puts "Aumentarías #{2*(sumavisibles/1000 + sumahidden/1000)} niveles"
+            end
 
             if (yesNoQuestion "¿Realizar la compra?")
                 # Tras realizar la compra, limpia la pantalla y muestra el resultado.
