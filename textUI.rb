@@ -232,7 +232,7 @@ module UserInterface
             if (NP.getCurrentPlayer.instance_of?(Game::Player))
                 puts "Aumentarías #{sumavisibles/1000 + sumahidden/1000} niveles"
             else 
-                puts "Aumentarías #{2*(sumavisibles/1000 + sumahidden/1000)} niveles"
+                puts "Aumentarías #{ 2*sumavisibles/1000 + 2*sumahidden/1000} niveles"
             end
 
             if (yesNoQuestion "¿Realizar la compra?")
